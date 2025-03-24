@@ -20,6 +20,9 @@ These include:
 - `uninstall`: Uninstalls the release build from the active Vintage Story installation.
 - `run`: Launches Vintage Story with the debug build of the mod loaded in.
 
+If the specified project name does not yet exist, it will be created
+automatically.
+
 Advanced project commands are defined under `make/project.mk`. The basic
 make commands are defined in terms of the more advanced commands. Some
 commands do not have a basic equivalent such as `project-run-server`. Refer
