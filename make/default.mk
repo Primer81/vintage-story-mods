@@ -9,5 +9,11 @@ rebuild:
 	$(MAKE) clean
 	$(MAKE) all
 
+.PHONY: install
+install: project-install-all
+
+.PHONY: uninstall
+uninstall: project-install-clean
+
 .PHONY: run
 run: project-run-client

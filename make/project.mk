@@ -29,6 +29,17 @@ project-build-all: $(PROJECT_BUILD_ALL_PREREQUISITES)
 project-build-clean: $(PROJECT_BUILD_CLEAN_PREREQUISITES)
 
 ###############################################################################
+# Install
+###############################################################################
+.PHONY: project-install-all
+project-install-all: $(PROJECT_INSTALL_PREREQUISITES)
+	cp $(PROJECT_TARGET_RELEASE) $(VINTAGE_STORY)/Mods
+
+.PHONY: project-install-clean
+project-install-clean:
+	rm -f $(VINTAGE_STORY)/Mods/$(notdir $(PROJECT_TARGET_RELEASE))
+
+###############################################################################
 # Run
 ###############################################################################
 .PHONY: project-run-client

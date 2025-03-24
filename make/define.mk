@@ -57,9 +57,14 @@ PROJECT_BUILD_CLEAN_PREREQUISITES=\
     project-target-cake-clean\
     project-target-mod-clean\
     project-target-release-clean
+#### Install
+PROJECT_INSTALL_PREREQUISITES=\
+    project-target-release-all
 #### Run
 PROJECT_RUN_PREREQUISITES=\
     project-build-all
 #### Target
 PROJECT_TARGET_PREREQUISITES=\
     $(PROJECT_CREATE_SENTINEL)
+PROJECT_TARGET_RELEASE=\
+    $(PROJECT_RELEASES_DIR)/$(PROJECT_MODID)_$(PROJECT_VERSION).zip
