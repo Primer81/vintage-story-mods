@@ -6,12 +6,12 @@ project-create-all: $(PROJECT_CREATE_SENTINEL)
 $(PROJECT_CREATE_SENTINEL): $(PROJECT_CREATE_PREREQUISITES)
 	$(shell mkdir -p $(dir $@))
 	$(DOTNET_VSMODE) \
+		--AddSolutionFile \
+		--IncludeVSCode \
 		--AddSampleCode \
 		--AddAssetFolder \
 		--output $(PROJECT_DIR) \
 		--name $(PROJECT_NAME)
-	rm -f $(PROJECT_DIR)/build.ps1
-	rm -f $(PROJECT_DIR)/build.sh
 	touch $@
 
 .PHONY: project-create-clean
