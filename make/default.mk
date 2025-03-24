@@ -1,3 +1,5 @@
+.DEFAULT_GOAL: all
+
 .PHONY: all
 all: project-build-all
 
