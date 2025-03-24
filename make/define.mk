@@ -21,7 +21,6 @@ DOTNET_VSMOD_INSTALL_SENTINEL=\
 ###############################################################################
 ## Configuration
 PROJECT_NAME?=HotbarScrollControl
-PROJECT_BUILD_PROFILE?=Debug
 ## Definitions
 ### Directories
 #### Common
