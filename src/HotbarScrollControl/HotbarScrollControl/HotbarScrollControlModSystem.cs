@@ -1,26 +1,56 @@
-﻿using Vintagestory.API.Client;
-using Vintagestory.API.Server;
-using Vintagestory.API.Config;
+﻿using System;
 using Vintagestory.API.Common;
+using Vintagestory.API.Client;
+using Vintagestory.API.Datastructures;
 
-namespace HotbarScrollControl;
-
-public class HotbarScrollControlModSystem : ModSystem
+namespace HotbarScrollControl
 {
-    // Called on server and client
-    // Useful for registering block/entity classes on both sides
-    public override void Start(ICoreAPI api)
+    public class HotbarScrollControlModSystem: ModSystem
     {
-        Mod.Logger.Notification("Hello from template mod: " + api.Side);
-    }
+        private ICoreClientAPI capi = null;
 
-    public override void StartServerSide(ICoreServerAPI api)
-    {
-        Mod.Logger.Notification("Hello from template mod server side: " + Lang.Get("hotbarscrollcontrol:hello"));
-    }
+        public override void Start(ICoreAPI api)
+        {
+            base.Start(api);
 
-    public override void StartClientSide(ICoreClientAPI api)
-    {
-        Mod.Logger.Notification("Hello from template mod client side: " + Lang.Get("hotbarscrollcontrol:hello"));
+            if (api.Side == EnumAppSide.Client)
+            {
+                capi = api as ICoreClientAPI;
+
+                // Register for active slot change events
+                // with the correct parameter order
+                capi.Event.MouseUp += OnMouseUp;
+                capi.Event.MouseDown += OnMouseDown;
+                capi.Event.MouseMove += OnMouseMove;
+            }
+        }
+
+        public override void Dispose()
+        {
+            if (capi != null)
+            {
+                capi.Event.MouseUp -= OnMouseUp;
+                capi.Event.MouseDown -= OnMouseDown;
+                capi.Event.MouseMove -= OnMouseMove;
+            }
+            base.Dispose();
+        }
+
+        private void OnMouseUp(MouseEvent args)
+        {
+            // Code to execute when mouse button is pressed
+            capi.ShowChatMessage($"Mouse up at: {args.X}, {args.Y}, Button: {args.Button}");
+        }
+
+        private void OnMouseDown(MouseEvent args)
+        {
+            // Code to execute when mouse button is pressed
+            capi.ShowChatMessage($"Mouse down at: {args.X}, {args.Y}, Button: {args.Button}");
+        }
+
+        private void OnMouseMove(MouseEvent args)
+        {
+            capi.ShowChatMessage($"Mouse move at: {args.X}, {args.Y}, Button: {args.Button}");
+        }
     }
 }
