@@ -1,4 +1,9 @@
 ###############################################################################
+# Functions
+###############################################################################
+read_json=$(shell python -c "import json; print(json.load(open('$(1)'))['$(2)'])" 2>/dev/null)
+
+###############################################################################
 # Sentinels
 ###############################################################################
 SENTINEL_DIR=sentinels
@@ -34,6 +39,9 @@ PROJECT_CAKE_BUILD_DIR=\
 PROJECT_SRC_DIR=$(PROJECT_DIR)/$(PROJECT_NAME)
 PROJECT_BUILD_DIR=\
     $(PROJECT_SRC_DIR)/bin/$(PROJECT_BUILD_PROFILE)/Mods/mod
+### Version
+PROJECT_VERSION=$(call read_json,$(PROJECT_SRC_DIR)/modinfo.json,version)
+PROJECT_MODID=$(call read_json,$(PROJECT_SRC_DIR)/modinfo.json,modid)
 ### Recipes
 #### Create
 PROJECT_CREATE_SENTINEL=\
