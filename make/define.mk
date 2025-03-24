@@ -1,7 +1,8 @@
 ###############################################################################
 # Sentinels
 ###############################################################################
-SENTINEL_DIR=tmp
+SENTINEL_DIR=sentinels
+SENTINEL_TMP_DIR=$(SENTINEL_DIR)/tmp
 SENTINEL_EXT=.sentinel
 
 ###############################################################################
@@ -13,7 +14,7 @@ DOTNET_VSMOD_PACKAGE_NAME?=VintageStory.Mod.Templates
 ## Definitions
 DOTNET_VSMODE=$(DOTNET) new vsmod
 DOTNET_VSMOD_INSTALL_SENTINEL=\
-    $(SENTINEL_DIR)/dotnet-vsmod-install$(SENTINEL_EXT)
+    $(SENTINEL_TMP_DIR)/dotnet-vsmod-install$(SENTINEL_EXT)
 
 ###############################################################################
 # Project
