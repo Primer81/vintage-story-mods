@@ -3,10 +3,10 @@
     "modid": "hotbarscrollcontrol",
     "name": "HotbarScrollControl",
     "authors": [
-        "Unknown"
+        "Grahm Larkham"
     ],
-    "description": "To be added",
-    "version": "1.0.0",
+    "description": "Add a control setting to optionally invert the scroll direction for the hotbar",
+    "version": "0.1.0",
     "dependencies": {
         "game": ""
     }
