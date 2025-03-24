@@ -46,13 +46,13 @@ project-install-clean:
 project-run-client: $(PROJECT_RUN_PREREQUISITES)
 	$(VINTAGE_STORY)/Vintagestory \
 		--tracelog \
-		--addModPath $(PROJECT_DIR)/bin/Debug/Mods
+		--addModPath $(abspath $(PROJECT_SRC_DIR)/bin/Debug/Mods)
 
 .PHONY: project-run-server
 project-run-server: $(PROJECT_RUN_PREREQUISITES)
 	$(VINTAGE_STORY)/VintagestoryServer \
 		--tracelog \
-		--addModPath $(PROJECT_DIR)/bin/Debug/Mods
+		--addModPath $(abspath $(PROJECT_SRC_DIR)/bin/Debug/Mods)
 
 ###############################################################################
 # Targets
