@@ -44,13 +44,14 @@ project-install-clean:
 ###############################################################################
 .PHONY: project-run-client
 project-run-client: $(PROJECT_RUN_PREREQUISITES)
-	$(VINTAGE_STORY)/Vintagestory \
+	"$(VINTAGE_STORY)/Vintagestory" \
 		--tracelog \
-		--addModPath $(abspath $(PROJECT_SRC_DIR)/bin/Debug/Mods)
+		--addModPath $(abspath $(PROJECT_SRC_DIR)/bin/Debug/Mods) \
+		--openWorld "TestWorld"
 
 .PHONY: project-run-server
 project-run-server: $(PROJECT_RUN_PREREQUISITES)
-	$(VINTAGE_STORY)/VintagestoryServer \
+	"$(VINTAGE_STORY)/VintagestoryServer" \
 		--tracelog \
 		--addModPath $(abspath $(PROJECT_SRC_DIR)/bin/Debug/Mods)
 
