@@ -25,7 +25,7 @@ DOTNET_VSMOD_INSTALL_SENTINEL=\
 # Project
 ###############################################################################
 ## Configuration
-PROJECT_NAME?=HotbarScrollControl
+PROJECT_NAME?=InvertHotbarScroll
 ## Definitions
 ### Directories
 #### Common

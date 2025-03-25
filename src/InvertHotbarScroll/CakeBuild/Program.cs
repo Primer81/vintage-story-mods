@@ -26,7 +26,7 @@ public static class Program
 
 public class BuildContext : FrostingContext
 {
-    public const string ProjectName = "HotbarScrollControl";
+    public const string ProjectName = "InvertHotbarScroll";
     public string BuildConfiguration { get; }
     public string Version { get; }
     public string Name { get; }

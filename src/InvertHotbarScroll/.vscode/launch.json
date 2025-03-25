@@ -21,7 +21,7 @@
                 // "--openWorld" , "modding test world",
                 "--tracelog",
                 "--addModPath",
-                "${workspaceFolder}/HotbarScrollControl/bin/Debug/Mods"
+                "${workspaceFolder}/InvertHotbarScroll/bin/Debug/Mods"
             ],
             "console": "internalConsole",
             "stopAtEntry": false
@@ -41,7 +41,7 @@
             "args": [
                 "--tracelog",
                 "--addModPath",
-                "${workspaceFolder}/HotbarScrollControl/bin/Debug/Mods"
+                "${workspaceFolder}/InvertHotbarScroll/bin/Debug/Mods"
             ],
             "console": "internalConsole",
             "stopAtEntry": false

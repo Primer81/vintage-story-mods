@@ -5,8 +5,8 @@
     "authors": [
         "Grahm Larkham"
     ],
-    "description": "Add a control setting to optionally invert the scroll direction for the hotbar",
-    "version": "0.1.0",
+    "description": "Invert the scroll direction for the hotbar",
+    "version": "1.0.0",
     "dependencies": {
         "game": ""
     }

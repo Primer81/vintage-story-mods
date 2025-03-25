@@ -9,7 +9,7 @@
                 "build",
                 "-c",
                 "Debug",
-                "${workspaceFolder}/HotbarScrollControl/HotbarScrollControl.csproj"
+                "${workspaceFolder}/InvertHotbarScroll/InvertHotbarScroll.csproj"
             ],
             "problemMatcher": "$msCompile"
         },

@@ -10,6 +10,8 @@ $(PROJECT_CREATE_SENTINEL): $(PROJECT_CREATE_PREREQUISITES)
 		--IncludeVSCode \
 		--AddSampleCode \
 		--AddAssetFolder \
+		--IncludeHarmony \
+		--IncludeVintagestoryLib \
 		--output $(PROJECT_DIR) \
 		--name $(PROJECT_NAME)
 	touch $@
