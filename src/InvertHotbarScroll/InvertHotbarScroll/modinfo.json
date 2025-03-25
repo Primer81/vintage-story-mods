@@ -1,12 +1,12 @@
 {
     "type": "code",
-    "modid": "hotbarscrollcontrol",
-    "name": "HotbarScrollControl",
+    "modid": "inverthotbarscroll",
+    "name": "InvertHotbarScroll",
     "authors": [
         "Grahm Larkham"
     ],
     "description": "Invert the scroll direction for the hotbar",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "dependencies": {
         "game": ""
     }

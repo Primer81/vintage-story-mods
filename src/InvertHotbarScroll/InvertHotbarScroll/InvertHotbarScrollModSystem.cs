@@ -33,7 +33,7 @@ namespace InvertHotbarScroll
         }
     }
 
-    [HarmonyPatchCategory("hotbarscrollcontrol")]
+    [HarmonyPatchCategory("inverthotbarscroll")]
     internal static class Patches
     {
         [HarmonyPrefix()]
