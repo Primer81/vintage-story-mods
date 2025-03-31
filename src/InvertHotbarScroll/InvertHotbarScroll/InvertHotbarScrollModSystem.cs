@@ -13,7 +13,7 @@ public class InvertHotbarScrollModSystem: ModSystem
     ICoreClientAPI capi;
     private Harmony patcher;
 
-    public override void StartClientSide(ICoreAPI api)
+    public override void StartClientSide(ICoreClientAPI api)
     {
         capi = api as ICoreClientAPI;
         patcher = new Harmony(Mod.Info.ModID);
