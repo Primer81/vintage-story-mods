@@ -6,47 +6,41 @@ using System.Linq;
 using HarmonyLib;
 using Vintagestory.Client.NoObf;
 
-namespace InvertHotbarScroll
+namespace InvertHotbarScroll;
+
+public class InvertHotbarScrollModSystem: ModSystem
 {
-    public class InvertHotbarScrollModSystem: ModSystem
+    ICoreClientAPI capi;
+    private Harmony patcher;
+
+    public override void StartClientSide(ICoreAPI api)
     {
-        ICoreClientAPI capi;
-        private Harmony patcher;
-
-        public override void Start(ICoreAPI api)
-        {
-            base.Start(api);
-            if (api.Side == EnumAppSide.Client &&
-                !Harmony.HasAnyPatches(Mod.Info.ModID))
-            {
-                capi = api as ICoreClientAPI;
-                patcher = new Harmony(Mod.Info.ModID);
-                patcher.PatchCategory(Mod.Info.ModID);
-                capi.Logger.Debug($"{Mod.Info.ModID} patches applied");
-            }
-        }
-
-        public override void Dispose()
-        {
-            base.Dispose();
-            patcher?.UnpatchAll(Mod.Info.ModID);
-        }
+        capi = api as ICoreClientAPI;
+        patcher = new Harmony(Mod.Info.ModID);
+        patcher.PatchCategory(Mod.Info.ModID);
+        capi.Logger.Debug($"{Mod.Info.ModID} patches applied");
     }
 
-    [HarmonyPatchCategory("inverthotbarscroll")]
-    internal static class Patches
+    public override void Dispose()
     {
-        [HarmonyPrefix()]
-        [HarmonyPatch(typeof(HudHotbar), "OnMouseWheel")]
-        public static bool BeforeHudHotbarOnMouseWheel(
-            HudHotbar __instance, ref MouseWheelEventArgs args)
-        {
-            // Invert the delta
-            args.delta *= -1;
-            args.deltaPrecise *= -1;
+        base.Dispose();
+        patcher?.UnpatchAll(Mod.Info.ModID);
+    }
+}
 
-            // Execute original method with new args
-            return true;
-        }
+[HarmonyPatchCategory("inverthotbarscroll")]
+internal static class Patches
+{
+    [HarmonyPrefix()]
+    [HarmonyPatch(typeof(HudHotbar), "OnMouseWheel")]
+    public static bool BeforeHudHotbarOnMouseWheel(
+        HudHotbar __instance, ref MouseWheelEventArgs args)
+    {
+        // Invert the delta
+        args.delta *= -1;
+        args.deltaPrecise *= -1;
+
+        // Execute original method with new args
+        return true;
     }
 }
