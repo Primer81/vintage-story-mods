@@ -15,7 +15,7 @@ $(DOTNET_VSMOD_INSTALL_SENTINEL):
 	touch $@
 
 .PHONY: dotnet-vsmod-update
-dotnet-vsmod-update: $(DOTNET_VSMOD_INSTALL_SENTINEL)
+dotnet-vsmod-update:
 	# The only way to update specific template packages
 	# is to uninstall and reinstall. `dotnet new update` does not provide
 	# any method to update specific packages.
