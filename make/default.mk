@@ -12,7 +12,9 @@ rebuild:
 	$(MAKE) all
 
 .PHONY: install
-install: project-install-all
+install:
+	$(MAKE) project-install-clean
+	$(MAKE) project-install-all
 
 .PHONY: uninstall
 uninstall: project-install-clean

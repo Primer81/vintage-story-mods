@@ -39,7 +39,7 @@ project-install-all: $(PROJECT_INSTALL_PREREQUISITES)
 
 .PHONY: project-install-clean
 project-install-clean:
-	rm -f $(VINTAGE_STORY)/Mods/$(notdir $(PROJECT_TARGET_RELEASE))
+	rm -f $(VINTAGE_STORY)/Mods/$(PROJECT_MODID)*
 
 ###############################################################################
 # Run
