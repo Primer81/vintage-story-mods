@@ -3,10 +3,10 @@
     "modid": "togglesneak",
     "name": "ToggleSneak",
     "authors": [
-        "Unknown"
+        "Primer81"
     ],
-    "description": "To be added",
-    "version": "1.0.0",
+    "description": "Sneak is now toggleable. No need to hold the button for sneak. Only affects sneaking.",
+    "version": "1.0.1",
     "dependencies": {
         "game": ""
     }

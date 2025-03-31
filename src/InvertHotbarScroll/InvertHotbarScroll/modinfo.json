@@ -3,10 +3,10 @@
     "modid": "inverthotbarscroll",
     "name": "InvertHotbarScroll",
     "authors": [
-        "Grahm Larkham"
+        "Primer81"
     ],
-    "description": "Invert the scroll direction for the hotbar",
-    "version": "1.0.1",
+    "description": "Inverts the mouse wheel scroll direction for the hotbar selection. Only affects the hotbar.",
+    "version": "1.0.2",
     "dependencies": {
         "game": ""
     }
