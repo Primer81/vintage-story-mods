@@ -1,0 +1,448 @@
+{
+  "HotKeys": [
+    {
+      "Name": "Primary mouse button",
+      "Code": "primarymouse",
+      "DefaultMapping": "Left mouse",
+      "TriggerOnUpAlso": true
+    },
+    {
+      "Name": "Second mouse button",
+      "Code": "secondarymouse",
+      "DefaultMapping": "Right mouse",
+      "TriggerOnUpAlso": true
+    },
+    {
+      "Name": "Middle mouse",
+      "Code": "middlemouse",
+      "DefaultMapping": "Middle mouse",
+      "TriggerOnUpAlso": true
+    },
+    {
+      "Name": "Walk forward",
+      "Code": "walkforward",
+      "DefaultMapping": "W",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "Walk backward",
+      "Code": "walkbackward",
+      "DefaultMapping": "S",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "Walk left",
+      "Code": "walkleft",
+      "DefaultMapping": "A",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "Walk right",
+      "Code": "walkright",
+      "DefaultMapping": "D",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "Sneak",
+      "Code": "sneak",
+      "DefaultMapping": "Shift",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "Sprint",
+      "Code": "sprint",
+      "DefaultMapping": "Ctrl",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "Shift-click",
+      "Code": "shift",
+      "DefaultMapping": "Shift",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "Ctrl-click",
+      "Code": "ctrl",
+      "DefaultMapping": "Ctrl",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "Jump",
+      "Code": "jump",
+      "DefaultMapping": "Space",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "Sit down",
+      "Code": "sitdown",
+      "DefaultMapping": "G",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "Open Backpack & Crafting Inventory",
+      "Code": "inventorydialog",
+      "DefaultMapping": "E",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "Open Character Inventory",
+      "Code": "characterdialog",
+      "DefaultMapping": "C",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "Drop one item",
+      "Code": "dropitem",
+      "DefaultMapping": "Q",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "Drop all items",
+      "Code": "dropitems",
+      "DefaultMapping": "CTRL + Q",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "Select Tool / Clayforming Mode",
+      "Code": "toolmodeselect",
+      "DefaultMapping": "F",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "Show/Hide coordinates and compass",
+      "Code": "coordinateshud",
+      "DefaultMapping": "CTRL + V",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "Show/Hide block and entity info overlay",
+      "Code": "blockinfohud",
+      "DefaultMapping": "CTRL + B",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "Show/Hide interaction info overlay",
+      "Code": "blockinteractionhelp",
+      "DefaultMapping": "CTRL + N",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "Pause game + Settings",
+      "Code": "escapemenudialog",
+      "DefaultMapping": "Esc",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "Hide/Show HUD",
+      "Code": "togglehud",
+      "DefaultMapping": "F4",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "First-, Third-person or Overhead camera",
+      "Code": "cyclecamera",
+      "DefaultMapping": "F5",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "3rd Person Camera: Zoom out",
+      "Code": "zoomout",
+      "DefaultMapping": "-",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "3rd Person Camera: Zoom in",
+      "Code": "zoomin",
+      "DefaultMapping": "=",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "Lock/Unlock Mouse Cursor",
+      "Code": "togglemousecontrol",
+      "DefaultMapping": "Alt",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "Chat: Begin Typing",
+      "Code": "beginchat",
+      "DefaultMapping": "T",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "Chat: Begin Typing a client command",
+      "Code": "beginclientcommand",
+      "DefaultMapping": ".",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "Chat: Begin Typing a server command",
+      "Code": "beginservercommand",
+      "DefaultMapping": "/",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "Chat: Show/Hide chat dialog",
+      "Code": "chatdialog",
+      "DefaultMapping": "Tab",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "Open Macro Editor",
+      "Code": "macroeditor",
+      "DefaultMapping": "CTRL + M",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "Toggle Fullscreen mode",
+      "Code": "togglefullscreen",
+      "DefaultMapping": "F11",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "Take screenshot",
+      "Code": "screenshot",
+      "DefaultMapping": "F12",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "Take mega screenshot",
+      "Code": "megascreenshot",
+      "DefaultMapping": "CTRL + F12",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "Exchange left/right hand contents",
+      "Code": "fliphandslots",
+      "DefaultMapping": "X",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "Select Hotbar Slot 1",
+      "Code": "hotbarslot1",
+      "DefaultMapping": "1",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "Select Hotbar Slot 2",
+      "Code": "hotbarslot2",
+      "DefaultMapping": "2",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "Select Hotbar Slot 3",
+      "Code": "hotbarslot3",
+      "DefaultMapping": "3",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "Select Hotbar Slot 4",
+      "Code": "hotbarslot4",
+      "DefaultMapping": "4",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "Select Hotbar Slot 5",
+      "Code": "hotbarslot5",
+      "DefaultMapping": "5",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "Select Hotbar Slot 6",
+      "Code": "hotbarslot6",
+      "DefaultMapping": "6",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "Select Hotbar Slot 7",
+      "Code": "hotbarslot7",
+      "DefaultMapping": "7",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "Select Hotbar Slot 8",
+      "Code": "hotbarslot8",
+      "DefaultMapping": "8",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "Select Hotbar Slot 9",
+      "Code": "hotbarslot9",
+      "DefaultMapping": "9",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "Select Hotbar Slot 10",
+      "Code": "hotbarslot10",
+      "DefaultMapping": "0",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "Select Backpack Slot 1",
+      "Code": "hotbarslot11",
+      "DefaultMapping": "CTRL + 1",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "Select Backpack Slot 2",
+      "Code": "hotbarslot12",
+      "DefaultMapping": "CTRL + 2",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "Select Backpack Slot 3",
+      "Code": "hotbarslot13",
+      "DefaultMapping": "CTRL + 3",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "Select Backpack Slot 4",
+      "Code": "hotbarslot14",
+      "DefaultMapping": "CTRL + 4",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "-1 Fly/Move Speed",
+      "Code": "decspeed",
+      "DefaultMapping": "F1",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "+1 Fly/Move Speed",
+      "Code": "incspeed",
+      "DefaultMapping": "F2",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "-0.1 Fly/Move Speed",
+      "Code": "decspeedfrac",
+      "DefaultMapping": "SHIFT + F1",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "+0.1 Fly/Move Speed",
+      "Code": "incspeedfrac",
+      "DefaultMapping": "SHIFT + F2",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "Cycle through 3 fly modes",
+      "Code": "cycleflymodes",
+      "DefaultMapping": "F3",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "Fly Mode On/Off",
+      "Code": "fly",
+      "DefaultMapping": "Space + Space",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "Show/Hide Meta Blocks",
+      "Code": "rendermetablocks",
+      "DefaultMapping": "CTRL + F4",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "FPS graph",
+      "Code": "fpsgraph",
+      "DefaultMapping": "ALT + F3",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "Debug screen + FPS graph",
+      "Code": "debugscreenandgraph",
+      "DefaultMapping": "CTRL + F3",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "Reload world",
+      "Code": "reloadworld",
+      "DefaultMapping": "CTRL + F1",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "Reload shaders",
+      "Code": "reloadshaders",
+      "DefaultMapping": "ALT + F1",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "Reload textures",
+      "Code": "reloadtextures",
+      "DefaultMapping": "ALT + F2",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "Compact large object heap",
+      "Code": "compactheap",
+      "DefaultMapping": "ALT + F8",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "Recompose all dialogs",
+      "Code": "recomposeallguis",
+      "DefaultMapping": "ALT + F9",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "Cycle Dialog Outline Modes",
+      "Code": "cycledialogoutlines",
+      "DefaultMapping": "ALT + F10",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "Toggle Tick Profiler",
+      "Code": "tickprofiler",
+      "DefaultMapping": "CTRL + F10",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "Pick block",
+      "Code": "pickblock",
+      "DefaultMapping": "Middle mouse",
+      "TriggerOnUpAlso": true
+    },
+    {
+      "Name": "Search block/item from the Creative inventory",
+      "Code": "creativesearch",
+      "DefaultMapping": "CTRL + F",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "CarryOn - Pick Up / Put Down",
+      "Code": "carryonpickupkey",
+      "DefaultMapping": "Shift",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "CarryOn - Swap to back modifier",
+      "Code": "carryonswapbackmodifierkey",
+      "DefaultMapping": "Ctrl",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "CarryOn - Enable / Disable interaction",
+      "Code": "carryontogglekey",
+      "DefaultMapping": "ALT + K",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "Open all containers in range",
+      "Code": "chestorganizer.openall",
+      "DefaultMapping": "R",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "Toggle 'Highlighting of Mycelium'",
+      "Code": "extrainfo:highlightmycelium",
+      "DefaultMapping": "SHIFT + M",
+      "TriggerOnUpAlso": false
+    },
+    {
+      "Name": "Toggle 'Highlighting of Reinforced Blocks'",
+      "Code": "extrainfo:highlightreinforced",
+      "DefaultMapping": "CTRL + T",
+      "TriggerOnUpAlso": false
+    }
+  ]
+}

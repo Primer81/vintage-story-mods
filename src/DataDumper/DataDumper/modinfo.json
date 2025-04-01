@@ -1,0 +1,13 @@
+{
+    "type": "code",
+    "modid": "datadumper",
+    "name": "DataDumper",
+    "authors": [
+        "Unknown"
+    ],
+    "description": "To be added",
+    "version": "1.0.0",
+    "dependencies": {
+        "game": ""
+    }
+}

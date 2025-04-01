@@ -8,6 +8,12 @@
 		},
 		{
 			"path": "src/ToggleSneak"
+		},
+		{
+			"path": "src/UnbindHotKeys"
+		},
+		{
+			"path": "src/DataDumper"
 		}
 	]
 }
