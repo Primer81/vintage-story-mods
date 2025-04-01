@@ -11,9 +11,9 @@ public class ToggleSneakModSystem : ModSystem
 {
     private ICoreClientAPI _clientApi;
 
-    HotKey _sneakHotKey = null;
-    long _listenerId = 0;
-    bool _triggerOnUpAlsoOriginal = false;
+    private HotKey _sneakHotKey = null;
+    private long _listenerId = 0;
+    private bool _triggerOnUpAlsoOriginal = false;
     private bool _sneakKeyIsPressed = false;
     private bool _sneakToggledOn = false;
 
