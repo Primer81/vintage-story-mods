@@ -6,7 +6,7 @@
         "Primer81"
     ],
     "description": "Sneak is now toggleable. No need to hold the button for sneak. Only affects sneaking.",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "dependencies": {
         "game": ""
     }
