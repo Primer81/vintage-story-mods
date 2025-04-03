@@ -3,9 +3,9 @@
     "modid": "datadumper",
     "name": "DataDumper",
     "authors": [
-        "Unknown"
+        "Primer81"
     ],
-    "description": "To be added",
+    "description": "For dumping data found at runtime in-game to the $(VINTAGE_STORY)/ModConfig/DataDumper directory in an easy to read JSON format. Useful for investigating modding techniques.",
     "version": "1.0.0",
     "dependencies": {
         "game": ""
