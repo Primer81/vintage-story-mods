@@ -6,7 +6,7 @@
         "Primer81"
     ],
     "description": "For dumping data found at runtime in-game to the $(VINTAGE_STORY)/ModConfig/DataDumper directory in an easy to read JSON format. Useful for investigating modding techniques.",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "dependencies": {
         "game": ""
     }

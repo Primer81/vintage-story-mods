@@ -6,7 +6,7 @@
         "Primer81"
     ],
     "description": "Inverts the mouse wheel scroll direction for the hotbar selection. Only affects the hotbar.",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "dependencies": {
         "game": ""
     }
