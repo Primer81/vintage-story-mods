@@ -15,10 +15,14 @@ public class UnbindHotKeysModSystem : ModSystem
 {
     private Harmony patcher;
 
-    public override void StartClientSide(ICoreClientAPI api)
+    // This will be called during game startup, before any world is loaded
+    public override void StartPre(ICoreAPI api)
     {
-        patcher = new Harmony(Mod.Info.ModID);
-        patcher.PatchCategory(Mod.Info.ModID);
+        if (api is ICoreClientAPI clientApi)
+        {
+            patcher = new Harmony(Mod.Info.ModID);
+            patcher.PatchCategory(Mod.Info.ModID);
+        }
     }
 
     public override void Dispose()
@@ -170,7 +174,8 @@ internal static class Patches
             }
             if (success == true)
             {
-                if (args.KeyCode == (int)GlKeys.Delete)
+                if ((args.KeyCode == (int)GlKeys.Delete) ||
+                    (args.KeyCode == (int)GlKeys.D))
                 {
                     int index = 0;
                     int indexNoTitle = 0;
