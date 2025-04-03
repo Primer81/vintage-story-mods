@@ -1,10 +1,16 @@
 .DEFAULT_GOAL: all
 
 .PHONY: all
-all: project-build-all
+all:
+	$(foreach project_name,$(PROJECT_NAME_LIST),\
+		$(MAKE) PROJECT_NAME=$(project_name) project-build-all $(newline)\
+	)
 
 .PHONY: clean
-clean: project-build-clean
+clean:
+	$(foreach project_name,$(PROJECT_NAME_LIST),\
+		$(MAKE) PROJECT_NAME=$(project_name) project-build-clean $(newline)\
+	)
 
 .PHONY: rebuild
 rebuild:
@@ -13,11 +19,16 @@ rebuild:
 
 .PHONY: install
 install:
-	$(MAKE) project-install-clean
-	$(MAKE) project-install-all
+	$(MAKE) uninstall
+	$(foreach project_name,$(PROJECT_NAME_LIST),\
+		$(MAKE) PROJECT_NAME=$(project_name) project-install-all $(newline)\
+	)
 
 .PHONY: uninstall
-uninstall: project-install-clean
+uninstall:
+	$(foreach project_name,$(PROJECT_NAME_LIST),\
+		$(MAKE) PROJECT_NAME=$(project_name) project-install-clean $(newline)\
+	)
 
 .PHONY: run
 run: project-run-client

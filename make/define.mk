@@ -1,5 +1,13 @@
 ###############################################################################
-# Functions
+# Common Definitions
+###############################################################################
+define newline
+
+
+endef
+
+###############################################################################
+# Common Functions
 ###############################################################################
 read_json=$(shell python -c "import json; print(json.load(open('$(1)'))['$(2)'])" 2>/dev/null)
 
@@ -30,12 +38,15 @@ DOTNET_VSMOD_INSTALL_SENTINEL=\
 ###############################################################################
 # Project
 ###############################################################################
+## Sources
+SRC_DIR=src
 ## Configuration
-PROJECT_NAME?=UnbindHotKeys
+PROJECT_NAME_LIST=$(patsubst $(SRC_DIR)/%,%,$(wildcard $(SRC_DIR)/*))
+PROJECT_NAME?=DataDumper
 ## Definitions
 ### Directories
 #### Common
-PROJECT_DIR=src/$(PROJECT_NAME)
+PROJECT_DIR=$(SRC_DIR)/$(PROJECT_NAME)
 PROJECT_RELEASES_DIR=$(PROJECT_DIR)/Releases
 #### Cake
 PROJECT_CAKE_SRC_DIR=$(PROJECT_DIR)/CakeBuild
