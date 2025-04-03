@@ -1,0 +1,13 @@
+{
+    "type": "code",
+    "modid": "unbindhotkeys",
+    "name": "UnbindHotKeys",
+    "authors": [
+        "Primer81"
+    ],
+    "description": "Hovering over a hot key and pressing the Delete key will now unbind the hot key.",
+    "version": "1.0.0",
+    "dependencies": {
+        "game": ""
+    }
+}
