@@ -41,7 +41,7 @@ DOTNET_VSMOD_INSTALL_SENTINEL=\
 ## Sources
 SRC_DIR=src
 ## Configuration
-PROJECT_NAME_LIST=$(patsubst $(SRC_DIR)/%,%,$(wildcard $(SRC_DIR)/*))
+PROJECT_NAME_LIST?=$(patsubst $(SRC_DIR)/%,%,$(wildcard $(SRC_DIR)/*))
 PROJECT_NAME?=DataDumper
 ## Definitions
 ### Directories
