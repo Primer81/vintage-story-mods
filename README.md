@@ -1,3 +1,5 @@
+![Vintage Story Mods](img/VintageStoryModsLogo.png)
+
 ## Build Requirements
 - Vintage Story installed
 - `dotnet` command line tool
