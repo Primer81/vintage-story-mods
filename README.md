@@ -1,4 +1,4 @@
-## Requirements
+## Build Requirements
 - Vintage Story installed
 - `dotnet` command line tool
 - `python` command line tool
