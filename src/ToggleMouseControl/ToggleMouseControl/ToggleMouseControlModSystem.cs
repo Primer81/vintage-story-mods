@@ -16,106 +16,85 @@ namespace ToggleMouseControl;
 
 public class ToggleMouseControlModSystem : ModSystem
 {
-    static public bool MouseControlToggledOn { get; set; }
+    static private ICoreClientAPI clientApi;
+    static private Harmony harmony;
+    static private MouseController mouseController;
 
-    static public ICoreClientAPI clientApi;
-
-    private Harmony _harmony;
-
-    private HotKey _mouseControlHotKey = null;
-    private long _listenerId = 0;
-    private bool _triggerOnUpAlsoOriginal = false;
-    private bool _mouseControlKeyIsPressed = false;
-    private MouseController _mouseController;
+    private bool triggerOnUpAlsoOriginal = false;
+    private bool mouseControlKeyIsPressed = false;
+    static private bool mouseControlToggledOn { get; set; }
 
     public override void StartClientSide(ICoreClientAPI api)
     {
         clientApi = api;
-
         // Enable mouse controller
-        _mouseControlHotKey = clientApi.Input.HotKeys["togglemousecontrol"];
-        _mouseController = new MouseController(clientApi);
-        Activate();
-
+        {
+            mouseController = new MouseController(clientApi);
+            triggerOnUpAlsoOriginal =
+                clientApi.Input.HotKeys["togglemousecontrol"].TriggerOnUpAlso;
+            clientApi.Input.HotKeys["togglemousecontrol"].TriggerOnUpAlso = true;
+            clientApi.Input.HotKeys["togglemousecontrol"].Handler +=
+                OnToggleMouseControlHotkey;
+            clientApi.Event.RegisterGameTickListener(
+                OnGameTickCheckMouseControlToggle, 5);
+        }
         // Patch all loaded gui dialogs such that the
         // PrefersUngrabbedMouse property always returns false.
         // This will ensure the mouse toggle applies universally even when
         // the map or handbook are open.
-        _harmony = new Harmony(Mod.Info.ModID);
-        _harmony.PatchCategory(Mod.Info.ModID);
+        {
+            harmony = new Harmony(Mod.Info.ModID);
+            harmony.PatchCategory(Mod.Info.ModID);
+        }
     }
 
     public override void Dispose()
     {
-        _harmony?.UnpatchAll(Mod.Info.ModID);
+        // Unpatch if possible
+        {
+            harmony?.UnpatchAll(Mod.Info.ModID);
+            harmony = null;
+        }
+        // Restore hotkey
+        {
+            clientApi.Input.HotKeys["togglemousecontrol"].TriggerOnUpAlso =
+                triggerOnUpAlsoOriginal;
+            clientApi.Input.HotKeys["togglemousecontrol"].Handler -=
+                OnToggleMouseControlHotkey;
+        }
         base.Dispose();
-    }
-
-    private void Activate()
-    {
-        try
-        {
-            _triggerOnUpAlsoOriginal =
-                _mouseControlHotKey.TriggerOnUpAlso;
-            _mouseControlHotKey.TriggerOnUpAlso = true;
-            _mouseControlHotKey.Handler += OnToggleMouseControlHotkey;
-            _listenerId = clientApi.Event.RegisterGameTickListener(
-                OnGameTickCheckMouseControlToggle, 5);
-        }
-        catch (NullReferenceException)
-        {
-            // _mouseControlHotKey was deleted; nothing to do
-            // or
-            // game quit; nothing to do
-        }
-    }
-
-    // Only needed to deactivate during runtime if needed in future.
-    // Currently unused as deactivation during Dispose() results in an
-    // unnecessary NullReferenceException being thrown by:
-    // - Dereferencing _mouseControlHotKey
-    // - _clientApi.Event.UnregisterGameTickListener(_listenerId);
-    private void Deactivate()
-    {
-        try
-        {
-            _mouseControlHotKey.TriggerOnUpAlso = _triggerOnUpAlsoOriginal;
-            _mouseControlHotKey.Handler -= OnToggleMouseControlHotkey;
-            clientApi.Event.UnregisterGameTickListener(_listenerId);
-        }
-        catch (NullReferenceException)
-        {
-            // _mouseControlHotKey was deleted; nothing to do
-            // or
-            // game quit; nothing to do
-        }
     }
 
     private bool OnToggleMouseControlHotkey(KeyCombination keyComb)
     {
         bool isPressed = clientApi.Input.KeyboardKeyState[keyComb.KeyCode];
-        if ((_mouseControlKeyIsPressed == false) && (isPressed == true))
+        if ((mouseControlKeyIsPressed == false) && (isPressed == true))
         {
-            _mouseControlKeyIsPressed = true;
-            MouseControlToggledOn = !MouseControlToggledOn;
+            mouseControlKeyIsPressed = true;
+            ToggleMouseControl();
         }
-        if ((_mouseControlKeyIsPressed == true) && (isPressed == false))
+        if ((mouseControlKeyIsPressed == true) && (isPressed == false))
         {
-            _mouseControlKeyIsPressed = false;
+            mouseControlKeyIsPressed = false;
         }
         return true;
     }
 
     private void OnGameTickCheckMouseControlToggle(float dt)
     {
-        if (MouseControlToggledOn == true)
+        if (mouseControlToggledOn == true)
         {
-            _mouseController.UnlockMouse();
+            mouseController.UnlockMouse();
         }
         else
         {
-            _mouseController.LockMouse();
+            mouseController.LockMouse();
         }
+    }
+
+    public static void ToggleMouseControl()
+    {
+        mouseControlToggledOn = !mouseControlToggledOn;
     }
 }
 
@@ -126,6 +105,7 @@ public class MouseController: GuiDialog
 
     public override string ToggleKeyCombinationCode => "togglemousecontrol";
     public override bool PrefersUngrabbedMouse => true;
+    // public override bool UnregisterOnClose => true;
     public override EnumDialogType DialogType => EnumDialogType.Dialog;
     public override bool Focusable => false;
 
@@ -181,9 +161,9 @@ public class MouseController: GuiDialog
         else
         {
             // This shouldn't happen... but if it does we should definitely
-            // lock the mouse so that the next time escape key is pressed
-            // the main menu should open regardless.
-            ToggleMouseControlModSystem.MouseControlToggledOn = false;
+            // toggle the mouse control so that the next time escape key
+            // is pressed the main menu should open regardless.
+            ToggleMouseControlModSystem.ToggleMouseControl();
         }
         return false;
     }
@@ -248,7 +228,7 @@ internal static class Patches
     }
     [HarmonyPostfix()]
     [HarmonyPatch(typeof(GuiDialogHandbook), "OnGuiOpened")]
-    public static void Before_GuiDialogHandbook_OnGuiOpened(
+    public static void After_GuiDialogHandbook_OnGuiOpened(
         GuiDialogHandbook __instance)
     {
         overviewGuiRef(__instance).UnfocusOwnElements();

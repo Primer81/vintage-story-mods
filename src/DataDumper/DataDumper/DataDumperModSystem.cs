@@ -9,6 +9,7 @@ using System.IO;
 using HarmonyLib;
 using Vintagestory.Client.NoObf;
 using Vintagestory.Client;
+using System;
 
 namespace DataDumper;
 
@@ -35,6 +36,7 @@ public class DataDumperModSystem : ModSystem
     {
         Dump(new HotKeysDump(clientApi.Input.HotKeys));
         Dump(new LoadedGuisDump(clientApi.Gui.LoadedGuis));
+        Dump(new KeyCodesDump());
     }
 }
 
@@ -97,10 +99,11 @@ class GuiDialogDump
 
 class LoadedGuisDump
 {
-    public List<GuiDialogDump> LoadedGuis = new List<GuiDialogDump>();
+    public List<GuiDialogDump> LoadedGuis;
 
     public LoadedGuisDump(List<GuiDialog> loadedGuis)
     {
+        LoadedGuis = new List<GuiDialogDump>();
         foreach (var loadedGui in loadedGuis)
         {
             LoadedGuis.Add(new GuiDialogDump(loadedGui));
@@ -149,9 +152,27 @@ class ComposersDump
 
     public ComposersDump(Dictionary<string, GuiComposer> composers)
     {
+        Composers = new Dictionary<string, GuiComposerDump>();
         foreach (var composer in composers)
         {
             Composers.Add(composer.Key, new GuiComposerDump(composer.Value));
+        }
+    }
+}
+
+class KeyCodesDump
+{
+    public Dictionary<string, int> KeyCodes;
+
+    public KeyCodesDump()
+    {
+        KeyCodes = new Dictionary<string, int>();
+        foreach (GlKeys key in Enum.GetValues(typeof(GlKeys)))
+        {
+            if (!KeyCodes.ContainsKey(key.ToString()))
+            {
+                KeyCodes.Add(key.ToString(), (int)key);
+            }
         }
     }
 }

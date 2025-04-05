@@ -9,82 +9,58 @@ namespace ToggleSneak;
 
 public class ToggleSneakModSystem : ModSystem
 {
-    private ICoreClientAPI _clientApi;
+    private ICoreClientAPI clientApi;
 
-    private HotKey _sneakHotKey = null;
-    private long _listenerId = 0;
-    private bool _triggerOnUpAlsoOriginal = false;
-    private bool _sneakKeyIsPressed = false;
-    private bool _sneakToggledOn = false;
+    private bool triggerOnUpAlsoOriginal = false;
+    private bool sneakKeyIsPressed = false;
+    static private bool sneakToggledOn = false;
 
     public override void StartClientSide(ICoreClientAPI api)
     {
-        _clientApi = api;
-        _sneakHotKey = _clientApi.Input.HotKeys["sneak"];
-        Activate();
+        clientApi = api;
+        triggerOnUpAlsoOriginal =
+            clientApi.Input.HotKeys["sneak"].TriggerOnUpAlso;
+        clientApi.Input.HotKeys["sneak"].TriggerOnUpAlso = true;
+        clientApi.Input.HotKeys["sneak"].Handler +=
+            OnToggleSneakHotkey;
+         clientApi.Event.RegisterGameTickListener(
+            OnGameTickCheckSneakToggle, 5);
     }
 
     public override void Dispose()
     {
+        // Restore hotkey
+        {
+            clientApi.Input.HotKeys["sneak"].TriggerOnUpAlso =
+                triggerOnUpAlsoOriginal;
+            clientApi.Input.HotKeys["sneak"].Handler -=
+                OnToggleSneakHotkey;
+        }
         base.Dispose();
-    }
-
-    private void Activate()
-    {
-        try
-        {
-            _triggerOnUpAlsoOriginal = _sneakHotKey.TriggerOnUpAlso;
-            _sneakHotKey.TriggerOnUpAlso = true;
-            _sneakHotKey.Handler += OnToggleSneakHotkey;
-            _listenerId = _clientApi.Event.RegisterGameTickListener(
-                OnGameTickCheckSneakToggle, 5);
-        }
-        catch (NullReferenceException)
-        {
-            // _sneakHotKey was deleted; nothing to do
-            // or
-            // game quit; nothing to do
-        }
-    }
-
-    // Only needed to deactivate during runtime if needed in future.
-    // Currently unused as deactivation during Dispose() results in an
-    // unnecessary NullReferenceException being thrown by:
-    // - Dereferencing _sneakHotKey
-    // - _clientApi.Event.UnregisterGameTickListener(_listenerId);
-    private void Deactivate()
-    {
-        try
-        {
-            _sneakHotKey.TriggerOnUpAlso = _triggerOnUpAlsoOriginal;
-            _sneakHotKey.Handler -= OnToggleSneakHotkey;
-            _clientApi.Event.UnregisterGameTickListener(_listenerId);
-        }
-        catch (NullReferenceException)
-        {
-            // _sneakHotKey was deleted; nothing to do
-            // or
-            // game quit; nothing to do
-        }
     }
 
     private bool OnToggleSneakHotkey(KeyCombination keyComb)
     {
-        bool isPressed = _clientApi.Input.KeyboardKeyState[keyComb.KeyCode];
-        if ((_sneakKeyIsPressed == false) && (isPressed == true))
+        bool isPressed = clientApi.Input.KeyboardKeyState[keyComb.KeyCode];
+        if ((sneakKeyIsPressed == false) && (isPressed == true))
         {
-            _sneakKeyIsPressed = true;
-            _sneakToggledOn = !_sneakToggledOn;
+            sneakKeyIsPressed = true;
+            ToggleSneak();
         }
-        if ((_sneakKeyIsPressed == true) && (isPressed == false))
+        if ((sneakKeyIsPressed == true) && (isPressed == false))
         {
-            _sneakKeyIsPressed = false;
+            sneakKeyIsPressed = false;
         }
         return true;
     }
 
     private void OnGameTickCheckSneakToggle(float dt)
     {
-        _clientApi.World.Player.Entity.Controls.Sneak = _sneakToggledOn;
+        clientApi.World.Player.Entity.Controls.Sneak = sneakToggledOn;
+    }
+
+    public static void ToggleSneak()
+    {
+        sneakToggledOn = !sneakToggledOn;
     }
 }
