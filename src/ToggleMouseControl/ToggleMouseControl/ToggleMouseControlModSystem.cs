@@ -96,12 +96,17 @@ public class ToggleMouseControlModSystem : ModSystem
     {
         mouseControlToggledOn = !mouseControlToggledOn;
     }
+
+    public static bool IsMouseControlToggledOn()
+    {
+        return mouseControlToggledOn;
+    }
 }
 
 public class MouseController: GuiDialog
 // public class MouseController
 {
-    public ICoreClientAPI _clientApi;
+    public ICoreClientAPI clientApi;
 
     public override string ToggleKeyCombinationCode => "togglemousecontrol";
     public override bool PrefersUngrabbedMouse => true;
@@ -113,12 +118,12 @@ public class MouseController: GuiDialog
     public MouseController(ICoreClientAPI capi) : base(capi)
     // public MouseController(ICoreClientAPI capi)
     {
-        _clientApi = capi;
+        clientApi = capi;
     }
 
     public void UnlockMouse()
     {
-        _clientApi.Input.MouseWorldInteractAnyway = false;
+        clientApi.Input.MouseWorldInteractAnyway = false;
         if (IsOpened() == false)
         {
             TryOpen();
@@ -127,10 +132,22 @@ public class MouseController: GuiDialog
 
     public void LockMouse()
     {
-        _clientApi.Input.MouseWorldInteractAnyway = true;
+        clientApi.Input.MouseWorldInteractAnyway = true;
         if (IsOpened() == true)
         {
             TryClose();
+        }
+        // Fix focus to hotbar when mouse is locked.
+        // Stops the GUIs with scrollbars from taking over the mouse wheel
+        // such as the handbook.
+        {
+            // GuiDialog hotbar = clientApi.Gui.LoadedGuis.FirstOrDefault(
+            //     gui => gui.DebugName == "HudHotbar");
+            // if (hotbar != null)
+            // {
+            //     clientApi.Gui.RequestFocus(hotbar);
+            // }
+            // ScreenManager.GuiComposers.UnfocusElements();
         }
     }
 
@@ -151,7 +168,7 @@ public class MouseController: GuiDialog
 
     public override bool OnEscapePressed()
     {
-        var escapeMenu = _clientApi.Gui.LoadedGuis.FirstOrDefault(
+        var escapeMenu = clientApi.Gui.LoadedGuis.FirstOrDefault(
             gui => gui.DebugName == "GuiDialogEscapeMenu");
         // Check if the object was found
         if (escapeMenu != null)
@@ -232,6 +249,19 @@ internal static class Patches
         GuiDialogHandbook __instance)
     {
         overviewGuiRef(__instance).UnfocusOwnElements();
+    }
+
+    // Stops GUIs with scrollbars from intercepting the mouse wheel
+    // events when mouse control is toggled
+    [HarmonyPrefix()]
+    [HarmonyPatch(typeof(GuiElementScrollbar), "OnMouseWheel")]
+    public static bool Before_GuiElementScrollbar_OnMouseWheel(
+        GuiElementScrollbar __instance,
+        ICoreClientAPI api, MouseWheelEventArgs args)
+    {
+        // Only run the original function if mouse control is toggled on
+        // to closely match the expected behavior.
+        return ToggleMouseControlModSystem.IsMouseControlToggledOn();
     }
 
     // Covered by HudElement patch
