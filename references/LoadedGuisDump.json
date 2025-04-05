@@ -19,7 +19,7 @@
       "DrawOrder": 0.9,
       "Focusable": false,
       "InputOrder": 0.5,
-      "PrefersUngrabbedMouse": true,
+      "PrefersUngrabbedMouse": false,
       "ToggleKeyCombinationCode": null,
       "UnregisterOnClose": false,
       "ZSize": 150.0
@@ -31,10 +31,22 @@
       "DrawOrder": 0.2,
       "Focusable": true,
       "InputOrder": 0.5,
-      "PrefersUngrabbedMouse": true,
+      "PrefersUngrabbedMouse": false,
       "ToggleKeyCombinationCode": "inventorydialog",
       "UnregisterOnClose": false,
       "ZSize": 250.0
+    },
+    {
+      "DebugName": "MouseController",
+      "DialogType": "Dialog",
+      "DisableMouseGrab": false,
+      "DrawOrder": 0.1,
+      "Focusable": false,
+      "InputOrder": 0.5,
+      "PrefersUngrabbedMouse": true,
+      "ToggleKeyCombinationCode": "togglemousecontrol",
+      "UnregisterOnClose": false,
+      "ZSize": 150.0
     },
     {
       "DebugName": "GuiDialogCharacter",
@@ -55,7 +67,7 @@
       "DrawOrder": 0.1,
       "Focusable": true,
       "InputOrder": 0.5,
-      "PrefersUngrabbedMouse": true,
+      "PrefersUngrabbedMouse": false,
       "ToggleKeyCombinationCode": null,
       "UnregisterOnClose": false,
       "ZSize": 150.0
@@ -103,7 +115,7 @@
       "DrawOrder": 0.1,
       "Focusable": false,
       "InputOrder": 0.5,
-      "PrefersUngrabbedMouse": true,
+      "PrefersUngrabbedMouse": false,
       "ToggleKeyCombinationCode": "tickprofiler",
       "UnregisterOnClose": false,
       "ZSize": 150.0
@@ -175,7 +187,7 @@
       "DrawOrder": 0.1,
       "Focusable": true,
       "InputOrder": 0.5,
-      "PrefersUngrabbedMouse": true,
+      "PrefersUngrabbedMouse": false,
       "ToggleKeyCombinationCode": null,
       "UnregisterOnClose": false,
       "ZSize": 150.0
@@ -187,7 +199,7 @@
       "DrawOrder": 0.1,
       "Focusable": true,
       "InputOrder": 0.5,
-      "PrefersUngrabbedMouse": true,
+      "PrefersUngrabbedMouse": false,
       "ToggleKeyCombinationCode": "firstlaunchinfo",
       "UnregisterOnClose": false,
       "ZSize": 150.0
@@ -205,13 +217,61 @@
       "ZSize": 150.0
     },
     {
+      "DebugName": "GuiDialogStoryGenFailed",
+      "DialogType": "Dialog",
+      "DisableMouseGrab": false,
+      "DrawOrder": 0.1,
+      "Focusable": true,
+      "InputOrder": 0.5,
+      "PrefersUngrabbedMouse": false,
+      "ToggleKeyCombinationCode": null,
+      "UnregisterOnClose": false,
+      "ZSize": 150.0
+    },
+    {
+      "DebugName": "HudTutorial",
+      "DialogType": "HUD",
+      "DisableMouseGrab": false,
+      "DrawOrder": 0.1,
+      "Focusable": true,
+      "InputOrder": 0.5,
+      "PrefersUngrabbedMouse": false,
+      "ToggleKeyCombinationCode": null,
+      "UnregisterOnClose": false,
+      "ZSize": 150.0
+    },
+    {
+      "DebugName": "ChestSortDialog",
+      "DialogType": "HUD",
+      "DisableMouseGrab": false,
+      "DrawOrder": 0.1,
+      "Focusable": true,
+      "InputOrder": 0.5,
+      "PrefersUngrabbedMouse": false,
+      "ToggleKeyCombinationCode": null,
+      "UnregisterOnClose": false,
+      "ZSize": 150.0
+    },
+    {
+      "DebugName": "GuiDialogWorldMap",
+      "DialogType": "HUD",
+      "DisableMouseGrab": false,
+      "DrawOrder": 0.07,
+      "Focusable": true,
+      "InputOrder": 0.5,
+      "PrefersUngrabbedMouse": true,
+      "ToggleKeyCombinationCode": null,
+      "UnregisterOnClose": true,
+      "ZSize": 150.0
+    },
+    {
       "DebugName": "GuiDialogEscapeMenu",
       "DialogType": "Dialog",
       "DisableMouseGrab": true,
       "DrawOrder": 0.89,
       "Focusable": true,
       "InputOrder": 0.0,
-      "PrefersUngrabbedMouse": true,
+      "PrefersUngrabbedMouse": false,
       "ToggleKeyCombinationCode": "escapemenudialog",
       "UnregisterOnClose": false,
       "ZSize": 150.0
@@ -253,6 +313,18 @@
       "ZSize": 150.0
     },
     {
+      "DebugName": "HudHotbar",
+      "DialogType": "HUD",
+      "DisableMouseGrab": false,
+      "DrawOrder": 0.1,
+      "Focusable": true,
+      "InputOrder": 1.0,
+      "PrefersUngrabbedMouse": false,
+      "ToggleKeyCombinationCode": null,
+      "UnregisterOnClose": false,
+      "ZSize": 150.0
+    },
+    {
       "DebugName": "HudIngameError",
       "DialogType": "HUD",
       "DisableMouseGrab": false,
@@ -270,18 +342,6 @@
       "DisableMouseGrab": false,
       "DrawOrder": 0.1,
       "Focusable": false,
-      "InputOrder": 1.0,
-      "PrefersUngrabbedMouse": false,
-      "ToggleKeyCombinationCode": null,
-      "UnregisterOnClose": false,
-      "ZSize": 150.0
-    },
-    {
-      "DebugName": "HudHotbar",
-      "DialogType": "HUD",
-      "DisableMouseGrab": false,
-      "DrawOrder": 0.1,
-      "Focusable": true,
       "InputOrder": 1.0,
       "PrefersUngrabbedMouse": false,
       "ToggleKeyCombinationCode": null,

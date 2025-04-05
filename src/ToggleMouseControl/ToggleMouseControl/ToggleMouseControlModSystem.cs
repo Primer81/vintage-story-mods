@@ -3,10 +3,14 @@ using Vintagestory.API.Server;
 using Vintagestory.API.Config;
 using Vintagestory.API.Common;
 using Vintagestory;
+using Vintagestory.GameContent;
 using Vintagestory.Client;
 using Vintagestory.Client.NoObf;
 using System;
 using System.Linq;
+using HarmonyLib;
+using System.Collections.Generic;
+using System.Reflection;
 
 namespace ToggleMouseControl;
 
@@ -14,7 +18,9 @@ public class ToggleMouseControlModSystem : ModSystem
 {
     static public bool MouseControlToggledOn { get; set; }
 
-    private ICoreClientAPI _clientApi;
+    static public ICoreClientAPI clientApi;
+
+    private Harmony _harmony;
 
     private HotKey _mouseControlHotKey = null;
     private long _listenerId = 0;
@@ -24,14 +30,24 @@ public class ToggleMouseControlModSystem : ModSystem
 
     public override void StartClientSide(ICoreClientAPI api)
     {
-        _clientApi = api;
-        _mouseControlHotKey = _clientApi.Input.HotKeys["togglemousecontrol"];
-        _mouseController = new MouseController(_clientApi);
+        clientApi = api;
+
+        // Enable mouse controller
+        _mouseControlHotKey = clientApi.Input.HotKeys["togglemousecontrol"];
+        _mouseController = new MouseController(clientApi);
         Activate();
+
+        // Patch all loaded gui dialogs such that the
+        // PrefersUngrabbedMouse property always returns false.
+        // This will ensure the mouse toggle applies universally even when
+        // the map or handbook are open.
+        _harmony = new Harmony(Mod.Info.ModID);
+        _harmony.PatchCategory(Mod.Info.ModID);
     }
 
     public override void Dispose()
     {
+        _harmony?.UnpatchAll(Mod.Info.ModID);
         base.Dispose();
     }
 
@@ -43,8 +59,8 @@ public class ToggleMouseControlModSystem : ModSystem
                 _mouseControlHotKey.TriggerOnUpAlso;
             _mouseControlHotKey.TriggerOnUpAlso = true;
             _mouseControlHotKey.Handler += OnToggleMouseControlHotkey;
-            _listenerId = _clientApi.Event.RegisterGameTickListener(
-                OnGameTickCheckMouseControlToggle, 100);
+            _listenerId = clientApi.Event.RegisterGameTickListener(
+                OnGameTickCheckMouseControlToggle, 5);
         }
         catch (NullReferenceException)
         {
@@ -65,7 +81,7 @@ public class ToggleMouseControlModSystem : ModSystem
         {
             _mouseControlHotKey.TriggerOnUpAlso = _triggerOnUpAlsoOriginal;
             _mouseControlHotKey.Handler -= OnToggleMouseControlHotkey;
-            _clientApi.Event.UnregisterGameTickListener(_listenerId);
+            clientApi.Event.UnregisterGameTickListener(_listenerId);
         }
         catch (NullReferenceException)
         {
@@ -77,7 +93,7 @@ public class ToggleMouseControlModSystem : ModSystem
 
     private bool OnToggleMouseControlHotkey(KeyCombination keyComb)
     {
-        bool isPressed = _clientApi.Input.KeyboardKeyState[keyComb.KeyCode];
+        bool isPressed = clientApi.Input.KeyboardKeyState[keyComb.KeyCode];
         if ((_mouseControlKeyIsPressed == false) && (isPressed == true))
         {
             _mouseControlKeyIsPressed = true;
@@ -171,4 +187,170 @@ public class MouseController: GuiDialog
         }
         return false;
     }
+}
+
+[HarmonyPatchCategory("togglemousecontrol")]
+internal static class Patches
+{
+
+    // Patches all classes derived from GuiDialog which do not override
+    // the PrefersUngrabbedMouse property.
+    [HarmonyPrefix()]
+    [HarmonyPatch(typeof(GuiDialog), "get_PrefersUngrabbedMouse")]
+    public static bool Before_GuiDialog_get_PrefersUngrabbedMouse(
+        ref bool __result)
+    {
+        __result = false;
+        return false;
+    }
+
+    // Patches all classes derived from HudElement which do not override
+    // the PrefersUngrabbedMouse property.
+    [HarmonyPrefix()]
+    [HarmonyPatch(typeof(HudElement), "get_PrefersUngrabbedMouse")]
+    public static bool Before_HudElement_get_PrefersUngrabbedMouse(
+        ref bool __result)
+    {
+        __result = false;
+        return false;
+    }
+
+    // Requires own patch
+    [HarmonyPrefix()]
+    [HarmonyPatch(typeof(GuiDialogInventory), "get_PrefersUngrabbedMouse")]
+    public static bool Before_GuiDialogInventory_get_PrefersUngrabbedMouse(
+        ref bool __result)
+    {
+        __result = false;
+        return false;
+    }
+
+    // Requires own patch
+    [HarmonyPrefix()]
+    [HarmonyPatch(typeof(GuiDialogWorldMap), "get_PrefersUngrabbedMouse")]
+    public static bool Before_GuiDialogWorldMap_get_PrefersUngrabbedMouse(
+        ref bool __result)
+    {
+        __result = false;
+        return false;
+    }
+
+    // Requires own patch
+    static AccessTools.FieldRef<GuiDialogHandbook, GuiComposer> overviewGuiRef =
+        AccessTools.FieldRefAccess<GuiDialogHandbook, GuiComposer>("overviewGui");
+    [HarmonyPrefix()]
+    [HarmonyPatch(typeof(GuiDialogHandbook), "get_PrefersUngrabbedMouse")]
+    public static bool Before_GuiDialogHandbook_get_PrefersUngrabbedMouse(
+        ref bool __result)
+    {
+        __result = false;
+        return false;
+    }
+    [HarmonyPostfix()]
+    [HarmonyPatch(typeof(GuiDialogHandbook), "OnGuiOpened")]
+    public static void Before_GuiDialogHandbook_OnGuiOpened(
+        GuiDialogHandbook __instance)
+    {
+        overviewGuiRef(__instance).UnfocusOwnElements();
+    }
+
+    // Covered by HudElement patch
+    // [HarmonyPrefix()]
+    // [HarmonyPatch(typeof(HudElementBlockAndEntityInfo), "get_PrefersUngrabbedMouse")]
+    // public static bool Before_HudElementBlockAndEntityInfo_get_PrefersUngrabbedMouse(
+    //     ref bool __result)
+    // {
+    //     __result = false;
+    //     return false;
+    // }
+
+    // Covered by GuiDialog patch
+    // [HarmonyPrefix()]
+    // [HarmonyPatch(typeof(GuiDialogConfirmRemapping), "get_PrefersUngrabbedMouse")]
+    // public static bool Before_GuiDialogConfirmRemapping_get_PrefersUngrabbedMouse(
+    //     ref bool __result)
+    // {
+    //     __result = false;
+    //     return false;
+    // }
+
+    // Inaccessible due to protection level
+    // [HarmonyPrefix()]
+    // [HarmonyPatch(typeof(GuiDialogMacroEditor), "get_PrefersUngrabbedMouse")]
+    // public static bool Before_GuiDialogMacroEditor_get_PrefersUngrabbedMouse(
+    //     ref bool __result)
+    // {
+    //     __result = false;
+    //     return false;
+    // }
+
+    // Covered by GuiDialog patch
+    // [HarmonyPrefix()]
+    // [HarmonyPatch(typeof(GuiDialogTickProfiler), "get_PrefersUngrabbedMouse")]
+    // public static bool Before_GuiDialogTickProfiler_get_PrefersUngrabbedMouse(
+    //     ref bool __result)
+    // {
+    //     __result = false;
+    //     return false;
+    // }
+
+    // Covered by GuiDialog patch
+    // [HarmonyPrefix()]
+    // [HarmonyPatch(typeof(GuiDialogTransformEditor), "get_PrefersUngrabbedMouse")]
+    // public static bool Before_GuiDialogTransformEditor_get_PrefersUngrabbedMouse(
+    //     ref bool __result)
+    // {
+    //     __result = false;
+    //     return false;
+    // }
+
+    // Covered by GuiDialog patch
+    // [HarmonyPrefix()]
+    // [HarmonyPatch(typeof(GuiDialogDead), "get_PrefersUngrabbedMouse")]
+    // public static bool Before_GuiDialogDead_get_PrefersUngrabbedMouse(
+    //     ref bool __result)
+    // {
+    //     __result = false;
+    //     return false;
+    // }
+
+    // Covered by GuiDialog patch
+    // [HarmonyPrefix()]
+    // [HarmonyPatch(typeof(GuiDialogFirstlaunchInfo), "get_PrefersUngrabbedMouse")]
+    // public static bool Before_GuiDialogFirstlaunchInfo_get_PrefersUngrabbedMouse(
+    //     ref bool __result)
+    // {
+    //     __result = false;
+    //     return false;
+    // }
+
+    // Inaccessible due to protection level
+    // [HarmonyPrefix()]
+    // [HarmonyPatch(typeof(GuiDialogEscapeMenu), "get_PrefersUngrabbedMouse")]
+    // public static bool Before_GuiDialogEscapeMenu_get_PrefersUngrabbedMouse(
+    //     ref bool __result)
+    // {
+    //     __result = false;
+    //     return false;
+    // }
+
+    // Inaccessible due to protection level
+    // [HarmonyPrefix()]
+    // [HarmonyPatch(typeof(GuiDialogSelboxEditor), "get_PrefersUngrabbedMouse")]
+    // public static bool Before_GuiDialogSelboxEditor_get_PrefersUngrabbedMouse(
+    //     ref bool __result)
+    // {
+    //     __result = false;
+    //     return false;
+    // }
+
+    // Inaccessible due to protection level
+    // [HarmonyPrefix()]
+    // [HarmonyPatch(typeof(GuiDialogHollowTransform), "get_PrefersUngrabbedMouse")]
+    // public static bool Before_GuiDialogHollowTransform_get_PrefersUngrabbedMouse(
+    //     ref bool __result)
+    // {
+    //     __result = false;
+    //     return false;
+    // }
 }

@@ -19,8 +19,7 @@ public class DataDumperModSystem : ModSystem
     public override void StartClientSide(ICoreClientAPI api)
     {
         clientApi = api;
-        Dump(new HotKeysDump(clientApi.Input.HotKeys));
-        Dump(new LoadedGuisDump(clientApi.Gui.LoadedGuis));
+        clientApi.Event.RegisterGameTickListener(OnGameTickDump, 10000);
     }
 
     private void Dump(object data)
@@ -30,6 +29,12 @@ public class DataDumperModSystem : ModSystem
             Path.Combine(
                 $"{nameof(DataDumper)}",
                 $"{data.GetType().Name}.json"));
+    }
+
+    private void OnGameTickDump(float dt)
+    {
+        Dump(new HotKeysDump(clientApi.Input.HotKeys));
+        Dump(new LoadedGuisDump(clientApi.Gui.LoadedGuis));
     }
 }
 
