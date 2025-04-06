@@ -1,4 +1,4 @@
-![Vintage Story Mods](img/VintageStoryModsLogoProfilePicTransparent.png)
+![Vintage Story Mods](img/Misc/VintageStoryModsLogoProfilePicTransparent.png)
 
 ## Build Requirements
 - Vintage Story installed
