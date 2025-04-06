@@ -168,21 +168,28 @@ public class MouseController: GuiDialog
 
     public override bool OnEscapePressed()
     {
-        var escapeMenu = clientApi.Gui.LoadedGuis.FirstOrDefault(
-            gui => gui.DebugName == "GuiDialogEscapeMenu");
+        bool guiClosed;
+        // var escapeMenu = clientApi.Gui.LoadedGuis.FirstOrDefault(
+        //     gui => gui.DebugName == "GuiDialogEscapeMenu");
         // Check if the object was found
-        if (escapeMenu != null)
-        {
-            escapeMenu.TryOpen();
-        }
-        else
-        {
-            // This shouldn't happen... but if it does we should definitely
-            // toggle the mouse control so that the next time escape key
-            // is pressed the main menu should open regardless.
+        // if (escapeMenu != null)
+        // {
+        //     escapeMenu.TryOpen();
+        //     guiClosed = false;
+        // }
+        // else
+        // {
+            // Toggle mouse control so that the next time escape key
+            // is pressed, the main menu should open.
             ToggleMouseControlModSystem.ToggleMouseControl();
-        }
-        return false;
+            // Try to close the dialog just in case 😉
+            if (IsOpened() == true)
+            {
+                TryClose();
+            }
+            guiClosed = true;
+        // }
+        return guiClosed;
     }
 }
 
