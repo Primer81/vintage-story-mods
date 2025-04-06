@@ -15,7 +15,7 @@ read_json=$(shell python -c "import json; print(json.load(open('$(1)'))['$(2)'])
 # Images
 ###############################################################################
 IMG_DIR=img
-IMG_PROFILE_PICTURE=$(IMG_DIR)/ProfilePicture.png
+IMG_PROFILE_PICTURE=$(IMG_DIR)/Misc/ProfilePicture.png
 
 ###############################################################################
 # Sentinels
