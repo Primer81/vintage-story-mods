@@ -28,8 +28,8 @@ SENTINEL_EXT=.sentinel
 # Dotnet
 ###############################################################################
 ## Configuration
-DOTNET?=dotnet
-DOTNET_VSMOD_PACKAGE_NAME?=VintageStory.Mod.Templates
+export DOTNET?=dotnet
+export DOTNET_VSMOD_PACKAGE_NAME?=VintageStory.Mod.Templates
 ## Definitions
 DOTNET_VSMODE=$(DOTNET) new vsmod
 DOTNET_VSMOD_INSTALL_SENTINEL=\
@@ -41,8 +41,8 @@ DOTNET_VSMOD_INSTALL_SENTINEL=\
 ## Sources
 SRC_DIR=src
 ## Configuration
-PROJECT_NAME_LIST?=$(patsubst $(SRC_DIR)/%,%,$(wildcard $(SRC_DIR)/*))
-PROJECT_NAME?=DataDumper
+export PROJECT_NAME_LIST?=$(patsubst $(SRC_DIR)/%,%,$(wildcard $(SRC_DIR)/*))
+export PROJECT_NAME?=DataDumper
 ## Definitions
 ### Directories
 #### Common
