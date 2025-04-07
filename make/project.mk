@@ -12,6 +12,9 @@ $(PROJECT_CREATE_SENTINEL): $(PROJECT_CREATE_PREREQUISITES)
 		--AddSampleCode \
 		--AddAssetFolder \
 		--IncludeHarmony \
+		--IncludeProtobuf \
+		--IncludeCairoSharp \
+		--IncludeSQLite \
 		--IncludeVintagestoryLib \
 		--output $(PROJECT_DIR) \
 		--name $(PROJECT_NAME)

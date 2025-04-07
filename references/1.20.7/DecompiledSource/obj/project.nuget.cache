@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "cbI0Hjrx9DqplmiFtWcpQMI/98eh+9Rr2cuZ5yRNx0x74c2RsCbrGbhLVnFeNuHfPZoyisxVi0Xp0AgGxTknfQ==",
+  "success": true,
+  "projectFilePath": "C:\\sw\\all\\vintage-story-mods\\main\\_src\\references\\1.20.7\\DecompiledSource\\DecompiledSource.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\gwlar\\.nuget\\packages\\system.collections.immutable\\8.0.0\\system.collections.immutable.8.0.0.nupkg.sha512",
+    "C:\\Users\\gwlar\\.nuget\\packages\\system.text.encodings.web\\8.0.0\\system.text.encodings.web.8.0.0.nupkg.sha512",
+    "C:\\Users\\gwlar\\.nuget\\packages\\system.text.json\\8.0.0\\system.text.json.8.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
