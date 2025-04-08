@@ -6,8 +6,9 @@
         "Primer81"
     ],
     "description": "Mouse control is now toggleable. Stop handbook, world map and other GUIs from controlling the mouse.",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "dependencies": {
         "game": ""
-    }
+    },
+    "side": "client"
 }
