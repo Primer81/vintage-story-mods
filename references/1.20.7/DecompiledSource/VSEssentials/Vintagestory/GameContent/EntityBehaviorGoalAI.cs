@@ -1,0 +1,76 @@
+using System;
+using Vintagestory.API.Common;
+using Vintagestory.API.Common.Entities;
+using Vintagestory.API.Datastructures;
+using Vintagestory.Essentials;
+
+namespace Vintagestory.GameContent;
+
+public class EntityBehaviorGoalAI : EntityBehavior
+{
+	public AiGoalManager goalManager;
+
+	public PathTraverserBase PathTraverser;
+
+	public EntityBehaviorGoalAI(Entity entity)
+		: base(entity)
+	{
+		goalManager = new AiGoalManager(entity);
+	}
+
+	public override void Initialize(EntityProperties properties, JsonObject aiconfig)
+	{
+		if (!(entity is EntityAgent))
+		{
+			entity.World.Logger.Error("The goal ai currently only works on entities inheriting from EntityAgent. Will ignore loading goals for entity {0} ", entity.Code);
+			return;
+		}
+		PathTraverser = new StraightLineTraverser(entity as EntityAgent);
+		JsonObject[] goals = aiconfig["aigoals"]?.AsArray();
+		if (goals == null)
+		{
+			return;
+		}
+		JsonObject[] array = goals;
+		foreach (JsonObject goalConfig in array)
+		{
+			string goalCode = goalConfig["code"]?.AsString();
+			Type goalType = null;
+			if (!AiGoalRegistry.GoalTypes.TryGetValue(goalCode, out goalType))
+			{
+				entity.World.Logger.Error("Goal with code {0} for entity {1} does not exist. Ignoring.", goalCode, entity.Code);
+			}
+			else
+			{
+				AiGoalBase goal = (AiGoalBase)Activator.CreateInstance(goalType, (EntityAgent)entity);
+				goal.LoadConfig(goalConfig, aiconfig);
+				goalManager.AddGoal(goal);
+			}
+		}
+	}
+
+	public override void OnGameTick(float deltaTime)
+	{
+		if (entity.State == EnumEntityState.Active)
+		{
+			PathTraverser.OnGameTick(deltaTime);
+			goalManager.OnGameTick(deltaTime);
+			entity.World.FrameProfiler.Mark("entity-ai");
+		}
+	}
+
+	public override void OnStateChanged(EnumEntityState beforeState, ref EnumHandling handled)
+	{
+		goalManager.OnStateChanged(beforeState);
+	}
+
+	public override void Notify(string key, object data)
+	{
+		goalManager.Notify(key, data);
+	}
+
+	public override string PropertyName()
+	{
+		return "goalai";
+	}
+}

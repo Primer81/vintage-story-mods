@@ -1,0 +1,148 @@
+using System.Collections.Generic;
+using Vintagestory.API.Client;
+using Vintagestory.API.Common;
+using Vintagestory.API.MathTools;
+using Vintagestory.API.Util;
+
+namespace Vintagestory.GameContent;
+
+public class BlockFruitPress : Block
+{
+	private Cuboidf[] particleCollBoxes;
+
+	private WorldInteraction[] interactions;
+
+	public bool RightMouseDown;
+
+	public override void OnLoaded(ICoreAPI api)
+	{
+		particleCollBoxes = new Cuboidf[1] { CollisionBoxes[0].Clone() };
+		particleCollBoxes[0].Y1 = 0.6875f;
+		base.OnLoaded(api);
+		if (api.Side == EnumAppSide.Client)
+		{
+			(api as ICoreClientAPI).Input.InWorldAction += Input_InWorldAction;
+		}
+		api.Event.EnqueueMainThreadTask(delegate
+		{
+			interactions = ObjectCacheUtil.GetOrCreate(api, "fruitPressInteractions", delegate
+			{
+				List<ItemStack> list = new List<ItemStack>();
+				foreach (CollectibleObject current in api.World.Collectibles)
+				{
+					if (current is BlockLiquidContainerBase { IsTopOpened: not false, AllowHeldLiquidTransfer: not false, CapacityLitres: <20f })
+					{
+						list.Add(new ItemStack(current));
+					}
+				}
+				return new WorldInteraction[1]
+				{
+					new WorldInteraction
+					{
+						ActionLangCode = "blockhelp-fruitpress-putremovebucket",
+						MouseButton = EnumMouseButton.Right,
+						Itemstacks = list.ToArray(),
+						ShouldApply = (WorldInteraction wi, BlockSelection bs, EntitySelection es) => bs.SelectionBoxIndex == 0
+					}
+				};
+			});
+		}, "initFruitPressInteractions");
+	}
+
+	private void Input_InWorldAction(EnumEntityAction action, bool on, ref EnumHandling handled)
+	{
+		if (action == EnumEntityAction.RightMouseDown && !on)
+		{
+			RightMouseDown = false;
+		}
+	}
+
+	public override Cuboidf[] GetParticleCollisionBoxes(IBlockAccessor blockAccessor, BlockPos pos)
+	{
+		return particleCollBoxes;
+	}
+
+	public override bool DoParticalSelection(IWorldAccessor world, BlockPos pos)
+	{
+		return true;
+	}
+
+	public override void OnBlockPlaced(IWorldAccessor world, BlockPos pos, ItemStack byItemStack = null)
+	{
+		base.OnBlockPlaced(world, pos, byItemStack);
+		Block toPlaceBlock = world.GetBlock(new AssetLocation("fruitpresstop-" + Variant["orientation"]));
+		world.BlockAccessor.SetBlock(toPlaceBlock.BlockId, pos.UpCopy());
+	}
+
+	public override void OnBlockBroken(IWorldAccessor world, BlockPos pos, IPlayer byPlayer, float dropQuantityMultiplier = 1f)
+	{
+		if (api.World.BlockAccessor.GetBlock(pos.UpCopy()).Code.Path == "fruitpresstop-" + Variant["orientation"])
+		{
+			world.BlockAccessor.SetBlock(0, pos.UpCopy());
+		}
+		base.OnBlockBroken(world, pos, byPlayer, dropQuantityMultiplier);
+	}
+
+	public override bool CanPlaceBlock(IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel, ref string failureCode)
+	{
+		if (!base.CanPlaceBlock(world, byPlayer, blockSel, ref failureCode))
+		{
+			return false;
+		}
+		BlockSelection bs = blockSel.Clone();
+		bs.Position = blockSel.Position.UpCopy();
+		if (!base.CanPlaceBlock(world, byPlayer, bs, ref failureCode))
+		{
+			return false;
+		}
+		return true;
+	}
+
+	public override bool OnBlockInteractStart(IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel)
+	{
+		if (world.BlockAccessor.GetBlockEntity(blockSel.Position) is BlockEntityFruitPress be)
+		{
+			bool result = be.OnBlockInteractStart(byPlayer, blockSel, (blockSel.SelectionBoxIndex == 1) ? EnumFruitPressSection.MashContainer : EnumFruitPressSection.Ground, !RightMouseDown);
+			RightMouseDown = true;
+			return result;
+		}
+		return base.OnBlockInteractStart(world, byPlayer, blockSel);
+	}
+
+	public override bool OnBlockInteractStep(float secondsUsed, IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel)
+	{
+		if (world.BlockAccessor.GetBlockEntity(blockSel.Position) is BlockEntityFruitPress be)
+		{
+			return be.OnBlockInteractStep(secondsUsed, byPlayer, (blockSel.SelectionBoxIndex == 1) ? EnumFruitPressSection.MashContainer : EnumFruitPressSection.Ground);
+		}
+		return base.OnBlockInteractStep(secondsUsed, world, byPlayer, blockSel);
+	}
+
+	public override void OnBlockInteractStop(float secondsUsed, IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel)
+	{
+		if (world.BlockAccessor.GetBlockEntity(blockSel.Position) is BlockEntityFruitPress be)
+		{
+			be.OnBlockInteractStop(secondsUsed, byPlayer);
+		}
+		base.OnBlockInteractStop(secondsUsed, world, byPlayer, blockSel);
+	}
+
+	public override bool OnBlockInteractCancel(float secondsUsed, IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel, EnumItemUseCancelReason cancelReason)
+	{
+		if (world.BlockAccessor.GetBlockEntity(blockSel.Position) is BlockEntityFruitPress be)
+		{
+			return be.OnBlockInteractCancel(secondsUsed, byPlayer);
+		}
+		return base.OnBlockInteractCancel(secondsUsed, world, byPlayer, blockSel, cancelReason);
+	}
+
+	public override WorldInteraction[] GetPlacedBlockInteractionHelp(IWorldAccessor world, BlockSelection selection, IPlayer forPlayer)
+	{
+		return interactions.Append(base.GetPlacedBlockInteractionHelp(world, selection, forPlayer));
+	}
+
+	public override string GetPlacedBlockInfo(IWorldAccessor world, BlockPos pos, IPlayer forPlayer)
+	{
+		return base.GetPlacedBlockInfo(world, pos, forPlayer);
+	}
+}
