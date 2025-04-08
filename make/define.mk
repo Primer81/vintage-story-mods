@@ -69,8 +69,15 @@ DOTNET_ILSPYCMD_DECOMPILE_PREREQUISITES=\
 ## Sources
 SRC_DIR=src
 ## Configuration
-export PROJECT_NAME_LIST?=$(patsubst $(SRC_DIR)/%,%,$(wildcard $(SRC_DIR)/*))
-export PROJECT_NAME?=DataDumper
+ifndef name
+    ### Defaults
+    export PROJECT_NAME_LIST?=$(patsubst $(SRC_DIR)/%,%,$(wildcard $(SRC_DIR)/*))
+    export PROJECT_NAME?=DataDumper
+else
+    ### Shorthand
+    export PROJECT_NAME_LIST?=$(name)
+    export PROJECT_NAME?=$(name)
+endif
 ## Definitions
 ### Directories
 #### Common
@@ -90,10 +97,10 @@ PROJECT_CSPROJ_FILE=$(PROJECT_SRC_DIR)/$(PROJECT_NAME).csproj
 PROJECT_VERSION=$(call read_json,$(PROJECT_SRC_DIR)/modinfo.json,version)
 PROJECT_MODID=$(call read_json,$(PROJECT_SRC_DIR)/modinfo.json,modid)
 ifeq ($(PROJECT_VERSION),)
-PROJECT_VERSION=1.0.0
+    PROJECT_VERSION=1.0.0
 endif
 ifeq ($(PROJECT_MODID),)
-PROJECT_MODID=unknown
+    PROJECT_MODID=unknown
 endif
 ### Icon
 PROJECT_MOD_ICON_DEFAULT=$(IMG_PROFILE_PICTURE)
