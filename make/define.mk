@@ -71,7 +71,7 @@ SRC_DIR=src
 ## Configuration
 ifndef name
     ### Defaults
-    export PROJECT_NAME_LIST?=$(patsubst $(SRC_DIR)/%,%,$(wildcard $(SRC_DIR)/*))
+    export PROJECT_NAME_LIST?=$(filter-out DataDumper, $(patsubst $(SRC_DIR)/%,%,$(wildcard $(SRC_DIR)/*)))
     export PROJECT_NAME?=DataDumper
 else
     ### Shorthand
