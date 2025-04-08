@@ -13,25 +13,25 @@
   <ItemGroup />
   <ItemGroup>
     <Reference Include="SkiaSharp">
-      <HintPath>..\..\..\..\..\..\..\..\..\Users\gwlar\AppData\Roaming\Vintagestory\Lib\SkiaSharp.dll</HintPath>
+      <HintPath>$(VINTAGE_STORY)\Lib\SkiaSharp.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\..\..\..\..\..\..\Users\gwlar\AppData\Roaming\Vintagestory\Lib\Newtonsoft.Json.dll</HintPath>
+      <HintPath>$(VINTAGE_STORY)\Lib\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="protobuf-net">
-      <HintPath>..\..\..\..\..\..\..\..\..\Users\gwlar\AppData\Roaming\Vintagestory\Lib\protobuf-net.dll</HintPath>
+      <HintPath>$(VINTAGE_STORY)\Lib\protobuf-net.dll</HintPath>
     </Reference>
     <Reference Include="cairo-sharp">
-      <HintPath>..\..\..\..\..\..\..\..\..\Users\gwlar\AppData\Roaming\Vintagestory\Lib\cairo-sharp.dll</HintPath>
+      <HintPath>$(VINTAGE_STORY)\Lib\cairo-sharp.dll</HintPath>
     </Reference>
     <Reference Include="OpenTK.Windowing.GraphicsLibraryFramework">
-      <HintPath>..\..\..\..\..\..\..\..\..\Users\gwlar\AppData\Roaming\Vintagestory\Lib\OpenTK.Windowing.GraphicsLibraryFramework.dll</HintPath>
+      <HintPath>$(VINTAGE_STORY)\Lib\OpenTK.Windowing.GraphicsLibraryFramework.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Data.Sqlite">
-      <HintPath>..\..\..\..\..\..\..\..\..\Users\gwlar\AppData\Roaming\Vintagestory\Lib\Microsoft.Data.Sqlite.dll</HintPath>
+      <HintPath>$(VINTAGE_STORY)\Lib\Microsoft.Data.Sqlite.dll</HintPath>
     </Reference>
     <Reference Include="OpenTK.Windowing.Desktop">
-      <HintPath>..\..\..\..\..\..\..\..\..\Users\gwlar\AppData\Roaming\Vintagestory\Lib\OpenTK.Windowing.Desktop.dll</HintPath>
+      <HintPath>$(VINTAGE_STORY)\Lib\OpenTK.Windowing.Desktop.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>

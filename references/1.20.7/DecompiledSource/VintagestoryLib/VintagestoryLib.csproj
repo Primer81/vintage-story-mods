@@ -13,76 +13,76 @@
   <ItemGroup />
   <ItemGroup>
     <Reference Include="VintagestoryAPI">
-      <HintPath>..\..\..\..\..\..\..\..\..\Users\gwlar\AppData\Roaming\Vintagestory\VintagestoryAPI.dll</HintPath>
+      <HintPath>$(VINTAGE_STORY)\VintagestoryAPI.dll</HintPath>
     </Reference>
     <Reference Include="cairo-sharp">
-      <HintPath>..\..\..\..\..\..\..\..\..\Users\gwlar\AppData\Roaming\Vintagestory\Lib\cairo-sharp.dll</HintPath>
+      <HintPath>$(VINTAGE_STORY)\Lib\cairo-sharp.dll</HintPath>
     </Reference>
     <Reference Include="protobuf-net">
-      <HintPath>..\..\..\..\..\..\..\..\..\Users\gwlar\AppData\Roaming\Vintagestory\Lib\protobuf-net.dll</HintPath>
+      <HintPath>$(VINTAGE_STORY)\Lib\protobuf-net.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\..\..\..\..\..\..\Users\gwlar\AppData\Roaming\Vintagestory\Lib\Newtonsoft.Json.dll</HintPath>
+      <HintPath>$(VINTAGE_STORY)\Lib\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="CommandLine">
-      <HintPath>..\..\..\..\..\..\..\..\..\Users\gwlar\AppData\Roaming\Vintagestory\Lib\CommandLine.dll</HintPath>
+      <HintPath>$(VINTAGE_STORY)\Lib\CommandLine.dll</HintPath>
     </Reference>
     <Reference Include="SkiaSharp">
-      <HintPath>..\..\..\..\..\..\..\..\..\Users\gwlar\AppData\Roaming\Vintagestory\Lib\SkiaSharp.dll</HintPath>
+      <HintPath>$(VINTAGE_STORY)\Lib\SkiaSharp.dll</HintPath>
     </Reference>
     <Reference Include="Open.Nat">
-      <HintPath>..\..\..\..\..\..\..\..\..\Users\gwlar\AppData\Roaming\Vintagestory\Lib\Open.Nat.dll</HintPath>
+      <HintPath>$(VINTAGE_STORY)\Lib\Open.Nat.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Nat">
-      <HintPath>..\..\..\..\..\..\..\..\..\Users\gwlar\AppData\Roaming\Vintagestory\Lib\Mono.Nat.dll</HintPath>
+      <HintPath>$(VINTAGE_STORY)\Lib\Mono.Nat.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil">
-      <HintPath>..\..\..\..\..\..\..\..\..\Users\gwlar\AppData\Roaming\Vintagestory\Lib\Mono.Cecil.dll</HintPath>
+      <HintPath>$(VINTAGE_STORY)\Lib\Mono.Cecil.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CodeAnalysis">
-      <HintPath>..\..\..\..\..\..\..\..\..\Users\gwlar\AppData\Roaming\Vintagestory\Lib\Microsoft.CodeAnalysis.dll</HintPath>
+      <HintPath>$(VINTAGE_STORY)\Lib\Microsoft.CodeAnalysis.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CodeAnalysis.CSharp">
-      <HintPath>..\..\..\..\..\..\..\..\..\Users\gwlar\AppData\Roaming\Vintagestory\Lib\Microsoft.CodeAnalysis.CSharp.dll</HintPath>
+      <HintPath>$(VINTAGE_STORY)\Lib\Microsoft.CodeAnalysis.CSharp.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
-      <HintPath>..\..\..\..\..\..\..\..\..\Users\gwlar\AppData\Roaming\Vintagestory\Lib\ICSharpCode.SharpZipLib.dll</HintPath>
+      <HintPath>$(VINTAGE_STORY)\Lib\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Data.Sqlite">
-      <HintPath>..\..\..\..\..\..\..\..\..\Users\gwlar\AppData\Roaming\Vintagestory\Lib\Microsoft.Data.Sqlite.dll</HintPath>
+      <HintPath>$(VINTAGE_STORY)\Lib\Microsoft.Data.Sqlite.dll</HintPath>
     </Reference>
     <Reference Include="0Harmony">
-      <HintPath>..\..\..\..\..\..\..\..\..\Users\gwlar\AppData\Roaming\Vintagestory\Lib\0Harmony.dll</HintPath>
+      <HintPath>$(VINTAGE_STORY)\Lib\0Harmony.dll</HintPath>
     </Reference>
     <Reference Include="OpenTK.Windowing.Desktop">
-      <HintPath>..\..\..\..\..\..\..\..\..\Users\gwlar\AppData\Roaming\Vintagestory\Lib\OpenTK.Windowing.Desktop.dll</HintPath>
+      <HintPath>$(VINTAGE_STORY)\Lib\OpenTK.Windowing.Desktop.dll</HintPath>
     </Reference>
     <Reference Include="OpenTK.Audio.OpenAL">
-      <HintPath>..\..\..\..\..\..\..\..\..\Users\gwlar\AppData\Roaming\Vintagestory\Lib\OpenTK.Audio.OpenAL.dll</HintPath>
+      <HintPath>$(VINTAGE_STORY)\Lib\OpenTK.Audio.OpenAL.dll</HintPath>
     </Reference>
     <Reference Include="OpenTK.Mathematics">
-      <HintPath>..\..\..\..\..\..\..\..\..\Users\gwlar\AppData\Roaming\Vintagestory\Lib\OpenTK.Mathematics.dll</HintPath>
+      <HintPath>$(VINTAGE_STORY)\Lib\OpenTK.Mathematics.dll</HintPath>
     </Reference>
     <Reference Include="OpenTK.Windowing.Common">
-      <HintPath>..\..\..\..\..\..\..\..\..\Users\gwlar\AppData\Roaming\Vintagestory\Lib\OpenTK.Windowing.Common.dll</HintPath>
+      <HintPath>$(VINTAGE_STORY)\Lib\OpenTK.Windowing.Common.dll</HintPath>
     </Reference>
     <Reference Include="OpenTK.Windowing.GraphicsLibraryFramework">
-      <HintPath>..\..\..\..\..\..\..\..\..\Users\gwlar\AppData\Roaming\Vintagestory\Lib\OpenTK.Windowing.GraphicsLibraryFramework.dll</HintPath>
+      <HintPath>$(VINTAGE_STORY)\Lib\OpenTK.Windowing.GraphicsLibraryFramework.dll</HintPath>
     </Reference>
     <Reference Include="DnsClient">
-      <HintPath>..\..\..\..\..\..\..\..\..\Users\gwlar\AppData\Roaming\Vintagestory\Lib\DnsClient.dll</HintPath>
+      <HintPath>$(VINTAGE_STORY)\Lib\DnsClient.dll</HintPath>
     </Reference>
     <Reference Include="OpenTK.Graphics">
-      <HintPath>..\..\..\..\..\..\..\..\..\Users\gwlar\AppData\Roaming\Vintagestory\Lib\OpenTK.Graphics.dll</HintPath>
+      <HintPath>$(VINTAGE_STORY)\Lib\OpenTK.Graphics.dll</HintPath>
     </Reference>
     <Reference Include="csvorbis">
-      <HintPath>..\..\..\..\..\..\..\..\..\Users\gwlar\AppData\Roaming\Vintagestory\Lib\csvorbis.dll</HintPath>
+      <HintPath>$(VINTAGE_STORY)\Lib\csvorbis.dll</HintPath>
     </Reference>
     <Reference Include="csogg">
-      <HintPath>..\..\..\..\..\..\..\..\..\Users\gwlar\AppData\Roaming\Vintagestory\Lib\csogg.dll</HintPath>
+      <HintPath>$(VINTAGE_STORY)\Lib\csogg.dll</HintPath>
     </Reference>
     <Reference Include="xplatforminterface">
-      <HintPath>..\..\..\..\..\..\..\..\..\Users\gwlar\AppData\Roaming\Vintagestory\Lib\xplatforminterface.dll</HintPath>
+      <HintPath>$(VINTAGE_STORY)\Lib\xplatforminterface.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>

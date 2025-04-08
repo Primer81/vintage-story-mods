@@ -13,25 +13,25 @@
   <ItemGroup />
   <ItemGroup>
     <Reference Include="VintagestoryAPI">
-      <HintPath>..\..\..\..\..\..\..\..\..\Users\gwlar\AppData\Roaming\Vintagestory\VintagestoryAPI.dll</HintPath>
+      <HintPath>$(VINTAGE_STORY)\VintagestoryAPI.dll</HintPath>
     </Reference>
     <Reference Include="cairo-sharp">
-      <HintPath>..\..\..\..\..\..\..\..\..\Users\gwlar\AppData\Roaming\Vintagestory\Lib\cairo-sharp.dll</HintPath>
+      <HintPath>$(VINTAGE_STORY)\Lib\cairo-sharp.dll</HintPath>
     </Reference>
     <Reference Include="VSEssentials">
-      <HintPath>..\..\..\..\..\..\..\..\..\Users\gwlar\AppData\Roaming\Vintagestory\Mods\VSEssentials.dll</HintPath>
+      <HintPath>$(VINTAGE_STORY)\Mods\VSEssentials.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\..\..\..\..\..\..\Users\gwlar\AppData\Roaming\Vintagestory\Lib\Newtonsoft.Json.dll</HintPath>
+      <HintPath>$(VINTAGE_STORY)\Lib\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="protobuf-net">
-      <HintPath>..\..\..\..\..\..\..\..\..\Users\gwlar\AppData\Roaming\Vintagestory\Lib\protobuf-net.dll</HintPath>
+      <HintPath>$(VINTAGE_STORY)\Lib\protobuf-net.dll</HintPath>
     </Reference>
     <Reference Include="VSCreativeMod">
-      <HintPath>..\..\..\..\..\..\..\..\..\Users\gwlar\AppData\Roaming\Vintagestory\Mods\VSCreativeMod.dll</HintPath>
+      <HintPath>$(VINTAGE_STORY)\Mods\VSCreativeMod.dll</HintPath>
     </Reference>
     <Reference Include="SkiaSharp">
-      <HintPath>..\..\..\..\..\..\..\..\..\Users\gwlar\AppData\Roaming\Vintagestory\Lib\SkiaSharp.dll</HintPath>
+      <HintPath>$(VINTAGE_STORY)\Lib\SkiaSharp.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>

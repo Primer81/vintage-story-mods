@@ -13,31 +13,31 @@
   <ItemGroup />
   <ItemGroup>
     <Reference Include="VintagestoryAPI">
-      <HintPath>..\..\..\..\..\..\..\..\..\Users\gwlar\AppData\Roaming\Vintagestory\VintagestoryAPI.dll</HintPath>
+      <HintPath>$(VINTAGE_STORY)\VintagestoryAPI.dll</HintPath>
     </Reference>
     <Reference Include="System.Drawing.Common">
-      <HintPath>..\..\..\..\..\..\..\..\..\Users\gwlar\AppData\Roaming\Vintagestory\Lib\System.Drawing.Common.dll</HintPath>
+      <HintPath>$(VINTAGE_STORY)\Lib\System.Drawing.Common.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\..\..\..\..\..\..\Users\gwlar\AppData\Roaming\Vintagestory\Lib\Newtonsoft.Json.dll</HintPath>
+      <HintPath>$(VINTAGE_STORY)\Lib\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Tavis.JsonPatch">
-      <HintPath>..\..\..\..\..\..\..\..\..\Users\gwlar\AppData\Roaming\Vintagestory\Lib\Tavis.JsonPatch.dll</HintPath>
+      <HintPath>$(VINTAGE_STORY)\Lib\Tavis.JsonPatch.dll</HintPath>
     </Reference>
     <Reference Include="cairo-sharp">
-      <HintPath>..\..\..\..\..\..\..\..\..\Users\gwlar\AppData\Roaming\Vintagestory\Lib\cairo-sharp.dll</HintPath>
+      <HintPath>$(VINTAGE_STORY)\Lib\cairo-sharp.dll</HintPath>
     </Reference>
     <Reference Include="protobuf-net">
-      <HintPath>..\..\..\..\..\..\..\..\..\Users\gwlar\AppData\Roaming\Vintagestory\Lib\protobuf-net.dll</HintPath>
+      <HintPath>$(VINTAGE_STORY)\Lib\protobuf-net.dll</HintPath>
     </Reference>
     <Reference Include="AnimatedGif">
-      <HintPath>..\..\..\..\..\..\..\..\..\Users\gwlar\AppData\Roaming\Vintagestory\Lib\AnimatedGif.dll</HintPath>
+      <HintPath>$(VINTAGE_STORY)\Lib\AnimatedGif.dll</HintPath>
     </Reference>
     <Reference Include="SkiaSharp">
-      <HintPath>..\..\..\..\..\..\..\..\..\Users\gwlar\AppData\Roaming\Vintagestory\Lib\SkiaSharp.dll</HintPath>
+      <HintPath>$(VINTAGE_STORY)\Lib\SkiaSharp.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Data.Sqlite">
-      <HintPath>..\..\..\..\..\..\..\..\..\Users\gwlar\AppData\Roaming\Vintagestory\Lib\Microsoft.Data.Sqlite.dll</HintPath>
+      <HintPath>$(VINTAGE_STORY)\Lib\Microsoft.Data.Sqlite.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>

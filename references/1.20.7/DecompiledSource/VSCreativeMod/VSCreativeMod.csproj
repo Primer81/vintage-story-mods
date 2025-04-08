@@ -13,16 +13,16 @@
   <ItemGroup />
   <ItemGroup>
     <Reference Include="VintagestoryAPI">
-      <HintPath>..\..\..\..\..\..\..\..\..\Users\gwlar\AppData\Roaming\Vintagestory\VintagestoryAPI.dll</HintPath>
+      <HintPath>$(VINTAGE_STORY)\VintagestoryAPI.dll</HintPath>
     </Reference>
     <Reference Include="cairo-sharp">
-      <HintPath>..\..\..\..\..\..\..\..\..\Users\gwlar\AppData\Roaming\Vintagestory\Lib\cairo-sharp.dll</HintPath>
+      <HintPath>$(VINTAGE_STORY)\Lib\cairo-sharp.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\..\..\..\..\..\..\Users\gwlar\AppData\Roaming\Vintagestory\Lib\Newtonsoft.Json.dll</HintPath>
+      <HintPath>$(VINTAGE_STORY)\Lib\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="protobuf-net">
-      <HintPath>..\..\..\..\..\..\..\..\..\Users\gwlar\AppData\Roaming\Vintagestory\Lib\protobuf-net.dll</HintPath>
+      <HintPath>$(VINTAGE_STORY)\Lib\protobuf-net.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>
