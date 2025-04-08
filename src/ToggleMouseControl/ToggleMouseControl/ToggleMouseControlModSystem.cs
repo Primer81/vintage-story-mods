@@ -266,12 +266,23 @@ internal static class Patches
         GuiElementScrollbar __instance,
         ICoreClientAPI api, MouseWheelEventArgs args)
     {
-        // Only run the original function if mouse control is toggled on
-        // to closely match the expected behavior.
-        return ToggleMouseControlModSystem.IsMouseControlToggledOn();
+        bool runOriginal;
+        if (ClientSettings.ImmersiveMouseMode == true)
+        {
+            // Only run the original function if mouse control is toggled on
+            // to closely match the expected behavior.
+            runOriginal = ToggleMouseControlModSystem.IsMouseControlToggledOn();
+        }
+        else
+        {
+            // TODO: Temporary patch to fix B02. Will need to be removed after
+            // fixing B03!
+            runOriginal = true;
+        }
+        return runOriginal;
     }
 
-    // Covered by HudElement patch
+    // // Covered by HudElement patch
     // [HarmonyPrefix()]
     // [HarmonyPatch(typeof(HudElementBlockAndEntityInfo), "get_PrefersUngrabbedMouse")]
     // public static bool Before_HudElementBlockAndEntityInfo_get_PrefersUngrabbedMouse(
@@ -281,7 +292,7 @@ internal static class Patches
     //     return false;
     // }
 
-    // Covered by GuiDialog patch
+    // // Covered by GuiDialog patch
     // [HarmonyPrefix()]
     // [HarmonyPatch(typeof(GuiDialogConfirmRemapping), "get_PrefersUngrabbedMouse")]
     // public static bool Before_GuiDialogConfirmRemapping_get_PrefersUngrabbedMouse(
@@ -291,7 +302,7 @@ internal static class Patches
     //     return false;
     // }
 
-    // Inaccessible due to protection level
+    // // Inaccessible due to protection level
     // [HarmonyPrefix()]
     // [HarmonyPatch(typeof(GuiDialogMacroEditor), "get_PrefersUngrabbedMouse")]
     // public static bool Before_GuiDialogMacroEditor_get_PrefersUngrabbedMouse(
@@ -301,7 +312,7 @@ internal static class Patches
     //     return false;
     // }
 
-    // Covered by GuiDialog patch
+    // // Covered by GuiDialog patch
     // [HarmonyPrefix()]
     // [HarmonyPatch(typeof(GuiDialogTickProfiler), "get_PrefersUngrabbedMouse")]
     // public static bool Before_GuiDialogTickProfiler_get_PrefersUngrabbedMouse(
@@ -311,7 +322,7 @@ internal static class Patches
     //     return false;
     // }
 
-    // Covered by GuiDialog patch
+    // // Covered by GuiDialog patch
     // [HarmonyPrefix()]
     // [HarmonyPatch(typeof(GuiDialogTransformEditor), "get_PrefersUngrabbedMouse")]
     // public static bool Before_GuiDialogTransformEditor_get_PrefersUngrabbedMouse(
@@ -321,7 +332,7 @@ internal static class Patches
     //     return false;
     // }
 
-    // Covered by GuiDialog patch
+    // // Covered by GuiDialog patch
     // [HarmonyPrefix()]
     // [HarmonyPatch(typeof(GuiDialogDead), "get_PrefersUngrabbedMouse")]
     // public static bool Before_GuiDialogDead_get_PrefersUngrabbedMouse(
@@ -331,7 +342,7 @@ internal static class Patches
     //     return false;
     // }
 
-    // Covered by GuiDialog patch
+    // // Covered by GuiDialog patch
     // [HarmonyPrefix()]
     // [HarmonyPatch(typeof(GuiDialogFirstlaunchInfo), "get_PrefersUngrabbedMouse")]
     // public static bool Before_GuiDialogFirstlaunchInfo_get_PrefersUngrabbedMouse(
@@ -341,7 +352,7 @@ internal static class Patches
     //     return false;
     // }
 
-    // Inaccessible due to protection level
+    // // Inaccessible due to protection level
     // [HarmonyPrefix()]
     // [HarmonyPatch(typeof(GuiDialogEscapeMenu), "get_PrefersUngrabbedMouse")]
     // public static bool Before_GuiDialogEscapeMenu_get_PrefersUngrabbedMouse(
@@ -351,7 +362,7 @@ internal static class Patches
     //     return false;
     // }
 
-    // Inaccessible due to protection level
+    // // Inaccessible due to protection level
     // [HarmonyPrefix()]
     // [HarmonyPatch(typeof(GuiDialogSelboxEditor), "get_PrefersUngrabbedMouse")]
     // public static bool Before_GuiDialogSelboxEditor_get_PrefersUngrabbedMouse(
@@ -361,7 +372,7 @@ internal static class Patches
     //     return false;
     // }
 
-    // Inaccessible due to protection level
+    // // Inaccessible due to protection level
     // [HarmonyPrefix()]
     // [HarmonyPatch(typeof(GuiDialogHollowTransform), "get_PrefersUngrabbedMouse")]
     // public static bool Before_GuiDialogHollowTransform_get_PrefersUngrabbedMouse(
