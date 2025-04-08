@@ -357,6 +357,11 @@
 					"line": 1121,
 					"column": 0,
 					"label": ""
+				},
+				{
+					"line": 1414,
+					"column": 0,
+					"label": ""
 				}
 			]
 		},
@@ -435,6 +440,21 @@
 				},
 				{
 					"line": 49,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 77,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 79,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 81,
 					"column": 0,
 					"label": ""
 				}
@@ -521,10 +541,420 @@
 			]
 		},
 		{
-			"path": "../../../../../Users/gwlar/AppData/Local/Temp/MetadataAsSource/02f05514ec3e45b5aced52a27fdbeda4/DecompilationMetadataAsSourceFileProvider/ab1b5877c7bc4c5499a692163ceb3a05/HotkeyType.cs",
+			"path": "references/1.20.7/DecompiledSource/VintagestoryLib/Vintagestory/Client/NoObf/ClientPlatformAbstract.cs",
 			"bookmarks": [
 				{
-					"line": 7,
+					"line": 13,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 19,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 21,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 25,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 33,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 35,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 39,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 48,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 50,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 56,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 58,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 64,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 66,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 110,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 112,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 114,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 124,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 155,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 293,
+					"column": 0,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "references/1.20.7/DecompiledSource/VintagestoryLib/Vintagestory/Common/AssetManager.cs",
+			"bookmarks": [
+				{
+					"line": 10,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 12,
+					"column": 0,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "references/1.20.7/DecompiledSource/VintagestoryLib/Vintagestory/Client/Gui/MainMenuAPI.cs",
+			"bookmarks": [
+				{
+					"line": 12,
+					"column": 0,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "references/1.20.7/DecompiledSource/VintagestoryAPI/Vintagestory/API/Client/HotkeyType.cs",
+			"bookmarks": [
+				{
+					"line": 2,
+					"column": 0,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "references/1.20.7/DecompiledSource/VintagestoryAPI/Vintagestory/API/Common/IPlayerInventoryManager.cs",
+			"bookmarks": [
+				{
+					"line": 9,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 19,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 25,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 31,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 36,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 41,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 52,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 96,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 109,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 179,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 196,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 208,
+					"column": 0,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "references/1.20.7/DecompiledSource/VintagestoryAPI/Vintagestory/API/Common/IEventAPI.cs",
+			"bookmarks": [
+				{
+					"line": 10,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 32,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 74,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 82,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 91,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 120,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 130,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 139,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 145,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 151,
+					"column": 0,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "references/1.20.7/DecompiledSource/VintagestoryAPI/Vintagestory/API/Common/ILogger.cs",
+			"bookmarks": [
+				{
+					"line": 93,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 103,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 113,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 118,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 128,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 133,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 143,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 148,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 158,
+					"column": 0,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "references/1.20.7/DecompiledSource/VintagestoryLib/Vintagestory/Client/NoObf/ClientSettings.cs",
+			"bookmarks": [
+				{
+					"line": 12,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 24,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 37,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 230,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 242,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 470,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 482,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 494,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 602,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 711,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 747,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 831,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 891,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 903,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 1371,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 1647,
+					"column": 0,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "references/1.20.7/DecompiledSource/VintagestoryLib/Vintagestory/Common/SettingsBase.cs",
+			"bookmarks": [
+				{
+					"line": 10,
+					"column": 0,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "../../../../../Users/gwlar/AppData/Local/Temp/MetadataAsSource/02f05514ec3e45b5aced52a27fdbeda4/DecompilationMetadataAsSourceFileProvider/c01d6589e3524321942bbcbbfed0d6ae/ISettings.cs",
+			"bookmarks": [
+				{
+					"line": 12,
+					"column": 0,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "../../../../../Users/gwlar/AppData/Local/Temp/MetadataAsSource/02f05514ec3e45b5aced52a27fdbeda4/DecompilationMetadataAsSourceFileProvider/5659dede8c114ec58dcc37acf443cdc1/ISettingsClass.cs",
+			"bookmarks": [
+				{
+					"line": 14,
 					"column": 0,
 					"label": ""
 				}
