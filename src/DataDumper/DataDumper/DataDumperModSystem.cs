@@ -46,6 +46,7 @@ class HotKeyDump
     public string Code;
     public string DefaultMapping;
     public bool TriggerOnUpAlso;
+    public string KeyCombinationType;
 
     public HotKeyDump(HotKey hotKey)
     {
@@ -53,6 +54,7 @@ class HotKeyDump
         Code = hotKey.Code;
         DefaultMapping = hotKey.DefaultMapping.ToString();
         TriggerOnUpAlso = hotKey.TriggerOnUpAlso;
+        KeyCombinationType = hotKey.KeyCombinationType.ToString();
     }
 }
 
