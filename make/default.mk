@@ -32,3 +32,6 @@ uninstall:
 
 .PHONY: run
 run: project-run-client
+
+.PHONY: decompile
+decompile: dotnet-ilspycmd-rebuild

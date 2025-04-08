@@ -25,15 +25,43 @@ SENTINEL_TMP_DIR=$(SENTINEL_DIR)/tmp
 SENTINEL_EXT=.sentinel
 
 ###############################################################################
-# Dotnet
+# Dotnet vsmod
 ###############################################################################
 ## Configuration
 export DOTNET?=dotnet
 export DOTNET_VSMOD_PACKAGE_NAME?=VintageStory.Mod.Templates
 ## Definitions
-DOTNET_VSMODE=$(DOTNET) new vsmod
+DOTNET_VSMOD=$(DOTNET) new vsmod
 DOTNET_VSMOD_INSTALL_SENTINEL=\
     $(SENTINEL_TMP_DIR)/dotnet-vsmod-install$(SENTINEL_EXT)
+
+###############################################################################
+# Dotnet ilspycmd
+###############################################################################
+## Configuration
+export DOTNET_ILSPYCMD_PACKAGE_NAME?=ilspycmd
+export DOTNET_ILSPYCMD_PACKAGE_VERSION?=8.2
+export DOTNET_ILSPYCMD_TARGETS?=\
+	$(VINTAGE_STORY)/VintagestoryAPI.dll\
+	$(VINTAGE_STORY)/VintagestoryLib.dll\
+	$(VINTAGE_STORY)/Mods/VSEssentials.dll\
+	$(VINTAGE_STORY)/Mods/VSSurvivalMod.dll\
+	$(VINTAGE_STORY)/Mods/VSCreativeMod.dll
+export DOTNET_ILSPYCMD_REFERENCES?=\
+	$(VINTAGE_STORY)\
+	$(VINTAGE_STORY)/Mods\
+	$(VINTAGE_STORY)/Lib
+export DOTNET_ILSPYCMD_VSVERSION?=new
+## Definitions
+### Commands
+DOTNET_ILSPYCMD=ilspycmd
+DOTNET_ILSPYCMD_INSTALL_SENTINEL=\
+    $(SENTINEL_TMP_DIR)/dotnet-ilspycmd-install$(SENTINEL_EXT)
+### Directories
+DOTNET_ILSPYCMD_OUTPUT_DIR=references/$(DOTNET_ILSPYCMD_VSVERSION)/DecompiledSource
+### Recipes
+DOTNET_ILSPYCMD_DECOMPILE_PREREQUISITES=\
+	| $(DOTNET_ILSPYCMD_INSTALL_SENTINEL)
 
 ###############################################################################
 # Project

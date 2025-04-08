@@ -21,3 +21,4 @@ dotnet-vsmod-update:
 	# any method to update specific packages.
 	$(MAKE) dotnet-vsmod-uninstall
 	$(MAKE) dotnet-vsmod-install
+

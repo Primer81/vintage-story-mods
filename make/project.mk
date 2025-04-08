@@ -6,7 +6,7 @@ project-create-all: $(PROJECT_CREATE_SENTINEL)
 $(PROJECT_CREATE_SENTINEL): $(PROJECT_CREATE_PREREQUISITES)
 	$(shell mkdir -p $(dir $@))
 	$(shell mkdir -p $(dir $(PROJECT_MOD_ICON)))
-	$(DOTNET_VSMODE) \
+	$(DOTNET_VSMOD) \
 		--AddSolutionFile \
 		--IncludeVSCode \
 		--AddSampleCode \
