@@ -372,7 +372,7 @@ internal static class Patches
     //     return false;
     // }
 
-    // // Covered by GuiDialog patch
+    // Covered by GuiDialog patch
     // [HarmonyPrefix()]
     // [HarmonyPatch(typeof(GuiDialogDead), "get_PrefersUngrabbedMouse")]
     // public static bool Before_GuiDialogDead_get_PrefersUngrabbedMouse(
@@ -381,6 +381,36 @@ internal static class Patches
     //     __result = false;
     //     return false;
     // }
+    // But needs special handling to ensure mouse control is granted!
+    [HarmonyPrefix()]
+    [HarmonyPatch(typeof(GuiDialogDead), "OnGuiOpened")]
+    public static bool Before_GuiDialogDead_OnGuiOpened(
+        GuiDialogDead __instance)
+    {
+        bool runOriginal = true;
+        if (ClientSettings.ImmersiveMouseMode == true)
+        {
+            if (ToggleMouseControlModSystem.IsMouseControlToggledOn() == false)
+            {
+                ToggleMouseControlModSystem.ToggleMouseControl();
+            }
+        }
+        return runOriginal;
+    }
+    [HarmonyPostfix()]
+    [HarmonyPatch(typeof(GuiDialogDead), "OnRespawn")]
+    public static void After_GuiDialogDead_OnRespawn(
+        GuiDialogDead __instance)
+    {
+        // if (ClientSettings.ImmersiveMouseMode == true)
+        {
+            // It's not wrong that no positive negativity never hurt nobody
+            if (ToggleMouseControlModSystem.IsMouseControlToggledOn() == true)
+            {
+                ToggleMouseControlModSystem.ToggleMouseControl();
+            }
+        }
+    }
 
     // // Covered by GuiDialog patch
     // [HarmonyPrefix()]
