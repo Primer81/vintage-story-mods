@@ -114,7 +114,35 @@ public class ToggleMouseControlModSystem : ModSystem
 
     private static void OnGameTickCheckMouseControlToggle()
     {
-        if (ShouldControlMouse() == true)
+        // Check open dialogs for when immersive mouse mode is OFF
+        CheckIfMouseControlShouldAutoToggle();
+        // Normal routine
+        CheckMouseControlToggle();
+    }
+
+    private static void CheckIfMouseControlShouldAutoToggle()
+    {
+        bool dialogsWantsMouseControl = ClientApi.Gui.OpenedGuis
+            .Where((GuiDialog gui) => gui.DialogType == EnumDialogType.Dialog)
+            .Any((GuiDialog dlg) =>
+                originalPrefersMouseUngrabbedSettings
+                    .GetValueOrDefault(dlg.DebugName, false));
+        if (IsImmersiveMouseModeEnabled() == false)
+        {
+            if (dialogsWantsMouseControl != dialogsWantsMouseControlPrev)
+            {
+                if (IsMouseControlToggledOn() != dialogsWantsMouseControl)
+                {
+                    ToggleMouseControl();
+                }
+            }
+        }
+        dialogsWantsMouseControlPrev = dialogsWantsMouseControl;
+    }
+
+    private static void CheckMouseControlToggle()
+    {
+        if (IsMouseControlToggledOn() == true)
         {
             mouseController.UnlockMouse();
         }
@@ -127,7 +155,7 @@ public class ToggleMouseControlModSystem : ModSystem
     public static void ToggleMouseControl()
     {
         mouseControlToggledOn = !mouseControlToggledOn;
-        OnGameTickCheckMouseControlToggle();
+        CheckMouseControlToggle();
     }
 
     public static bool IsMouseControlToggledOn()
@@ -143,34 +171,6 @@ public class ToggleMouseControlModSystem : ModSystem
     public static void SetImmersiveMouseMode(bool enabled)
     {
         immersiveMouseModeEnabled = enabled;
-    }
-
-    public static bool ShouldControlMouse()
-    {
-        bool shouldControlMouse = false;
-        bool dialogsWantsMouseControl = ClientApi.Gui.OpenedGuis
-            .Where((GuiDialog gui) => gui.DialogType == EnumDialogType.Dialog)
-            .Any((GuiDialog dlg) =>
-                originalPrefersMouseUngrabbedSettings
-                    .GetValueOrDefault(dlg.DebugName, false));
-        if ((IsImmersiveMouseModeEnabled() == false) &&
-            (IsMouseControlToggledOn() == false))
-        {
-            if ((dialogsWantsMouseControl == true) &&
-                (dialogsWantsMouseControlPrev == false))
-            {
-                ToggleMouseControl();
-                shouldControlMouse = true;
-            }
-            shouldControlMouse = IsMouseControlToggledOn();
-        }
-        else
-        {
-
-            shouldControlMouse = IsMouseControlToggledOn();
-        }
-        dialogsWantsMouseControlPrev = dialogsWantsMouseControl;
-        return shouldControlMouse;
     }
 
     public static void AddOriginalPrefersMouseUngrabbedSetting(
@@ -287,7 +287,7 @@ internal static class Patches
     {
         ToggleMouseControlModSystem.AddOriginalPrefersMouseUngrabbedSetting(
             __instance.DebugName, __result);
-        __result = ToggleMouseControlModSystem.ShouldControlMouse();
+        __result = ToggleMouseControlModSystem.IsMouseControlToggledOn();
     }
 
     // Patches all classes derived from HudElement which do not override
@@ -299,7 +299,7 @@ internal static class Patches
     {
         ToggleMouseControlModSystem.AddOriginalPrefersMouseUngrabbedSetting(
             __instance.DebugName, __result);
-        __result = ToggleMouseControlModSystem.ShouldControlMouse();
+        __result = ToggleMouseControlModSystem.IsMouseControlToggledOn();
     }
 
     // Requires own patch
@@ -310,7 +310,7 @@ internal static class Patches
     {
         ToggleMouseControlModSystem.AddOriginalPrefersMouseUngrabbedSetting(
             __instance.DebugName, __result);
-        __result = ToggleMouseControlModSystem.ShouldControlMouse();
+        __result = ToggleMouseControlModSystem.IsMouseControlToggledOn();
     }
 
     // Requires own patch
@@ -321,7 +321,7 @@ internal static class Patches
     {
         ToggleMouseControlModSystem.AddOriginalPrefersMouseUngrabbedSetting(
             __instance.DebugName, __result);
-        __result = ToggleMouseControlModSystem.ShouldControlMouse();
+        __result = ToggleMouseControlModSystem.IsMouseControlToggledOn();
     }
 
     // Requires own patch
@@ -334,7 +334,7 @@ internal static class Patches
     {
         ToggleMouseControlModSystem.AddOriginalPrefersMouseUngrabbedSetting(
             __instance.DebugName, __result);
-        __result = ToggleMouseControlModSystem.ShouldControlMouse();
+        __result = ToggleMouseControlModSystem.IsMouseControlToggledOn();
     }
     [HarmonyPrefix()]
     [HarmonyPatch(typeof(GuiDialogHandbook), "OnGuiOpened")]
