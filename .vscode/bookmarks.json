@@ -1,6 +1,21 @@
 {
 	"files": [
 		{
+			"path": "src/ToggleMouseControl/ToggleMouseControl/ToggleMouseControlModSystem.cs",
+			"bookmarks": [
+				{
+					"line": 329,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 335,
+					"column": 0,
+					"label": ""
+				}
+			]
+		},
+		{
 			"path": "references/1.20.7/DecompiledSource/VSSurvivalMod/Vintagestory/GameContent/GuiDialogHandbook.cs",
 			"bookmarks": [
 				{
@@ -1015,6 +1030,276 @@
 			"bookmarks": [
 				{
 					"line": 135,
+					"column": 0,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "references/1.20.7/DecompiledSource/VSSurvivalMod/Vintagestory/GameContent/FirepitContentsRenderer.cs",
+			"bookmarks": [
+				{
+					"line": 44,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 72,
+					"column": 0,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "references/1.20.7/DecompiledSource/VSSurvivalMod/Vintagestory/GameContent/BlockEntityFirepit.cs",
+			"bookmarks": [
+				{
+					"line": 12,
+					"column": 0,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "references/1.20.7/DecompiledSource/VSSurvivalMod/Vintagestory/GameContent/BlockEntityOpenableContainer.cs",
+			"bookmarks": [
+				{
+					"line": 22,
+					"column": 0,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "references/1.20.7/DecompiledSource/VSSurvivalMod/Vintagestory/GameContent/BlockBehaviorContainer.cs",
+			"bookmarks": [
+				{
+					"line": 15,
+					"column": 0,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "references/1.20.7/DecompiledSource/VSEssentials/Vintagestory/GameContent/IInteractable.cs",
+			"bookmarks": [
+				{
+					"line": 4,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 6,
+					"column": 0,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "references/1.20.7/DecompiledSource/VintagestoryLib/Vintagestory/Client/NoObf/SystemMouseInWorldInteractions.cs",
+			"bookmarks": [
+				{
+					"line": 10,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 69,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 74,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 96,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 111,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 309,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 350,
+					"column": 0,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "references/1.20.7/DecompiledSource/VintagestoryLib/Vintagestory/Client/NoObf/InputAPI.cs",
+			"bookmarks": [
+				{
+					"line": 83,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 89,
+					"column": 0,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "../../../../../Users/gwlar/AppData/Local/Temp/MetadataAsSource/02f05514ec3e45b5aced52a27fdbeda4/DecompilationMetadataAsSourceFileProvider/70acf589c1a94ce49bd57a0d25897015/BlockEntityBehaviorType.cs",
+			"bookmarks": [
+				{
+					"line": 15,
+					"column": 0,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "references/1.20.7/DecompiledSource/VintagestoryAPI/Vintagestory/API/Common/BlockBehavior.cs",
+			"bookmarks": [
+				{
+					"line": 12,
+					"column": 0,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "references/1.20.7/DecompiledSource/VintagestoryAPI/Vintagestory/API/Common/BlockEntityBehavior.cs",
+			"bookmarks": [
+				{
+					"line": 13,
+					"column": 0,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "references/1.20.7/DecompiledSource/VintagestoryAPI/Vintagestory/API/Common/BlockEntity.cs",
+			"bookmarks": [
+				{
+					"line": 15,
+					"column": 0,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "references/1.20.7/DecompiledSource/VintagestoryAPI/Vintagestory/API/Common/EntityPlayer.cs",
+			"bookmarks": [
+				{
+					"line": 447,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 479,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 484,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 750,
+					"column": 0,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "references/1.20.7/DecompiledSource/VintagestoryLib/Vintagestory/Client/NoObf/ClientSystem.cs",
+			"bookmarks": [
+				{
+					"line": 6,
+					"column": 0,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "references/1.20.7/DecompiledSource/VintagestoryLib/Vintagestory/Client/NoObf/GuiManager.cs",
+			"bookmarks": [
+				{
+					"line": 7,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 306,
+					"column": 0,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "references/1.20.7/DecompiledSource/VintagestoryLib/Vintagestory/Client/NoObf/HudMouseTools.cs",
+			"bookmarks": [
+				{
+					"line": 125,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 127,
+					"column": 0,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "references/1.20.7/DecompiledSource/VintagestoryLib/Vintagestory/Client/NoObf/HudHotbar.cs",
+			"bookmarks": [
+				{
+					"line": 12,
+					"column": 0,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "references/1.20.7/DecompiledSource/VSSurvivalMod/Vintagestory/GameContent/HudTutorial.cs",
+			"bookmarks": [
+				{
+					"line": 4,
+					"column": 0,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "references/1.20.7/DecompiledSource/VSSurvivalMod/Vintagestory/Client/NoObf/HudBosshealthBars.cs",
+			"bookmarks": [
+				{
+					"line": 7,
+					"column": 0,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "references/1.20.7/DecompiledSource/VintagestoryLib/Vintagestory/Client/NoObf/GuiDialogEscapeMenu.cs",
+			"bookmarks": [
+				{
+					"line": 9,
+					"column": 0,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "references/1.20.7/DecompiledSource/VintagestoryLib/Vintagestory/Client/NoObf/GuiDialogInventory.cs",
+			"bookmarks": [
+				{
+					"line": 10,
 					"column": 0,
 					"label": ""
 				}
