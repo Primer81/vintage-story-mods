@@ -12,6 +12,7 @@ using HarmonyLib;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Linq.Expressions;
+using System.Reflection.Metadata.Ecma335;
 
 namespace ToggleMouseControl;
 
@@ -205,7 +206,8 @@ public class MouseController: GuiDialog
 
     public void UnlockMouse()
     {
-        clientApi.Input.MouseWorldInteractAnyway = false;
+        // clientApi.Input.MouseWorldInteractAnyway = false;
+        clientApi.Input.MouseWorldInteractAnyway = true;
         if (IsOpened() == false)
         {
             TryOpen();
@@ -214,7 +216,8 @@ public class MouseController: GuiDialog
 
     public void LockMouse()
     {
-        clientApi.Input.MouseWorldInteractAnyway = true;
+        // clientApi.Input.MouseWorldInteractAnyway = true;
+        clientApi.Input.MouseWorldInteractAnyway = false;
         if (IsOpened() == true)
         {
             TryClose();
