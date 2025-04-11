@@ -541,7 +541,14 @@ internal static class Patches
     public static bool Before_ClientSettings_get_ImmersiveMouseMode(
         ref bool __result)
     {
-        __result = true;
+        if (ToggleMouseControlModSystem.ClientApi.IsGamePaused)
+        {
+            __result = ToggleMouseControlModSystem.IsImmersiveMouseModeEnabled();
+        }
+        else
+        {
+            __result = true;
+        }
         return false;
     }
 
