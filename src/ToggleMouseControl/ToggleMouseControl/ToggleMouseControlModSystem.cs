@@ -28,7 +28,8 @@ public class ToggleMouseControlModSystem : ModSystem
     static private bool mouseControlToggledOn = false;
     static private bool immersiveMouseModeEnabled;
     // static private bool originalImmersiveMouseModeSetting;
-    static public bool DialogsWantsMouseControlPrev;
+    static public bool DialogsWantMouseControlPrev;
+    static public bool DialogsDisableMouseGrabPrev;
 
     public override double ExecuteOrder()
     {
@@ -39,7 +40,8 @@ public class ToggleMouseControlModSystem : ModSystem
     {
         ClientApi = api;
         // Initialize static members
-        DialogsWantsMouseControlPrev = false;
+        DialogsWantMouseControlPrev = false;
+        DialogsDisableMouseGrabPrev = false;
         // Collect the original PreferredMouseUngrabbedSetting settings for each dialog
         originalPrefersMouseUngrabbedSettings = new Dictionary<string, bool>();
         foreach (GuiDialog guiDialog in ClientApi.Gui.LoadedGuis)
@@ -581,19 +583,25 @@ internal static class Patches
         ref bool ___exitToMainMenu)
     {
         // int altKey = ScreenManager.hotkeyManager.HotKeys["togglemousecontrol"].CurrentMapping.KeyCode;
-        bool isAltKeyDown = ToggleMouseControlModSystem.IsMouseControlToggledOn();
-        bool dialogsWantsMouseControl = ___api.Gui.OpenedGuis
-            .Where((GuiDialog gui) => gui.DialogType == EnumDialogType.Dialog)
-            .Any((GuiDialog dlg) => dlg.PrefersUngrabbedMouse);
-        bool disableMouseGrab = ___api.Gui.OpenedGuis
-            .Any((GuiDialog gui) => gui.DisableMouseGrab);
+        // bool isAltKeyDown = ToggleMouseControlModSystem.IsMouseControlToggledOn();
+        bool dialogsWantMouseControl =
+            ___api.Gui.OpenedGuis
+                .Where((GuiDialog gui) => gui.DialogType == EnumDialogType.Dialog)
+                .Any((GuiDialog dlg) => dlg.PrefersUngrabbedMouse) &&
+            ClientSettings.ImmersiveMouseMode == false;
+        bool dialogsDisableMouseGrab =
+            ___api.Gui.OpenedGuis.Any((GuiDialog gui) => gui.DisableMouseGrab) ||
+            ___api.IsGamePaused;
+            // ((ToggleMouseControlModSystem.ClientApi.Settings.Bool["noHandbookPause"] == true) ||
+            //     ___api.Gui.OpenedGuis.Any((GuiDialog gui) => gui is GuiDialogHandbook));
+
         bool mouseGrabbed =
             ScreenManager.Platform.IsFocused &&
             !___exitToDisconnectScreen &&
             !___exitToMainMenu &&
             __instance.BlocksReceivedAndLoaded &&
-            !disableMouseGrab &&
-            !___api.IsGamePaused;
+            !dialogsDisableMouseGrab &&
+            !dialogsWantMouseControl;
         if (mouseGrabbed)
         {
             bool someDialogIsOpen = __instance.DialogsOpened > 0;
@@ -601,13 +609,20 @@ internal static class Patches
             {
                 // who cares?
             }
-            if (ClientSettings.ImmersiveMouseMode == false)
-            {
-                if (dialogsWantsMouseControl != ToggleMouseControlModSystem.DialogsWantsMouseControlPrev)
-                {
-                    ToggleMouseControlModSystem.ToggleMouseControl();
-                }
-            }
+            // if (ClientSettings.ImmersiveMouseMode == false)
+            // {
+                // if (dialogsWantMouseControl != ToggleMouseControlModSystem.DialogsWantMouseControlPrev)
+                // {
+                //     ToggleMouseControlModSystem.ToggleMouseControl();
+                // }
+            // }
+            // if (dialogsDisableMouseGrab != ToggleMouseControlModSystem.DialogsDisableMouseGrabPrev)
+            // {
+                // if (ToggleMouseControlModSystem.IsMouseControlToggledOn() == false)
+                // {
+                    // ToggleMouseControlModSystem.ToggleMouseControl();
+                // }
+            // }
             // if (dialogWantsMouseGrabbed != ToggleMouseControlModSystem.DialogsWantsMouseGrabbedPrev)
             // {
             //     if (ToggleMouseControlModSystem.IsMouseControlToggledOn() == dialogWantsMouseGrabbed)
@@ -617,8 +632,13 @@ internal static class Patches
             // }
             __instance.MouseGrabbed = !ToggleMouseControlModSystem.IsMouseControlToggledOn();
         }
-        ___mouseWorldInteractAnyway = !__instance.MouseGrabbed; // && !dialogsWantsMouseControl;
-        ToggleMouseControlModSystem.DialogsWantsMouseControlPrev = dialogsWantsMouseControl;
+        else
+        {
+            __instance.MouseGrabbed = false;
+        }
+        ___mouseWorldInteractAnyway = !__instance.MouseGrabbed; // && !dialogsWantMouseControl;
+        ToggleMouseControlModSystem.DialogsWantMouseControlPrev = dialogsWantMouseControl;
+        ToggleMouseControlModSystem.DialogsDisableMouseGrabPrev = dialogsDisableMouseGrab;
         return false;
     }
 }
