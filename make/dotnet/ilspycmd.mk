@@ -19,15 +19,17 @@ dotnet-ilspycmd-update:
 .PHONY: dotnet-ilspycmd-all
 dotnet-ilspycmd-all: $(DOTNET_ILSPYCMD_DECOMPILE_PREREQUISITES)
 	$(shell mkdir -p $(DOTNET_ILSPYCMD_OUTPUT_DIR))
-	$(DOTNET_ILSPYCMD) $(DOTNET_ILSPYCMD_TARGETS) \
-		--project\
-		--disable-updatecheck\
-		--nested-directories\
-		--use-varnames-from-pdb\
-		$(foreach ref,$(DOTNET_ILSPYCMD_REFERENCES),\
-			-r $(ref)\
-		)\
-		-o $(DOTNET_ILSPYCMD_OUTPUT_DIR)
+ifeq ($(words $(DOTNET_ILSPYCMD_TARGETS_INDEX)),1)
+	$(warning Only one target detected. \
+		Duplicating target to generate solution file.\
+		The error 'System.ArgumentException: An item with the same \
+		key has already been added. Key: \
+		$(notdir $(basename $(lastword $(DOTNET_ILSPYCMD_TARGETS))))' \
+		is expected and can be ignored.)
+	$(eval DOTNET_ILSPYCMD_TARGETS=\
+		$(DOTNET_ILSPYCMD_TARGETS) $(DOTNET_ILSPYCMD_TARGETS))
+endif
+	-$(DOTNET_ILSPYCMD) $(DOTNET_ILSPYCMD_TARGETS) $(DOTNET_ILSPYCMD_FLAGS)
 
 .PHONY: dotnet-ilspycmd-clean
 dotnet-ilspycmd-clean:
