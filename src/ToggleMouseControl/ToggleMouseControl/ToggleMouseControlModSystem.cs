@@ -591,7 +591,8 @@ internal static class Patches
             ClientSettings.ImmersiveMouseMode == false;
         bool dialogsDisableMouseGrab =
             ___api.Gui.OpenedGuis.Any((GuiDialog gui) => gui.DisableMouseGrab) ||
-            ___api.IsGamePaused;
+            ___api.IsGamePaused &&
+            (___api.World.Player.Entity.Alive == false);
             // ((ToggleMouseControlModSystem.ClientApi.Settings.Bool["noHandbookPause"] == true) ||
             //     ___api.Gui.OpenedGuis.Any((GuiDialog gui) => gui is GuiDialogHandbook));
 
