@@ -1,0 +1,20 @@
+{
+  "SYOuYd37nVnk7sMjY2LmfdDQ": {
+    "UnlearnPoints": 0.0,
+    "UnlearnCooldown": 0.0,
+    "Sparring": false,
+    "Skills": {
+      "survival": {
+        "Level": 1,
+        "Experience": 0.25465778,
+        "Abilities": {}
+      },
+      "temporaladaptation": {
+        "Level": 1,
+        "Experience": 3.6787064,
+        "Abilities": {}
+      }
+    },
+    "Knowledge": {}
+  }
+}

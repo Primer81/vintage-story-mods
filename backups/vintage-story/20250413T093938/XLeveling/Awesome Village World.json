@@ -1,0 +1,30 @@
+{
+  "SYOuYd37nVnk7sMjY2LmfdDQ": {
+    "UnlearnPoints": 0.0,
+    "UnlearnCooldown": 0.0,
+    "Sparring": false,
+    "Skills": {
+      "survival": {
+        "Level": 1,
+        "Experience": 0.5806785,
+        "Abilities": {}
+      },
+      "farming": {
+        "Level": 1,
+        "Experience": 3.2670002,
+        "Abilities": {}
+      },
+      "digging": {
+        "Level": 1,
+        "Experience": 1.5290002,
+        "Abilities": {}
+      },
+      "forestry": {
+        "Level": 1,
+        "Experience": 4.642,
+        "Abilities": {}
+      }
+    },
+    "Knowledge": {}
+  }
+}

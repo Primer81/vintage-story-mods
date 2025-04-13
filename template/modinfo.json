@@ -1,0 +1,14 @@
+{
+    "type": "code",
+    "modid": "[{ProjectModId}]",
+    "name": "[{ProjectName}]",
+    "authors": [
+        "Primer81"
+    ],
+    "description": "[{ProjectDescription}]",
+    "version": "[{ProjectVersion}]",
+    "dependencies": {
+        "game": ""
+    },
+    "side": "client"
+}
