@@ -29,7 +29,7 @@ public class ToggleMouseControlModSystem : ModSystem
     static private bool immersiveMouseModeEnabled;
     // static private bool originalImmersiveMouseModeSetting;
     static public bool DialogsWantMouseControlPrev;
-    static public bool DialogsDisableMouseGrabPrev;
+    // static public bool DialogsDisableMouseGrabPrev;
 
     public override double ExecuteOrder()
     {
@@ -41,7 +41,7 @@ public class ToggleMouseControlModSystem : ModSystem
         ClientApi = api;
         // Initialize static members
         DialogsWantMouseControlPrev = false;
-        DialogsDisableMouseGrabPrev = false;
+        // DialogsDisableMouseGrabPrev = false;
         // Collect the original PreferredMouseUngrabbedSetting settings for each dialog
         originalPrefersMouseUngrabbedSettings = new Dictionary<string, bool>();
         foreach (GuiDialog guiDialog in ClientApi.Gui.LoadedGuis)
@@ -582,56 +582,48 @@ internal static class Patches
         ref bool ___exitToDisconnectScreen,
         ref bool ___exitToMainMenu)
     {
-        // int altKey = ScreenManager.hotkeyManager.HotKeys["togglemousecontrol"].CurrentMapping.KeyCode;
-        // bool isAltKeyDown = ToggleMouseControlModSystem.IsMouseControlToggledOn();
         bool dialogsWantMouseControl =
             ___api.Gui.OpenedGuis
                 .Where((GuiDialog gui) => gui.DialogType == EnumDialogType.Dialog)
-                .Any((GuiDialog dlg) => dlg.PrefersUngrabbedMouse) &&
-            ClientSettings.ImmersiveMouseMode == false;
-        bool dialogsDisableMouseGrab =
+                .Any((GuiDialog dlg) => dlg.PrefersUngrabbedMouse) ||
+            (__instance.DialogsOpened != 0);
+        bool forceDisableMouseGrab =
             ___api.Gui.OpenedGuis.Any((GuiDialog gui) => gui.DisableMouseGrab) ||
             ___api.IsGamePaused ||
             (___api.World.Player.Entity.Alive == false);
-            // ((ToggleMouseControlModSystem.ClientApi.Settings.Bool["noHandbookPause"] == true) ||
-            //     ___api.Gui.OpenedGuis.Any((GuiDialog gui) => gui is GuiDialogHandbook));
-
-        bool mouseGrabbed =
+        bool canGrabMouse =
             ScreenManager.Platform.IsFocused &&
             !___exitToDisconnectScreen &&
             !___exitToMainMenu &&
             __instance.BlocksReceivedAndLoaded &&
-            !dialogsDisableMouseGrab &&
-            !dialogsWantMouseControl;
-        if (mouseGrabbed)
+            !forceDisableMouseGrab;
+        if (ClientSettings.ImmersiveMouseMode == false)
         {
-            bool someDialogIsOpen = __instance.DialogsOpened > 0;
-            if (someDialogIsOpen)
+            if (dialogsWantMouseControl != ToggleMouseControlModSystem.DialogsWantMouseControlPrev)
             {
-                // who cares?
+                if (ToggleMouseControlModSystem.IsMouseControlToggledOn() != dialogsWantMouseControl)
+                {
+                    ToggleMouseControlModSystem.ToggleMouseControl();
+                }
             }
-            // if (ClientSettings.ImmersiveMouseMode == false)
+        }
+        if (canGrabMouse)
+        {
+            // if (ClientSettings.ImmersiveMouseMode)
             // {
-                // if (dialogsWantMouseControl != ToggleMouseControlModSystem.DialogsWantMouseControlPrev)
-                // {
-                //     ToggleMouseControlModSystem.ToggleMouseControl();
-                // }
+                __instance.MouseGrabbed = !ToggleMouseControlModSystem.IsMouseControlToggledOn();
             // }
-            // if (dialogsDisableMouseGrab != ToggleMouseControlModSystem.DialogsDisableMouseGrabPrev)
+            // else
             // {
-                // if (ToggleMouseControlModSystem.IsMouseControlToggledOn() == false)
-                // {
-                    // ToggleMouseControlModSystem.ToggleMouseControl();
-                // }
-            // }
-            // if (dialogWantsMouseGrabbed != ToggleMouseControlModSystem.DialogsWantsMouseGrabbedPrev)
-            // {
-            //     if (ToggleMouseControlModSystem.IsMouseControlToggledOn() == dialogWantsMouseGrabbed)
+            //     if (dialogsWantMouseControl)
             //     {
-            //         ToggleMouseControlModSystem.ToggleMouseControl();
+            //         __instance.MouseGrabbed = ToggleMouseControlModSystem.IsMouseControlToggledOn();
+            //     }
+            //     else
+            //     {
+            //         __instance.MouseGrabbed = !ToggleMouseControlModSystem.IsMouseControlToggledOn();
             //     }
             // }
-            __instance.MouseGrabbed = !ToggleMouseControlModSystem.IsMouseControlToggledOn();
         }
         else
         {
@@ -639,7 +631,6 @@ internal static class Patches
         }
         ___mouseWorldInteractAnyway = !__instance.MouseGrabbed; // && !dialogsWantMouseControl;
         ToggleMouseControlModSystem.DialogsWantMouseControlPrev = dialogsWantMouseControl;
-        ToggleMouseControlModSystem.DialogsDisableMouseGrabPrev = dialogsDisableMouseGrab;
         return false;
     }
 }
