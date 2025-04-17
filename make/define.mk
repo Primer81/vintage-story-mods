@@ -1,8 +1,14 @@
 ###############################################################################
+# Python
+###############################################################################
+export PYTHON?=python
+
+###############################################################################
 # Scripts
 ###############################################################################
 SCRIPT_DIR=scripts
 SCRIPT_UPDATE_INI_PY=$(SCRIPT_DIR)/update-ini.py
+SCRIPT_SORT_JSON_PY=$(SCRIPT_DIR)/sort-json.py
 
 ###############################################################################
 # Common Definitions
@@ -15,14 +21,22 @@ endef
 ###############################################################################
 # Common Functions
 ###############################################################################
-read_json=$(shell python -c "import json; print(json.load(open('$(1)'))['$(2)'])" 2>/dev/null)
-read_xml=$(shell python -c "import xml.etree.ElementTree as ET; print(elem.text ET.parse('$(1)').getroot().find('.//$(2)').text)" 2>/dev/null)
+read_json=$(shell $(PYTHON) -c "import json; print(json.load(open('$(1)'))['$(2)'])" 2>/dev/null)
+read_xml=$(shell $(PYTHON) -c "import xml.etree.ElementTree as ET; print(elem.text ET.parse('$(1)').getroot().find('.//$(2)').text)" 2>/dev/null)
 define zip
-    python -c "import shutil; shutil.make_archive('$(if $(2),$(2),$(basename $(1)))', 'zip', '$(1)')"
+    $(PYTHON) -c "import shutil; shutil.make_archive('$(if $(2),$(2),$(basename $(1)))', 'zip', '$(1)')"
 endef
-write_ini=python $(SCRIPT_UPDATE_INI_PY) "$(1)" $(2) $(3) $(4)
+write_ini=$(PYTHON) $(SCRIPT_UPDATE_INI_PY) "$(1)" $(2) $(3) $(4)
+sort_json_file=$(PYTHON) $(SCRIPT_SORT_JSON_PY) $(1)
 lowercase=$(shell echo $(1) | tr A-Z a-z)
 now=$(shell date +%Y%m%dT%H%M%S)
+rwildcard=$(strip \
+	$(wildcard $(1)/$(2)) \
+	$(foreach item,$(wildcard $(1)/*),\
+		$(if $(wildcard $(item)/*),\
+			$(call rwildcard,$(item),$(2)),\
+		)\
+	))
 
 ###############################################################################
 # Images

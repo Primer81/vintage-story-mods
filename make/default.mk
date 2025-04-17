@@ -35,3 +35,9 @@ run: project-run-client
 
 .PHONY: decompile
 decompile: dotnet-ilspycmd-rebuild
+
+.PHONY: sort
+sort:
+	$(foreach project_bookmarks,$(call rwildcard,.,.vscode/bookmarks.json),\
+		$(call sort_json_file,--sort-object-keys -r -k path -x "[^/\\\\\\\\]*$$" "$(project_bookmarks)") $(newline)\
+	)
