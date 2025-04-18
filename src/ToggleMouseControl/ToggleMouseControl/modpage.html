@@ -1,0 +1,156 @@
+<p>Mouse control is now toggleable. Stop handbook, world map and other GUIs from controlling the mouse.</p>
+<p>&nbsp;</p>
+<p>For those who wish immersive mouse mode was actually immersive. 😜</p>
+<p>&nbsp;</p>
+<p>Works with and without immersive mouse mode with slight behavior changes as follows:</p>
+<ul>
+<li><span style="font-size: 12pt;">With immersive mouse mode OFF, most GUIs will auto-<em>enable</em> mouse control when opened and auto-<em>disable</em> mouse control when closed. This mode is useful if you don't want to toggle mouse control each time you open or close a GUI that has an auto-toggle trigger in Vanilla.</span></li>
+<li><span style="font-size: 12pt;">With immersive mouse mode ON, most GUIs will NOT auto-toggle the mouse control when opened or closed. This mode provides the player with the most control over the mouse.</span></li>
+</ul>
+<h3>Bugs</h3>
+<p>&nbsp;</p>
+<p>Active Bugs:</p>
+<ul>
+<li>B07: Given mouse control is toggled OFF and any GUI with a scrollbar is open under the player's crosshairs, then the player cannot scroll across the hotbar.<br />
+<ul>
+<li><span style="font-size: 10pt;">Note: This occurs regardless of whether immersive mouse mode is ON or OFF.</span></li>
+<li><span style="font-size: 10pt;">Dev Note: Should try approaching this by moving the crosshair GUI's z-depth to be underneath other GUIs.</span></li>
+</ul>
+</li>
+</ul>
+<p>&nbsp;</p>
+<p>Patched<sup>1</sup> Bugs:</p>
+<div class="spoiler">
+<div class="spoiler-toggle">Patched (1)</div>
+<div class="spoiler-text">
+<ul>
+<li><span style="text-decoration: line-through;">All patches have been converted to fixes! 🩹</span></li>
+<li>B05: Given immersive mouse mode is ON and mouse control is toggled OFF, when the player dies and the gui death dialog appears, the mouse remains locked and the player cannot toggle mouse control.
+<ul>
+<li><span style="font-size: 10pt;">Patched in v1.0.7 🩹</span></li>
+<li><span style="font-size: 10pt;">Re-introduced in v1.1.0 🪲</span></li>
+<li><span style="font-size: 10pt;">Patched in v1.1.1 🩹</span></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<p>&nbsp;</p>
+<p>Fixed<sup>2</sup> Bugs:</p>
+<div class="spoiler">
+<div class="spoiler-toggle">Fixed (9)</div>
+<div class="spoiler-text">
+<ul>
+<li>B11: Given immersive mouse mode is OFF and a certain type of GUI (such as the firepit) is open, then mouse control does not auto-enable as expected.
+<ul>
+<li><span style="font-size: 10pt;">Note: By "certain type of GUI" I mean GUIs which are expected to disable the mouse grab given immersive mouse mode is OFF and do not set the PrefersUngrabbedMouse property to true.</span></li>
+<li><span style="font-size: 10pt;">Dev Note: For some reason, the firepit GUI (and presumably some other GUIs) do not set the PrefersUngrabbedMouse property to true even though they ungrab the mouse in Vanilla. It seems to manage to work in Vanilla in the ClientMain class by checking for when the DialogsOpen property is non-zero.</span></li>
+<li><span style="font-size: 10pt;">Fixed in v1.1.2 🛠️</span></li>
+</ul>
+</li>
+<li>B10: Given immersive mouse mode is OFF and a certain type of GUI (such as the player inventory) is open, then mouse control is no longer toggleable at all.
+<ul>
+<li><span style="font-size: 10pt;">Note: By "certain type of GUI" I mean GUIs which are expected to disable the mouse grab and do set the PrefersUngrabbedMouse property to true.</span></li>
+<li><span style="font-size: 10pt;">Introduced in v1.1.0 🪲</span></li>
+<li><span style="font-size: 10pt;">Fixed in v1.1.2 🛠️</span></li>
+</ul>
+</li>
+<li>B09: Given mouse control is toggled ON, when using rafts, the user cannot interact with the raft as expected.
+<ul>
+<li><span style="font-size: 10pt;">Fixed in v1.1.0 🛠️</span></li>
+</ul>
+</li>
+<li>B08: Given mouse control is toggled ON, when knapping, the user cannot interact with the knappable object.
+<ul>
+<li><span style="font-size: 10pt;">Fixed in v1.1.0 🛠️</span></li>
+</ul>
+</li>
+<li>B06: The immersive mouse mode check box is always displayed "checked" when the Interface settings menu is first opened.
+<ul>
+<li><span style="font-size: 10pt;">Note: The setting can still be changed - just know it will be set depending on if it appears "checked" after clicking it.</span></li>
+<li><span style="font-size: 10pt;">Patched in v1.0.9 🩹</span></li>
+<li><span style="font-size: 10pt;">Fixed in v1.1.0 🛠️</span></li>
+</ul>
+</li>
+<li>B03: Given immersive mouse mode is OFF and a GUI (such as the player inventory) is open, then mouse control is no longer toggleable; the hot key must be held down.
+<ul>
+<li><span style="font-size: 10pt;">Patched in v1.0.8 🩹</span></li>
+<li><span style="font-size: 10pt;">Fixed in v1.1.0 🛠️</span></li>
+</ul>
+</li>
+<li>B04: Given immersive mouse mode is ON and the handbook GUI is opened in pause mode, then mouse control is not granted as expected.
+<ul>
+<li><span style="font-size: 10pt;">Patched in v1.0.6 🩹</span></li>
+<li><span style="font-size: 10pt;">Fixed in v1.1.0 🛠️</span></li>
+</ul>
+</li>
+<li>B02: Given immersive mouse mode is OFF, then GUI scroll bars can no longer be controlled with the mouse wheel 🤔.
+<ul>
+<li><span style="font-size: 10pt;">Patched in v1.0.5 🩹</span></li>
+<li><span style="font-size: 10pt;">Fixed in v1.0.8 🛠️</span></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>B01: Given mouse control is toggled OFF and a GUI with a scroll bar is open, then the handbook still grabs the mouse wheel events.
+<ul>
+<li><span style="font-size: 10pt;">Fixed in v1.0.2 🛠️</span></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<p>&nbsp;</p>
+<p><span style="font-size: 10pt;"><sup>1</sup> By patched, I mean the bug has been solved with a naive solution that should be replaced with a more robust solution later on. 🩹</span></p>
+<p><span style="font-size: 10pt;"><sup>2</sup> By fixed, I mean the bug has been solved with a robust solution. 🛠️</span></p>
+<h3>Improvements</h3>
+<p>&nbsp;</p>
+<p>Improvements Made:</p>
+<ul>
+<li>F09: Decouple disabling mouse control from the ESC key while retaining the the ability to close GUIs with the ESC key. This will more closely match the Vanilla behavior.
+<ul>
+<li><span style="font-size: 10pt;">Added in v1.1.0 🎉</span></li>
+</ul>
+</li>
+<li>F08: Minimize the number of harmony patches required for the mod to function correctly. This will improve compatibility with other mods.
+<ul>
+<li><span style="font-size: 10pt;">Added in v1.1.0 🎉</span></li>
+</ul>
+</li>
+<li>F07: Ensure the mouse pointer can still interact with the world when mouse control is toggled ON.
+<ul>
+<li><span style="font-size: 10pt;">Added in v1.0.9 🎉</span></li>
+</ul>
+</li>
+</ul>
+<p>&nbsp;</p>
+<p>Deprecated Improvements:</p>
+<div class="spoiler">
+<div class="spoiler-toggle">Deprecated (1)</div>
+<div class="spoiler-text">F03: Disable mouse control when ESC is pressed rather than open the ESC menu.
+<ul>
+<li><span style="font-size: 10pt;">Added in v1.0.3 🎉</span></li>
+<li><span style="font-size: 10pt;">Replaced with F09 in v1.1.0 🏗️</span></li>
+</ul>
+</div>
+</div>
+<p>&nbsp;</p>
+<p>Future Improvements:</p>
+<ul>
+<li>F01: Add the ability to sprint while mouse control is granted.</li>
+<li>F02: Add the ability to jump while mouse control is granted.</li>
+<li>F04: Tie the handbook pause button to a hot key (will likely spin this into its own mod).</li>
+<li>F05: Make it possible to configure which GUI's will auto-enable mouse control when immersive mouse mode is ON.
+<ul>
+<li><span style="font-size: 10pt;">Specifically: Given immersive mouse mode is ON and mouse control is toggled OFF, while a <em>configured GUI</em> is open, mouse control is automatically granted.</span></li>
+</ul>
+</li>
+<li>
+<p>F06: Minimize the size of the mod.</p>
+</li>
+<li>F10: Decouple the auto-toggling behavior of a certain type of GUI (such as the player inventory) from the immersive mouse mode setting into its own setting.
+<ul>
+<li><span style="font-size: 10pt;">Note:</span><span style="font-size: 10pt;"> By "certain type of GUI" I mean GUIs which are expected to disable the mouse grab and do set the PrefersUngrabbedMouse property to true.</span></li>
+</ul>
+</li>
+</ul>
