@@ -135,7 +135,20 @@ public class HotkeyManager
 	{
 		foreach (HotKey hotkey in HotKeys.ValuesOrdered)
 		{
-			if (hotkey.CurrentMapping.KeyCode == keyEventargs.KeyCode && (!keyup || hotkey.TriggerOnUpAlso) && (hotkey.KeyCombinationType != HotkeyType.CreativeTool || player == null || player.WorldData.CurrentGameMode == EnumGameMode.Creative) && (hotkey.KeyCombinationType != HotkeyType.CreativeOrSpectatorTool || player == null || player.WorldData.CurrentGameMode == EnumGameMode.Creative || player.WorldData.CurrentGameMode == EnumGameMode.Spectator) && (!isGlobal || hotkey.IsGlobalHotkey) && (fallBack ? hotkey.FallbackDidPress(keyEventargs, world, player, allowCharacterControls) : hotkey.DidPress(keyEventargs, world, player, allowCharacterControls)) && hotkey.Handler != null)
+			if ((hotkey.CurrentMapping.KeyCode == keyEventargs.KeyCode) &&
+				(!keyup || hotkey.TriggerOnUpAlso) &&
+				(hotkey.KeyCombinationType != HotkeyType.CreativeTool ||
+					player == null ||
+					player.WorldData.CurrentGameMode == EnumGameMode.Creative) &&
+				(hotkey.KeyCombinationType != HotkeyType.CreativeOrSpectatorTool ||
+					player == null ||
+					player.WorldData.CurrentGameMode == EnumGameMode.Creative ||
+					player.WorldData.CurrentGameMode == EnumGameMode.Spectator) &&
+				(!isGlobal || hotkey.IsGlobalHotkey) &&
+				(fallBack ?
+					hotkey.FallbackDidPress(keyEventargs, world, player, allowCharacterControls) :
+					hotkey.DidPress(keyEventargs, world, player, allowCharacterControls)) &&
+				(hotkey.Handler != null))
 			{
 				keyEventargs.Handled = true;
 				hotkey.CurrentMapping.OnKeyUp = keyup;
@@ -275,7 +288,11 @@ public class HotkeyManager
 		listeners += handler;
 	}
 
-	public bool OnMouseButton(ClientMain game, EnumMouseButton button, int modifiers, bool buttonDown)
+	public bool OnMouseButton(
+		ClientMain game,
+		EnumMouseButton button,
+		int modifiers,
+		bool buttonDown)
 	{
 		KeyEvent args = new KeyEvent
 		{
@@ -285,7 +302,11 @@ public class HotkeyManager
 		args.ShiftPressed = (modifiers & 1) != 0;
 		args.AltPressed = (modifiers & 4) != 0;
 		args.CommandPressed = (modifiers & 8) != 0;
-		if (TriggerHotKey(args, game, game.player, game.AllowCharacterControl, !buttonDown))
+		if (TriggerHotKey(
+			args, game,
+			game.player,
+			game.AllowCharacterControl,
+			!buttonDown))
 		{
 			return true;
 		}
