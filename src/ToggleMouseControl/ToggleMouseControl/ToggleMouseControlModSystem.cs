@@ -20,6 +20,7 @@ public class ToggleMouseControlModSystem : ModSystem
 {
     static public ICoreClientAPI ClientApi;
     static public bool DialogsWantMouseControlPrev;
+    static public int DialogsOpenCountPrev;
 
     static private Harmony harmony;
     static private bool mouseControlToggledOn;
@@ -37,6 +38,7 @@ public class ToggleMouseControlModSystem : ModSystem
         ClientApi = api;
         // Initial static state defaults
         DialogsWantMouseControlPrev = false;
+        DialogsOpenCountPrev = 0;
         mouseControlToggledOn = false;
         // Enable mouse toggle
         {
@@ -135,6 +137,7 @@ internal static class Patches
                 .Where((GuiDialog gui) => gui.DialogType == EnumDialogType.Dialog)
                 .Any((GuiDialog dlg) => dlg.PrefersUngrabbedMouse) ||
             (__instance.DialogsOpened != 0);
+        int dialogsOpenCount = __instance.DialogsOpened;
         bool forceDisableMouseGrab =
             ___api.Gui.OpenedGuis.Any((GuiDialog gui) => gui.DisableMouseGrab) ||
             ___api.IsGamePaused ||
@@ -147,7 +150,8 @@ internal static class Patches
             !forceDisableMouseGrab;
         if (ClientSettings.ImmersiveMouseMode == false)
         {
-            if (dialogsWantMouseControl != ToggleMouseControlModSystem.DialogsWantMouseControlPrev)
+            if ((dialogsWantMouseControl != ToggleMouseControlModSystem.DialogsWantMouseControlPrev) ||
+                (dialogsOpenCount > ToggleMouseControlModSystem.DialogsOpenCountPrev))
             {
                 if (ToggleMouseControlModSystem.IsMouseControlToggledOn() != dialogsWantMouseControl)
                 {
@@ -165,28 +169,99 @@ internal static class Patches
         }
         ___mouseWorldInteractAnyway = !__instance.MouseGrabbed;
         ToggleMouseControlModSystem.DialogsWantMouseControlPrev = dialogsWantMouseControl;
+        ToggleMouseControlModSystem.DialogsOpenCountPrev = dialogsOpenCount;
         return false;
     }
 }
 
 public static class GuiDialogPatcher
 {
+    public static bool ShouldDisableGuiDialogInputHandlers(GuiDialog __instance)
+    {
+        bool runOriginal = true;
+        if (ToggleMouseControlModSystem.ClientApi.Input.MouseGrabbed == true)
+        {
+            runOriginal =
+                (__instance is HudHotbar && false) ||
+                (__instance.PrefersUngrabbedMouse == false);
+        }
+        return runOriginal;
+    }
+
     public static void PatchAllImplementations(Harmony harmony)
     {
+        // Patch OnMouseWheel
+        PatchAllImplementationsOfMethodWithPrefixAndPostfix(
+            harmony,
+            typeof(GuiDialog),
+            nameof(GuiDialog.OnMouseWheel),
+            nameof(Before_GuiDialog_OnMouseWheel),
+            nameof(After_GuiDialog_OnMouseWheel));
+        // Patch OnMouseDown/OnMouseUp
+        PatchAllImplementationsOfMethodWithPrefixAndPostfix(
+            harmony,
+            typeof(GuiDialog),
+            nameof(GuiDialog.OnMouseDown),
+            nameof(Before_GuiDialog_OnMouseDown),
+            nameof(After_GuiDialog_OnMouseDown));
+        PatchAllImplementationsOfMethodWithPrefixAndPostfix(
+            harmony,
+            typeof(GuiDialog),
+            nameof(GuiDialog.OnMouseUp),
+            nameof(Before_GuiDialog_OnMouseUp),
+            nameof(After_GuiDialog_OnMouseUp));
+        // Patch OnKeyDown/OnKeyUp
+        PatchAllImplementationsOfMethodWithPrefixAndPostfix(
+            harmony,
+            typeof(GuiDialog),
+            nameof(GuiDialog.OnKeyDown),
+            nameof(Before_GuiDialog_OnKeyDown),
+            nameof(After_GuiDialog_OnKeyDown));
+        PatchAllImplementationsOfMethodWithPrefixAndPostfix(
+            harmony,
+            typeof(GuiDialog),
+            nameof(GuiDialog.OnKeyUp),
+            nameof(Before_GuiDialog_OnKeyUp),
+            nameof(After_GuiDialog_OnKeyUp));
+
+        // PatchAllImplementationsOfMethodWithPrefixAndPostfix(
+        //     harmony,
+        //     typeof(GuiDialog),
+        //     nameof(GuiDialog.CaptureAllInputs),
+        //     nameof(Before_GuiDialog_CaptureAllInputs),
+        //     nameof(After_GuiDialog_CaptureAllInputs));
+        // PatchAllImplementationsOfMethodWithPrefixAndPostfix(
+        //     harmony,
+        //     typeof(GuiDialog),
+        //     nameof(GuiDialog.CaptureRawMouse),
+        //     nameof(Before_GuiDialog_CaptureRawMouse),
+        //     nameof(After_GuiDialog_CaptureRawMouse));
+    }
+
+    public static void PatchAllImplementationsOfMethodWithPrefixAndPostfix(
+        Harmony harmony,
+        Type methodParentClass,
+        string method,
+        string prefix,
+        string postfix)
+    {
+        // This class's type!
+        Type thisClassType = MethodBase.GetCurrentMethod().DeclaringType;
+
         // Get the parent method
-        MethodInfo parentMethod = AccessTools.Method(typeof(GuiDialog), nameof(GuiDialog.OnMouseWheel));
+        MethodInfo parentMethod = AccessTools.Method(methodParentClass, method);
         if (parentMethod == null)
         {
             ToggleMouseControlModSystem.ClientApi.Logger.Error(
-                $"Failed to find parent method {nameof(GuiDialog)}.{nameof(GuiDialog.OnMouseWheel)}");
+                $"Failed to find parent method {methodParentClass.Name}.{method}");
             return;
         }
 
         // Patch the parent method
         harmony.Patch(
             parentMethod,
-            prefix: new HarmonyMethod(AccessTools.Method(typeof(GuiDialogPatcher), nameof(Before_GuiDialog_OnMouseWheel))),
-            postfix: new HarmonyMethod(AccessTools.Method(typeof(GuiDialogPatcher), nameof(After_GuiDialog_OnMouseWheel)))
+            prefix: new HarmonyMethod(AccessTools.Method(thisClassType, prefix)),
+            postfix: new HarmonyMethod(AccessTools.Method(thisClassType, postfix))
         );
 
         // Find all types in all loaded assemblies
@@ -215,7 +290,7 @@ public static class GuiDialogPatcher
         foreach (Type derivedType in derivedTypes)
         {
             // Look for the method in this specific type (not inherited)
-            MethodInfo overriddenMethod = derivedType.GetMethod(nameof(GuiDialog.OnMouseWheel),
+            MethodInfo overriddenMethod = derivedType.GetMethod(method,
                 BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly);
 
             if (overriddenMethod != null)
@@ -224,12 +299,8 @@ public static class GuiDialogPatcher
                     $"Patching overridden method in {derivedType.Name}");
                 harmony.Patch(
                     overriddenMethod,
-                    prefix: new HarmonyMethod(
-                        AccessTools.Method(
-                            typeof(GuiDialogPatcher), nameof(Before_GuiDialog_OnMouseWheel))),
-                    postfix: new HarmonyMethod(
-                        AccessTools.Method(
-                            typeof(GuiDialogPatcher), nameof(After_GuiDialog_OnMouseWheel)))
+                    prefix: new HarmonyMethod(AccessTools.Method(thisClassType, prefix)),
+                    postfix: new HarmonyMethod(AccessTools.Method(thisClassType, postfix))
                 );
             }
         }
@@ -238,15 +309,75 @@ public static class GuiDialogPatcher
     public static bool Before_GuiDialog_OnMouseWheel(
         GuiDialog __instance)
     {
-        bool runOriginal = true;
-        if (ToggleMouseControlModSystem.ClientApi.Input.MouseGrabbed == true)
-        {
-            runOriginal = __instance is HudHotbar;
-        }
-        return runOriginal;
+        return ShouldDisableGuiDialogInputHandlers(__instance);
     }
-
     public static void After_GuiDialog_OnMouseWheel(GuiDialog __instance)
     {
     }
+
+    public static bool Before_GuiDialog_OnMouseDown(
+        GuiDialog __instance)
+    {
+        return ShouldDisableGuiDialogInputHandlers(__instance);
+    }
+    public static void After_GuiDialog_OnMouseDown(GuiDialog __instance)
+    {
+    }
+
+    public static bool Before_GuiDialog_OnMouseUp(
+        GuiDialog __instance)
+    {
+        return ShouldDisableGuiDialogInputHandlers(__instance);
+    }
+    public static void After_GuiDialog_OnMouseUp(GuiDialog __instance)
+    {
+    }
+
+    public static bool Before_GuiDialog_OnKeyDown(
+        GuiDialog __instance)
+    {
+        return ShouldDisableGuiDialogInputHandlers(__instance);
+    }
+    public static void After_GuiDialog_OnKeyDown(GuiDialog __instance)
+    {
+    }
+
+    public static bool Before_GuiDialog_OnKeyUp(
+        GuiDialog __instance)
+    {
+        return ShouldDisableGuiDialogInputHandlers(__instance);
+    }
+    public static void After_GuiDialog_OnKeyUp(GuiDialog __instance)
+    {
+    }
+
+    // public static bool Before_GuiDialog_CaptureAllInputs(
+    //     GuiDialog __instance)
+    // {
+    //     bool runOriginal = true;
+    //     return runOriginal;
+    // }
+
+    // public static void After_GuiDialog_CaptureAllInputs(GuiDialog __instance, ref bool __result)
+    // {
+    //     if (ToggleMouseControlModSystem.ClientApi.Input.MouseGrabbed == true)
+    //     {
+    //         __result = __instance is HudHotbar && false;
+    //     }
+    // }
+
+    // public static bool Before_GuiDialog_CaptureRawMouse(
+    //     GuiDialog __instance)
+    // {
+    //     bool runOriginal = true;
+    //     return runOriginal;
+    // }
+
+    // public static void After_GuiDialog_CaptureRawMouse(GuiDialog __instance, ref bool __result)
+    // {
+    //     if (ToggleMouseControlModSystem.ClientApi.Input.MouseGrabbed == true)
+    //     {
+    //         __result = __instance is HudHotbar && false;
+    //     }
+    // }
 }
