@@ -22,9 +22,10 @@ public class ToggleMouseControlModSystem : ModSystem
     static public bool DialogsWantMouseControlPrev;
 
     static private Harmony harmony;
+    static private bool mouseControlToggledOn;
+
     private bool triggerOnUpAlsoOriginal = false;
     private bool mouseControlKeyIsPressed = false;
-    static private bool mouseControlToggledOn = false;
 
     public override double ExecuteOrder()
     {
@@ -34,8 +35,9 @@ public class ToggleMouseControlModSystem : ModSystem
     public override void StartClientSide(ICoreClientAPI api)
     {
         ClientApi = api;
-        // Initialize static members
+        // Initial static state defaults
         DialogsWantMouseControlPrev = false;
+        mouseControlToggledOn = false;
         // Enable mouse toggle
         {
             triggerOnUpAlsoOriginal =
@@ -48,6 +50,7 @@ public class ToggleMouseControlModSystem : ModSystem
         {
             harmony = new Harmony(Mod.Info.ModID);
             harmony.PatchCategory(Mod.Info.ModID);
+            GuiDialogPatcher.PatchAllImplementations(harmony);
         }
     }
 
@@ -163,5 +166,87 @@ internal static class Patches
         ___mouseWorldInteractAnyway = !__instance.MouseGrabbed;
         ToggleMouseControlModSystem.DialogsWantMouseControlPrev = dialogsWantMouseControl;
         return false;
+    }
+}
+
+public static class GuiDialogPatcher
+{
+    public static void PatchAllImplementations(Harmony harmony)
+    {
+        // Get the parent method
+        MethodInfo parentMethod = AccessTools.Method(typeof(GuiDialog), nameof(GuiDialog.OnMouseWheel));
+        if (parentMethod == null)
+        {
+            ToggleMouseControlModSystem.ClientApi.Logger.Error(
+                $"Failed to find parent method {nameof(GuiDialog)}.{nameof(GuiDialog.OnMouseWheel)}");
+            return;
+        }
+
+        // Patch the parent method
+        harmony.Patch(
+            parentMethod,
+            prefix: new HarmonyMethod(AccessTools.Method(typeof(GuiDialogPatcher), nameof(Before_GuiDialog_OnMouseWheel))),
+            postfix: new HarmonyMethod(AccessTools.Method(typeof(GuiDialogPatcher), nameof(After_GuiDialog_OnMouseWheel)))
+        );
+
+        // Find all types in all loaded assemblies
+        List<Type> derivedTypes = new List<Type>();
+        foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
+        {
+            try
+            {
+                foreach (Type type in assembly.GetTypes())
+                {
+                    // Check if this type derives from GuiDialog
+                    if (type != typeof(GuiDialog) && typeof(GuiDialog).IsAssignableFrom(type))
+                    {
+                        derivedTypes.Add(type);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ToggleMouseControlModSystem.ClientApi.Logger.Error(
+                    $"Error scanning assembly {assembly.FullName}: {ex.Message}");
+            }
+        }
+
+        // Patch all derived implementations that override the method
+        foreach (Type derivedType in derivedTypes)
+        {
+            // Look for the method in this specific type (not inherited)
+            MethodInfo overriddenMethod = derivedType.GetMethod(nameof(GuiDialog.OnMouseWheel),
+                BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly);
+
+            if (overriddenMethod != null)
+            {
+                ToggleMouseControlModSystem.ClientApi.Logger.Debug(
+                    $"Patching overridden method in {derivedType.Name}");
+                harmony.Patch(
+                    overriddenMethod,
+                    prefix: new HarmonyMethod(
+                        AccessTools.Method(
+                            typeof(GuiDialogPatcher), nameof(Before_GuiDialog_OnMouseWheel))),
+                    postfix: new HarmonyMethod(
+                        AccessTools.Method(
+                            typeof(GuiDialogPatcher), nameof(After_GuiDialog_OnMouseWheel)))
+                );
+            }
+        }
+    }
+
+    public static bool Before_GuiDialog_OnMouseWheel(
+        GuiDialog __instance)
+    {
+        bool runOriginal = true;
+        if (ToggleMouseControlModSystem.ClientApi.Input.MouseGrabbed == true)
+        {
+            runOriginal = __instance is HudHotbar;
+        }
+        return runOriginal;
+    }
+
+    public static void After_GuiDialog_OnMouseWheel(GuiDialog __instance)
+    {
     }
 }
