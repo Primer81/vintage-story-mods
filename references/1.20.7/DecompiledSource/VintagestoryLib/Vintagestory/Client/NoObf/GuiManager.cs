@@ -47,7 +47,32 @@ public class GuiManager : ClientSystem
 
 	public void RegisterDefaultDialogs()
 	{
-		game.RegisterDialog(new HudEntityNameTags(game.api), new GuiDialogEscapeMenu(game.api), new HudIngameError(game.api), new HudIngameDiscovery(game.api), new HudDialogChat(game.api), new HudElementInteractionHelp(game.api), new HudHotbar(game.api), new HudStatbar(game.api), new GuiDialogInventory(game.api), new GuiDialogCharacter(game.api), new GuiDialogConfirmRemapping(game.api), new GuiDialogMacroEditor(game.api), new HudDebugScreen(game.api), new HudElementCoordinates(game.api), new HudElementBlockAndEntityInfo(game.api), new GuiDialogTickProfiler(game.api), new HudDisconnected(game.api), new HudNotMinecraft(game.api), new GuiDialogTransformEditor(game.api), new GuiDialogSelboxEditor(game.api), new GuiDialogToolMode(game.api), new GuiDialogDead(game.api), new GuiDialogFirstlaunchInfo(game.api), new HudMouseTools(game.api), new HudDropItem(game.api));
+		game.RegisterDialog(
+			new HudEntityNameTags(game.api),
+			new GuiDialogEscapeMenu(game.api),
+			new HudIngameError(game.api),
+			new HudIngameDiscovery(game.api),
+			new HudDialogChat(game.api),
+			new HudElementInteractionHelp(game.api),
+			new HudHotbar(game.api),
+			new HudStatbar(game.api),
+			new GuiDialogInventory(game.api),
+			new GuiDialogCharacter(game.api),
+			new GuiDialogConfirmRemapping(game.api),
+			new GuiDialogMacroEditor(game.api),
+			new HudDebugScreen(game.api),
+			new HudElementCoordinates(game.api),
+			new HudElementBlockAndEntityInfo(game.api),
+			new GuiDialogTickProfiler(game.api),
+			new HudDisconnected(game.api),
+			new HudNotMinecraft(game.api),
+			new GuiDialogTransformEditor(game.api),
+			new GuiDialogSelboxEditor(game.api),
+			new GuiDialogToolMode(game.api),
+			new GuiDialogDead(game.api),
+			new GuiDialogFirstlaunchInfo(game.api),
+			new HudMouseTools(game.api),
+			new HudDropItem(game.api));
 	}
 
 	public override EnumClientSystemType GetSystemType()

@@ -165,7 +165,15 @@ public class GuiDialogToolMode : GuiDialog
 	{
 		if (capi.Settings.Bool["immersiveMouseMode"] && blockSele?.Position != null)
 		{
-			Vec3d pos = MatrixToolsd.Project(new Vec3d((double)blockSele.Position.X + 0.5, (double)blockSele.Position.Y + floatyDialogPosition, (double)blockSele.Position.Z + 0.5), capi.Render.PerspectiveProjectionMat, capi.Render.PerspectiveViewMat, capi.Render.FrameWidth, capi.Render.FrameHeight);
+			Vec3d pos = MatrixToolsd.Project(
+				new Vec3d(
+					(double)blockSele.Position.X + 0.5,
+					(double)blockSele.Position.Y + floatyDialogPosition,
+					(double)blockSele.Position.Z + 0.5),
+					capi.Render.PerspectiveProjectionMat,
+					capi.Render.PerspectiveViewMat,
+					capi.Render.FrameWidth,
+					capi.Render.FrameHeight);
 			if (pos.Z < 0.0)
 			{
 				return;

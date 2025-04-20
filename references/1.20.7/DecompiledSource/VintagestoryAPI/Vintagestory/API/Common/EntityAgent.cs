@@ -494,7 +494,38 @@ public class EntityAgent : Entity
 		{
 			if (Alive)
 			{
-				CurrentControls = ((!servercontrols.TriesToMove && ((!servercontrols.Jump && !servercontrols.Sneak) || !servercontrols.IsClimbing)) ? EnumEntityActivity.Idle : EnumEntityActivity.Move) | ((Swimming && !servercontrols.FloorSitting) ? EnumEntityActivity.Swim : EnumEntityActivity.None) | (servercontrols.FloorSitting ? EnumEntityActivity.FloorSitting : EnumEntityActivity.None) | ((servercontrols.Sneak && !servercontrols.IsClimbing && !servercontrols.FloorSitting && !Swimming) ? EnumEntityActivity.SneakMode : EnumEntityActivity.None) | ((servercontrols.TriesToMove && servercontrols.Sprint && !Swimming && !servercontrols.Sneak) ? EnumEntityActivity.SprintMode : EnumEntityActivity.None) | (servercontrols.IsFlying ? (servercontrols.Gliding ? EnumEntityActivity.Glide : EnumEntityActivity.Fly) : EnumEntityActivity.None) | (servercontrols.IsClimbing ? EnumEntityActivity.Climb : EnumEntityActivity.None) | ((servercontrols.Jump && OnGround) ? EnumEntityActivity.Jump : EnumEntityActivity.None) | ((!OnGround && !Swimming && !FeetInLiquid && !servercontrols.IsClimbing && !servercontrols.IsFlying && base.SidedPos.Motion.Y < -0.05) ? EnumEntityActivity.Fall : EnumEntityActivity.None) | ((MountedOn != null) ? EnumEntityActivity.Mounted : EnumEntityActivity.None);
+				CurrentControls =
+					((!servercontrols.TriesToMove && (!(servercontrols.Jump || servercontrols.Sneak) || !servercontrols.IsClimbing))
+						? EnumEntityActivity.Idle
+						: EnumEntityActivity.Move)
+					| ((Swimming && !servercontrols.FloorSitting)
+						? EnumEntityActivity.Swim
+						: EnumEntityActivity.None)
+					| (servercontrols.FloorSitting
+						? EnumEntityActivity.FloorSitting
+						: EnumEntityActivity.None)
+					| ((servercontrols.Sneak && !servercontrols.IsClimbing && !servercontrols.FloorSitting && !Swimming)
+						? EnumEntityActivity.SneakMode
+						: EnumEntityActivity.None)
+					| ((servercontrols.TriesToMove && servercontrols.Sprint && !Swimming && !servercontrols.Sneak)
+						? EnumEntityActivity.SprintMode
+						: EnumEntityActivity.None)
+					| (servercontrols.IsFlying
+						? (servercontrols.Gliding
+							? EnumEntityActivity.Glide
+							: EnumEntityActivity.Fly)
+						: EnumEntityActivity.None)
+					| (servercontrols.IsClimbing
+						? EnumEntityActivity.Climb
+						: EnumEntityActivity.None)
+					| ((servercontrols.Jump && OnGround)
+						? EnumEntityActivity.Jump
+						: EnumEntityActivity.None)
+					| ((!OnGround && !Swimming && !FeetInLiquid && !servercontrols.IsClimbing && !servercontrols.IsFlying && base.SidedPos.Motion.Y < -0.05)
+						? EnumEntityActivity.Fall : EnumEntityActivity.None)
+					| ((MountedOn != null)
+						? EnumEntityActivity.Mounted
+						: EnumEntityActivity.None);
 			}
 			else
 			{

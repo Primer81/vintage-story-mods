@@ -76,7 +76,13 @@ internal class HudMouseTools : GuiDialog
 		bool newBottomOverlap = bottomOverlapPixels > 0.0;
 		if (currentSlot != null && (recalcAlignmentOffset || newBottomOverlap || rightOverlap))
 		{
-			curStackInfoBounds.WithFixedAlignmentOffset(newRightOverlap ? ((0.0 - (curStackInfoBounds.OuterWidth + (double)(3 * tooltipOffsetX))) / (double)ClientSettings.GUIScale) : 0.0, newBottomOverlap ? ((0.0 - bottomOverlapPixels) / (double)ClientSettings.GUIScale - 10.0) : 0.0);
+			curStackInfoBounds.WithFixedAlignmentOffset(
+				newRightOverlap
+				? ((0.0 - (curStackInfoBounds.OuterWidth + (double)(3 * tooltipOffsetX))) / (double)ClientSettings.GUIScale)
+				: 0.0, newBottomOverlap
+					? ((0.0 - bottomOverlapPixels) / (double)ClientSettings.GUIScale - 10.0)
+					: 0.0
+			);
 			curStackInfoBounds.CalcWorldBounds();
 			bottomOverlap = newBottomOverlap;
 			rightOverlap = newRightOverlap;
