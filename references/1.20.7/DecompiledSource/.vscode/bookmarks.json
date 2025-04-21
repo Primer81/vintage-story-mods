@@ -1,1824 +1,1839 @@
 {
-  "files": [
-    {
-      "path": "VintagestoryLib/Vintagestory/Common/AssetManager.cs",
-      "bookmarks": [
-        {
-          "line": 10,
-          "column": 0,
-          "label": "public class AssetManager : IAssetManager"
-        },
-        {
-          "line": 12,
-          "column": 0,
-          "label": "private EnumAppSide side;"
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryAPI/Vintagestory/API/Common/BlockBehavior.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public abstract class BlockBehavior : CollectibleBehavior",
-          "line": 12
-        }
-      ]
-    },
-    {
-      "path": "VSSurvivalMod/Vintagestory/GameContent/BlockBehaviorContainer.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public override bool OnBlockInteractStart(IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel, ref EnumHandling handling)",
-          "line": 15
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryAPI/Vintagestory/API/Common/BlockEntity.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public abstract class BlockEntity",
-          "line": 15
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryAPI/Vintagestory/API/Common/BlockEntityBehavior.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public abstract class BlockEntityBehavior",
-          "line": 13
-        }
-      ]
-    },
-    {
-      "path": "VSSurvivalMod/Vintagestory/GameContent/BlockEntityFirepit.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public class BlockEntityFirepit : BlockEntityOpenableContainer, IHeatSource, IFirePit, ITemperatureSensitive",
-          "line": 12
-        }
-      ]
-    },
-    {
-      "path": "VSSurvivalMod/Vintagestory/GameContent/BlockEntityOpenableContainer.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public abstract bool OnPlayerRightClick(IPlayer byPlayer, BlockSelection blockSel);",
-          "line": 22
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryLib/Vintagestory/Client/NoObf/Camera.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public class Camera",
-          "line": 8
-        },
-        {
-          "column": 0,
-          "label": "internal void Update(float deltaTime, AABBIntersectionTest intersectionTester)",
-          "line": 114
-        },
-        {
-          "column": 0,
-          "label": "IClientWorldAccessor cworld = intersectionTester.bsTester as IClientWorldAccessor;",
-          "line": 129
-        },
-        {
-          "column": 0,
-          "label": "return lookatFp(plr, camEyePosIn);",
-          "line": 172
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryLib/Vintagestory/Client/NoObf/ClientMain.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public sealed class ClientMain : GameMain, IWorldIntersectionSupplier, IClientWorldAccessor, IWorldAccessor",
-          "line": 22
-        },
-        {
-          "column": 0,
-          "label": "public void UpdateFreeMouse()",
-          "line": 2059
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryLib/Vintagestory/Client/NoObf/ClientPlatformAbstract.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public abstract class ClientPlatformAbstract",
-          "line": 13
-        },
-        {
-          "column": 0,
-          "label": "public abstract Size2i ScreenSize { get; }",
-          "line": 19
-        },
-        {
-          "column": 0,
-          "label": "public abstract Size2i WindowSize { get; }",
-          "line": 21
-        },
-        {
-          "column": 0,
-          "label": "public abstract bool IsFocused { get; }",
-          "line": 25
-        },
-        {
-          "column": 0,
-          "label": "public abstract AssetManager AssetManager { get; }",
-          "line": 33
-        },
-        {
-          "column": 0,
-          "label": "public abstract ILogger Logger { get; }",
-          "line": 35
-        },
-        {
-          "column": 0,
-          "label": "public abstract int CpuCoreCount { get; }",
-          "line": 39
-        },
-        {
-          "column": 0,
-          "label": "public abstract bool MouseGrabbed { get; set; }",
-          "line": 48
-        },
-        {
-          "column": 0,
-          "label": "public abstract string CurrentMouseCursor { get; protected set; }",
-          "line": 50
-        },
-        {
-          "column": 0,
-          "label": "public abstract IList<string> AvailableAudioDevices { get; }",
-          "line": 56
-        },
-        {
-          "column": 0,
-          "label": "public abstract string CurrentAudioDevice { get; set; }",
-          "line": 58
-        },
-        {
-          "column": 0,
-          "label": "public abstract bool IsServerRunning { get; set; }",
-          "line": 64
-        },
-        {
-          "column": 0,
-          "label": "public abstract bool IsGamePaused { get; }",
-          "line": 66
-        },
-        {
-          "column": 0,
-          "label": "public abstract string SaveScreenshot(string path = null, string filename = null, bool withAlpha = false, bool flip = false, string metaDataStr = null);",
-          "line": 110
-        },
-        {
-          "column": 0,
-          "label": "public abstract BitmapRef GrabScreenshot(bool withAlpha = false, bool scale = false);",
-          "line": 112
-        },
-        {
-          "column": 0,
-          "label": "public abstract BitmapRef GrabScreenshot(int width, int height, bool scaleScreenshot, bool flip, bool withAlpha = false);",
-          "line": 114
-        },
-        {
-          "column": 0,
-          "label": "public abstract string GetGameVersion();",
-          "line": 124
-        },
-        {
-          "column": 0,
-          "label": "public abstract MouseEvent CreateMouseEvent(EnumMouseButton button);",
-          "line": 155
-        },
-        {
-          "column": 0,
-          "label": "public abstract void SetGamePausedState(bool paused);",
-          "line": 293
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryLib/Vintagestory/Client/NoObf/ClientPlatformWindows.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public sealed class ClientPlatformWindows : ClientPlatformAbstract",
-          "line": 29
-        },
-        {
-          "column": 0,
-          "label": "mouseEventHandler.OnMouseDown(args);",
-          "line": 3198
-        },
-        {
-          "column": 0,
-          "label": "keyEventHandler.OnKeyPress(new KeyEvent",
-          "line": 3216
-        },
-        {
-          "column": 0,
-          "label": "keyEventHandler.OnKeyDown(args);",
-          "line": 3245
-        },
-        {
-          "column": 0,
-          "label": "keyEventHandler.OnKeyUp(args);",
-          "line": 3268
-        },
-        {
-          "column": 0,
-          "label": "return new MouseEvent((int)mouseX, (int)mouseY, button, 0);",
-          "line": 3274
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryLib/Vintagestory/Client/NoObf/ClientPlayer.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public class ClientPlayer : IClientPlayer, IPlayer",
-          "line": 13
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryLib/Vintagestory/Client/NoObf/ClientSettings.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public class ClientSettings : SettingsBase",
-          "line": 12
-        },
-        {
-          "column": 0,
-          "label": "public static Dictionary<string, Vec2i> DialogPositions",
-          "line": 24
-        },
-        {
-          "column": 0,
-          "label": "public static Dictionary<string, KeyCombination> KeyMapping",
-          "line": 37
-        },
-        {
-          "column": 0,
-          "label": "public static bool ToggleSprint",
-          "line": 230
-        },
-        {
-          "column": 0,
-          "label": "public static bool SeparateCtrl",
-          "line": 242
-        },
-        {
-          "column": 0,
-          "label": "public static string PlayerName",
-          "line": 470
-        },
-        {
-          "column": 0,
-          "label": "public static string Entitlements",
-          "line": 482
-        },
-        {
-          "column": 0,
-          "label": "public static string SettingsVersion",
-          "line": 494
-        },
-        {
-          "column": 0,
-          "label": "public static bool DeveloperMode",
-          "line": 602
-        },
-        {
-          "column": 0,
-          "label": "public static bool PauseGameOnLostFocus",
-          "line": 711
-        },
-        {
-          "column": 0,
-          "label": "public static int GameWindowMode",
-          "line": 747
-        },
-        {
-          "column": 0,
-          "label": "public static int MusicFrequency",
-          "line": 831
-        },
-        {
-          "column": 0,
-          "label": "public static int ScreenWidth",
-          "line": 891
-        },
-        {
-          "column": 0,
-          "label": "public static int ScreenHeight",
-          "line": 903
-        },
-        {
-          "column": 0,
-          "label": "public static List<string> ModPaths",
-          "line": 1371
-        },
-        {
-          "column": 0,
-          "label": "public static bool ImmersiveMouseMode",
-          "line": 1647
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryLib/Vintagestory/Client/NoObf/ClientSystem.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public abstract class ClientSystem",
-          "line": 6
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryLib/Vintagestory/Client/NoObf/ClientWorldMap.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public sealed class ClientWorldMap : WorldMap, IChunkProvider, ILandClaimAPI",
-          "line": 14
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryLib/Vintagestory/Client/NoObf/ClientWorldPlayerData.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public class ClientWorldPlayerData : IWorldPlayerData",
-          "line": 7
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryAPI/Vintagestory/API/Client/ConfigItem.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public class ConfigItem",
-          "line": 5
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryLib/Vintagestory/Common/CreativeTab.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public class CreativeTab",
-          "line": 7
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryLib/Vintagestory/Client/NoObf/DrawWorldInteractionUtil.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public class DrawWorldInteractionUtil",
-          "line": 9
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryAPI/Vintagestory/API/Common/EntityAgent.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public override void OnGameTick(float dt)",
-          "line": 480
-        },
-        {
-          "column": 0,
-          "label": "CurrentControls =",
-          "line": 496
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryAPI/Vintagestory/API/Common/EntityControls.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public class EntityControls",
-          "line": 11
-        },
-        {
-          "column": 0,
-          "label": "public bool IsStepping;",
-          "line": 65
-        },
-        {
-          "column": 0,
-          "label": "public float MovespeedMultiplier = 1f;",
-          "line": 92
-        },
-        {
-          "column": 0,
-          "label": "public virtual bool Jump",
-          "line": 181
-        },
-        {
-          "column": 0,
-          "label": "public virtual bool Sneak",
-          "line": 197
-        },
-        {
-          "column": 0,
-          "label": "public virtual bool Sprint",
-          "line": 243
-        },
-        {
-          "column": 0,
-          "label": "protected virtual void AttemptToggleAction(EnumEntityAction action, bool on)",
-          "line": 359
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryAPI/Vintagestory/API/Common/EntityHeadController.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public class EntityHeadController",
-          "line": 5
-        },
-        {
-          "column": 0,
-          "label": "protected EntityAgent entity;",
-          "line": 19
-        },
-        {
-          "column": 0,
-          "label": "public virtual void OnFrame(float dt)",
-          "line": 43
-        },
-        {
-          "column": 0,
-          "label": "if (entity.Pos.HeadYaw != 0f || entity.Pos.HeadPitch != 0f)",
-          "line": 53
-        },
-        {
-          "column": 0,
-          "label": "if (obj2 != null && obj2.ImmersiveFpMode)",
-          "line": 64
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryAPI/Vintagestory/API/Common/EntityPlayer.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public class EntityPlayer : EntityHumanoid, IPettable",
-          "line": 15
-        },
-        {
-          "column": 0,
-          "label": "private PlayerAnimationManager selfFpAnimManager;",
-          "line": 86
-        },
-        {
-          "column": 0,
-          "label": "public bool PrevFrameCanStandUp;",
-          "line": 96
-        },
-        {
-          "column": 0,
-          "label": "if (tesselating || player == null || (player != null && (player.WorldData?.CurrentGameMode).GetValueOrDefault() == EnumGameMode.Spectator))",
-          "line": 447
-        },
-        {
-          "column": 0,
-          "label": "else if ((controls.Sneak || !PrevFrameCanStandUp) && !controls.IsClimbing && !controls.IsFlying)",
-          "line": 479
-        },
-        {
-          "column": 0,
-          "label": "else if (!Alive)",
-          "line": 484
-        },
-        {
-          "column": 0,
-          "label": "if (!servercontrols.Sneak && !PrevFrameCanStandUp)",
-          "line": 675
-        },
-        {
-          "column": 0,
-          "label": "servercontrols.Sneak = true;",
-          "line": 677
-        },
-        {
-          "column": 0,
-          "label": "servercontrols.Sneak = false;",
-          "line": 679
-        },
-        {
-          "column": 0,
-          "label": "private void updateLocalEyePosImmersiveFpMode(float dt)",
-          "line": 697
-        },
-        {
-          "column": 0,
-          "label": "if (Api.Side == EnumAppSide.Server || AnimManager.Animator == null || ((Api as ICoreClientAPI).Render.CameraType != 0 && Alive))",
-          "line": 699
-        },
-        {
-          "column": 0,
-          "label": "public void HandleSeraphHandAnimations(float dt)",
-          "line": 750
-        }
-      ]
-    },
-    {
-      "path": "VSSurvivalMod/Vintagestory/GameContent/EyesOverlayRenderer.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public class EyesOverlayRenderer : IRenderer, IDisposable",
-          "line": 6
-        },
-        {
-          "column": 0,
-          "label": "public void OnRenderFrame(float deltaTime, EnumRenderStage stage)",
-          "line": 46
-        },
-        {
-          "column": 0,
-          "label": "if (!(Level <= 0f) && capi.World.Player.CameraMode == EnumCameraMode.FirstPerson)",
-          "line": 48
-        }
-      ]
-    },
-    {
-      "path": "VSSurvivalMod/Vintagestory/GameContent/FirepitContentsRenderer.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public FirepitContentsRenderer(ICoreClientAPI api, BlockPos pos)",
-          "line": 44
-        },
-        {
-          "column": 0,
-          "label": "public void SetContents(ItemStack newContentStack, ModelTransform transform)",
-          "line": 72
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryLib/Vintagestory/Common/GameMain.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public abstract class GameMain : IWorldIntersectionSupplier",
-          "line": 9
-        },
-        {
-          "column": 0,
-          "label": "public AABBIntersectionTest interesectionTester;",
-          "line": 11
-        },
-        {
-          "column": 0,
-          "label": "interesectionTester = new AABBIntersectionTest(this);",
-          "line": 52
-        },
-        {
-          "column": 0,
-          "label": "public void RayTraceForSelection(Vec3d fromPos, float pitch, float yaw, float range, ref BlockSelection blockSelection, ref EntitySelection entitySelection, BlockFilter bfilter = null, EntityFilter efilter = null)",
-          "line": 111
-        },
-        {
-          "column": 0,
-          "label": "Vec3d pos = player.Entity.Pos.XYZ.Add(player.Entity.LocalEyePos);",
-          "line": 174
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryAPI/Vintagestory/API/Client/GlKeyNames.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public static class GlKeyNames",
-          "line": 5
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryAPI/Vintagestory/API/Client/GlKeys.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public enum GlKeys",
-          "line": 8
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryAPI/Vintagestory/API/Client/GuiComposer.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public class GuiComposer : IDisposable",
-          "line": 15
-        },
-        {
-          "column": 0,
-          "label": "public GuiComposer Compose(bool focusFirstElement = true)",
-          "line": 356
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryAPI/Vintagestory/API/Client/GuiComposerHelpers.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public static class GuiComposerHelpers",
-          "line": 6
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryLib/Vintagestory/Client/NoObf/GuiComposerManager.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public class GuiComposerManager : IGuiComposerManager",
-          "line": 7
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryLib/Vintagestory/Client/NoObf/GuiCompositeSettings.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public class GuiCompositeSettings : GuiComposite",
-          "line": 15
-        },
-        {
-          "column": 0,
-          "label": ".AddConfigList(keycontrolItems, OnKeyControlItemClick, CairoFont.WhiteSmallText().WithFontSize(18f), configListBounds, \"configlist\")",
-          "line": 888
-        },
-        {
-          "column": 0,
-          "label": "private void OnKeyControlItemClick(int index, int indexNoTitle)",
-          "line": 1063
-        },
-        {
-          "column": 0,
-          "label": "private void CompletedCapture()",
-          "line": 1121
-        },
-        {
-          "column": 0,
-          "label": "GuiComposer guiComposer = composer.AddStaticText(Lang.Get(\"setting-name-immersivemousemode\"), CairoFont.WhiteSmallishText(), leftText = leftText.BelowCopy(0.0, 4.0)).AddHoverText(Lang.Get(\"setting-hover-immersivemousemode\"), CairoFont.WhiteSmallText(), 250, leftText.FlatCopy().WithFixedHeight(25.0)).AddSwitch(onImmersiveMouseModeChanged, rightSlider = rightSlider.BelowCopy(0.0, 17.0), \"immersiveMouseModeSwitch\")",
-          "line": 1414
-        },
-        {
-          "column": 0,
-          "label": "private void onImmersiveMouseModeChanged(bool on)",
-          "line": 1496
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryAPI/Vintagestory/API/Client/GuiDialog.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public abstract class GuiDialog : IDisposable",
-          "line": 9
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryAPI/Vintagestory/API/Client/GuiDialogBlockEntity.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "if (capi.Settings.Bool[\"immersiveMouseMode\"])",
-          "line": 92
-        }
-      ]
-    },
-    {
-      "path": "VSSurvivalMod/Vintagestory/GameContent/GuiDialogBlockEntityRecipeSelector.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "if (capi.Settings.Bool[\"immersiveMouseMode\"])",
-          "line": 135
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryLib/Vintagestory/Client/NoObf/GuiDialogDead.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public class GuiDialogDead : GuiDialog",
-          "line": 6
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryLib/Vintagestory/Client/NoObf/GuiDialogEscapeMenu.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "internal class GuiDialogEscapeMenu : GuiDialog, IGameSettingsHandler, IGuiCompositeHandler",
-          "line": 9
-        }
-      ]
-    },
-    {
-      "path": "VSSurvivalMod/Vintagestory/GameContent/GuiDialogHandbook.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public class GuiDialogHandbook : GuiDialog",
-          "line": 10
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryLib/Vintagestory/Client/NoObf/GuiDialogInventory.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public class GuiDialogInventory : GuiDialog",
-          "line": 10
-        },
-        {
-          "column": 0,
-          "label": "private void ComposeCreativeInvDialog()",
-          "line": 99
-        },
-        {
-          "column": 0,
-          "label": "foreach (CreativeTab tab2 in unorderedTabs)",
-          "line": 124
-        },
-        {
-          "column": 0,
-          "label": ".AddVerticalTabs(tabsL, tabBoundsL, OnTabClicked, \"verticalTabs\");",
-          "line": 177
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryLib/Vintagestory/Client/NoObf/GuiDialogMacroEditor.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "internal class GuiDialogMacroEditor : GuiDialog",
-          "line": 9
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryLib/Vintagestory/Client/NoObf/GuiDialogSelboxEditor.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "internal class GuiDialogSelboxEditor : GuiDialog",
-          "line": 12
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryLib/Vintagestory/Client/NoObf/GuiDialogTickProfiler.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public class GuiDialogTickProfiler : GuiDialog",
-          "line": 11
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryLib/Vintagestory/Client/NoObf/GuiDialogToolMode.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public class GuiDialogToolMode : GuiDialog",
-          "line": 11
-        },
-        {
-          "column": 0,
-          "label": "if (capi.Settings.Bool[\"immersiveMouseMode\"] && blockSele?.Position != null)",
-          "line": 165
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryAPI/Vintagestory/API/Client/GuiElement.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public abstract class GuiElement : IDisposable",
-          "line": 10
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryAPI/Vintagestory/API/Client/GuiElementConfigList.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public class GuiElementConfigList : GuiElementTextBase",
-          "line": 10
-        },
-        {
-          "column": 0,
-          "label": "public List<ConfigItem> items;",
-          "line": 18
-        },
-        {
-          "column": 0,
-          "label": "public void Refresh()",
-          "line": 93
-        },
-        {
-          "column": 0,
-          "label": "public override void OnMouseDownOnElement(ICoreClientAPI api, MouseEvent args)",
-          "line": 148
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryAPI/Vintagestory/API/Client/GuiElementItemSlotGrid.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public class GuiElementItemSlotGrid : GuiElementItemSlotGridBase",
-          "line": 8
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryAPI/Vintagestory/API/Client/GuiElementItemSlotGridBase.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public abstract class GuiElementItemSlotGridBase : GuiElement",
-          "line": 15
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryAPI/Vintagestory/API/Client/GuiElementItemSlotGridExcl.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public class GuiElementItemSlotGridExcl : GuiElementItemSlotGridBase",
-          "line": 10
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryAPI/Vintagestory/API/Client/GuiElementScrollbar.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public class GuiElementScrollbar : GuiElementControl",
-          "line": 6
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryLib/Vintagestory/Client/NoObf/GuiManager.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public class GuiManager : ClientSystem",
-          "line": 7
-        },
-        {
-          "column": 0,
-          "label": "public void RegisterDefaultDialogs()",
-          "line": 47
-        },
-        {
-          "column": 0,
-          "label": "if (DEBUG_PRINT_INTERACTIONS)",
-          "line": 331
-        },
-        {
-          "column": 0,
-          "label": "public override void OnMouseWheel(MouseWheelEventArgs args)",
-          "line": 408
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryLib/GuiScreen.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public class GuiScreen",
-          "line": 5
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryAPI/Vintagestory/API/Client/HotKey.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public class HotKey",
-          "line": 4
-        },
-        {
-          "column": 0,
-          "label": "public bool IsGlobalHotkey;",
-          "line": 9
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryLib/Vintagestory/Client/HotkeyCapturer.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public class HotkeyCapturer",
-          "line": 5
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryLib/Vintagestory/Client/HotkeyManager.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public class HotkeyManager",
-          "line": 9
-        },
-        {
-          "column": 0,
-          "label": "public OrderedDictionary<string, HotKey> HotKeys = new OrderedDictionary<string, HotKey>();",
-          "line": 11
-        },
-        {
-          "column": 0,
-          "label": "public bool ShouldTriggerHotkeys = true;",
-          "line": 13
-        },
-        {
-          "column": 0,
-          "label": "public virtual void RegisterDefaultHotKeys()",
-          "line": 17
-        },
-        {
-          "column": 0,
-          "label": "public bool TriggerHotKey(KeyEvent keyEventargs, IWorldAccessor world, IPlayer player, bool allowCharacterControls, bool keyUp)",
-          "line": 120
-        },
-        {
-          "column": 0,
-          "label": "private bool TriggerHotKey(KeyEvent keyEventargs, IWorldAccessor world, IPlayer player, bool allowCharacterControls, bool isGlobal, bool fallBack, bool keyup)",
-          "line": 133
-        },
-        {
-          "column": 0,
-          "label": "public bool IsHotKeyRegistered(KeyCombination keyCombMap)",
-          "line": 164
-        },
-        {
-          "column": 0,
-          "label": "public HotKey GetHotKeyByCode(string code)",
-          "line": 174
-        },
-        {
-          "column": 0,
-          "label": "public void RemoveHotKey(string code)",
-          "line": 183
-        },
-        {
-          "column": 0,
-          "label": "public void RegisterHotKey(HotKey keyComb)",
-          "line": 188
-        },
-        {
-          "column": 0,
-          "label": "if (TriggerHotKey(",
-          "line": 304
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryAPI/Vintagestory/API/Client/HotkeyType.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public enum HotkeyType",
-          "line": 2
-        }
-      ]
-    },
-    {
-      "path": "VSSurvivalMod/Vintagestory/Client/NoObf/HudBosshealthBars.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public class HudBosshealthBars : HudElement",
-          "line": 7
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryLib/Vintagestory/Client/NoObf/HudDropItem.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "internal class HudDropItem : HudElement",
-          "line": 5
-        },
-        {
-          "column": 0,
-          "label": "public override void OnMouseDown(MouseEvent args)",
-          "line": 22
-        },
-        {
-          "column": 0,
-          "label": "if (!guiDialog.IsOpened() || guiDialog is HudMouseTools)",
-          "line": 30
-        },
-        {
-          "column": 0,
-          "label": "foreach (GuiComposer value in guiDialog.Composers.Values)",
-          "line": 34
-        },
-        {
-          "column": 0,
-          "label": "if (value.Bounds.PointInside(args.X, args.Y))",
-          "line": 36
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryAPI/Vintagestory/API/Client/HudElement.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public abstract class HudElement : GuiDialog",
-          "line": 5
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryLib/Vintagestory/Client/NoObf/HudHotbar.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public class HudHotbar : HudElement",
-          "line": 12
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryLib/Vintagestory/Client/NoObf/HudMouseTools.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "curStackInfoBounds.WithFixedAlignmentOffset(",
-          "line": 78
-        },
-        {
-          "column": 0,
-          "label": "curStackInfoBounds.CalcWorldBounds();",
-          "line": 85
-        },
-        {
-          "column": 0,
-          "label": "public override bool IsOpened()",
-          "line": 131
-        },
-        {
-          "column": 0,
-          "label": "if (!capi.Input.MouseGrabbed)",
-          "line": 133
-        }
-      ]
-    },
-    {
-      "path": "VSSurvivalMod/Vintagestory/GameContent/HudTutorial.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public class HudTutorial : HudElement",
-          "line": 4
-        }
-      ]
-    },
-    {
-      "path": "VSCreativeMod/VSCreativeMod/HudWorldEditInputCapture.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public class HudWorldEditInputCapture : HudElement",
-          "line": 7
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryAPI/Vintagestory/API/Client/IClientEventAPI.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public interface IClientEventAPI : IEventAPI",
-          "line": 8
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryAPI/Vintagestory/API/Client/IClientPlayer.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public interface IClientPlayer : IPlayer",
-          "line": 7
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryAPI/Vintagestory/API/Client/IClientWorldAccessor.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public interface IClientWorldAccessor : IWorldAccessor",
-          "line": 10
-        },
-        {
-          "column": 0,
-          "label": "new IClientGameCalendar Calendar { get; }",
-          "line": 15
-        },
-        {
-          "column": 0,
-          "label": "IClientPlayer Player { get; }",
-          "line": 30
-        },
-        {
-          "column": 0,
-          "label": "Dictionary<long, Entity> LoadedEntities { get; }",
-          "line": 35
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryAPI/Vintagestory/API/Client/ICoreClientAPI.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public interface ICoreClientAPI : ICoreAPI, ICoreAPICommon",
-          "line": 9
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryAPI/Vintagestory/API/Common/IEventAPI.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public interface IEventAPI",
-          "line": 10
-        },
-        {
-          "column": 0,
-          "label": "event EntityDeathDelegate OnEntityDeath;",
-          "line": 32
-        },
-        {
-          "column": 0,
-          "label": "void PushEvent(string eventName, IAttribute data = null);",
-          "line": 74
-        },
-        {
-          "column": 0,
-          "label": "void RegisterEventBusListener(EventBusListenerDelegate OnEvent, double priority = 0.5, string filterByEventName = null);",
-          "line": 82
-        },
-        {
-          "column": 0,
-          "label": "long RegisterGameTickListener(Action<float> onGameTick, int millisecondInterval, int initialDelayOffsetMs = 0);",
-          "line": 91
-        },
-        {
-          "column": 0,
-          "label": "long RegisterCallback(Action<float> OnTimePassed, int millisecondDelay);",
-          "line": 120
-        },
-        {
-          "column": 0,
-          "label": "long RegisterCallback(Action<float> OnTimePassed, int millisecondDelay, bool permittedWhilePaused);",
-          "line": 130
-        },
-        {
-          "column": 0,
-          "label": "long RegisterCallback(Action<IWorldAccessor, BlockPos, float> OnTimePassed, BlockPos pos, int millisecondDelay);",
-          "line": 139
-        },
-        {
-          "column": 0,
-          "label": "void UnregisterCallback(long listenerId);",
-          "line": 145
-        },
-        {
-          "column": 0,
-          "label": "void UnregisterGameTickListener(long listenerId);",
-          "line": 151
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryAPI/Vintagestory/API/Client/IGuiAPI.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public interface IGuiAPI",
-          "line": 7
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryAPI/Vintagestory/API/Client/IInputAPI.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public interface IInputAPI",
-          "line": 8
-        },
-        {
-          "column": 0,
-          "label": "string ClipboardText { get; set; }",
-          "line": 13
-        },
-        {
-          "column": 0,
-          "label": "bool[] KeyboardKeyState { get; }",
-          "line": 23
-        },
-        {
-          "column": 0,
-          "label": "int MouseX { get; }",
-          "line": 38
-        },
-        {
-          "column": 0,
-          "label": "int MouseY { get; }",
-          "line": 43
-        },
-        {
-          "column": 0,
-          "label": "bool MouseWorldInteractAnyway { get; set; }",
-          "line": 58
-        },
-        {
-          "column": 0,
-          "label": "bool MouseGrabbed { get; }",
-          "line": 64
-        },
-        {
-          "column": 0,
-          "label": "OrderedDictionary<string, HotKey> HotKeys { get; }",
-          "line": 69
-        },
-        {
-          "column": 0,
-          "label": "event OnEntityAction InWorldAction;",
-          "line": 74
-        },
-        {
-          "column": 0,
-          "label": "void RegisterHotKey(string hotkeyCode, string name, GlKeys key, HotkeyType type = HotkeyType.CharacterControls, bool altPressed = false, bool ctrlPressed = false, bool shiftPressed = false);",
-          "line": 107
-        },
-        {
-          "column": 0,
-          "label": "void SetHotKeyHandler(string hotkeyCode, ActionConsumable<KeyCombination> handler);",
-          "line": 126
-        },
-        {
-          "column": 0,
-          "label": "HotKey GetHotKeyByCode(string toggleKeyCombinationCode);",
-          "line": 135
-        },
-        {
-          "column": 0,
-          "label": "bool IsHotKeyPressed(string hotKeyCode);",
-          "line": 137
-        },
-        {
-          "column": 0,
-          "label": "bool IsHotKeyPressed(HotKey hotKey);",
-          "line": 139
-        }
-      ]
-    },
-    {
-      "path": "VSEssentials/Vintagestory/GameContent/IInteractable.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public interface IInteractable",
-          "line": 4
-        },
-        {
-          "column": 0,
-          "label": "bool OnBlockInteractStart(IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel, ref EnumHandling handling);",
-          "line": 6
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryAPI/Vintagestory/API/Common/ILogger.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "void Debug(string message);",
-          "line": 93
-        },
-        {
-          "column": 0,
-          "label": "void Notification(string message);",
-          "line": 103
-        },
-        {
-          "column": 0,
-          "label": "void Warning(string message);",
-          "line": 113
-        },
-        {
-          "column": 0,
-          "label": "void Warning(Exception e);",
-          "line": 118
-        },
-        {
-          "column": 0,
-          "label": "void Error(string message);",
-          "line": 128
-        },
-        {
-          "column": 0,
-          "label": "void Error(Exception e);",
-          "line": 133
-        },
-        {
-          "column": 0,
-          "label": "void Fatal(string message);",
-          "line": 143
-        },
-        {
-          "column": 0,
-          "label": "void Fatal(Exception e);",
-          "line": 148
-        },
-        {
-          "column": 0,
-          "label": "void Audit(string message);",
-          "line": 158
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryAPI/Vintagestory/API/Common/IPlayer.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public interface IPlayer",
-          "line": 7
-        },
-        {
-          "column": 0,
-          "label": "string PlayerName { get; }",
-          "line": 38
-        },
-        {
-          "column": 0,
-          "label": "EntityPlayer Entity { get; }",
-          "line": 53
-        },
-        {
-          "column": 0,
-          "label": "bool HasPrivilege(string privilegeCode);",
-          "line": 92
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryAPI/Vintagestory/API/Common/IPlayerInventoryManager.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public interface IPlayerInventoryManager",
-          "line": 9
-        },
-        {
-          "column": 0,
-          "label": "int ActiveHotbarSlotNumber { get; set; }",
-          "line": 19
-        },
-        {
-          "column": 0,
-          "label": "ItemSlot ActiveHotbarSlot { get; }",
-          "line": 25
-        },
-        {
-          "column": 0,
-          "label": "Dictionary<string, IInventory> Inventories { get; }",
-          "line": 31
-        },
-        {
-          "column": 0,
-          "label": "IEnumerable<InventoryBase> InventoriesOrdered { get; }",
-          "line": 36
-        },
-        {
-          "column": 0,
-          "label": "List<IInventory> OpenedInventories { get; }",
-          "line": 41
-        },
-        {
-          "column": 0,
-          "label": "ItemSlot CurrentHoveredSlot { get; set; }",
-          "line": 52
-        },
-        {
-          "column": 0,
-          "label": "IInventory GetInventory(string inventoryId);",
-          "line": 96
-        },
-        {
-          "column": 0,
-          "label": "IInventory GetHotbarInventory();",
-          "line": 109
-        },
-        {
-          "column": 0,
-          "label": "bool Find(System.Func<ItemSlot, bool> matcher);",
-          "line": 179
-        },
-        {
-          "column": 0,
-          "label": "void OnDeath();",
-          "line": 196
-        },
-        {
-          "column": 0,
-          "label": "void BroadcastHotbarSlot();",
-          "line": 208
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryLib/Vintagestory/Client/NoObf/InputAPI.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public void TriggerInWorldAction(EnumEntityAction action, bool on, ref EnumHandling handling)",
-          "line": 83
-        },
-        {
-          "column": 0,
-          "label": "Delegate[] invocationList = this.InWorldAction.GetInvocationList();",
-          "line": 89
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryLib/Vintagestory/Client/Gui/MainMenuAPI.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public class MainMenuAPI : ICoreClientAPI, ICoreAPI, ICoreAPICommon",
-          "line": 12
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryAPI/Vintagestory/API/Common/ModSystem.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public abstract class ModSystem",
-          "line": 11
-        },
-        {
-          "column": 0,
-          "label": "public Mod Mod { get; internal set; }",
-          "line": 16
-        },
-        {
-          "column": 0,
-          "label": "public virtual bool ShouldLoad(EnumAppSide forSide)",
-          "line": 31
-        },
-        {
-          "column": 0,
-          "label": "public virtual double ExecuteOrder()",
-          "line": 53
-        },
-        {
-          "column": 0,
-          "label": "public virtual void Start(ICoreAPI api)",
-          "line": 73
-        },
-        {
-          "column": 0,
-          "label": "public virtual void StartClientSide(ICoreClientAPI api)",
-          "line": 101
-        },
-        {
-          "column": 0,
-          "label": "public virtual void StartServerSide(ICoreServerAPI api)",
-          "line": 111
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryAPI/Vintagestory/API/Client/MouseWheelEventArgs.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public class MouseWheelEventArgs",
-          "line": 5
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryAPI/Vintagestory/API/Common/PlayerAnimationManager.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public class PlayerAnimationManager : AnimationManager",
-          "line": 8
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryLib/Vintagestory/Client/NoObf/PlayerCamera.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public class PlayerCamera : Camera",
-          "line": 6
-        },
-        {
-          "column": 0,
-          "label": "Update(dt, game.interesectionTester);",
-          "line": 66
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryAPI/Vintagestory/API/Common/PlayerHeadController.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public class PlayerHeadController : EntityHeadController",
-          "line": 6
-        },
-        {
-          "column": 0,
-          "label": "protected IPlayer player;",
-          "line": 8
-        },
-        {
-          "column": 0,
-          "label": "private EntityPlayer entityPlayer;",
-          "line": 10
-        },
-        {
-          "column": 0,
-          "label": "if (player.PlayerUID == capi.World.Player.PlayerUID && !capi.Settings.Bool[\"immersiveFpMode\"] && cameraMode != 0)",
-          "line": 104
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryLib/Vintagestory/Client/ScreenManager.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public class ScreenManager : KeyEventHandler, MouseEventHandler, NewFrameHandler",
-          "line": 21
-        },
-        {
-          "column": 0,
-          "label": "public static GuiComposerManager GuiComposers;",
-          "line": 25
-        },
-        {
-          "column": 0,
-          "label": "public static ClientPlatformAbstract Platform;",
-          "line": 27
-        },
-        {
-          "column": 0,
-          "label": "public static bool[] KeyboardKeyState = new bool[keysMax];",
-          "line": 35
-        },
-        {
-          "column": 0,
-          "label": "public static bool[] MouseButtonState = new bool[(int)Enum.GetValues(typeof(EnumMouseButton)).Cast<EnumMouseButton>().Max()];",
-          "line": 37
-        },
-        {
-          "column": 0,
-          "label": "public SessionManager sessionManager;",
-          "line": 47
-        },
-        {
-          "column": 0,
-          "label": "public static HotkeyManager hotkeyManager;",
-          "line": 49
-        },
-        {
-          "column": 0,
-          "label": "internal GuiComposer mainMenuComposer;",
-          "line": 77
-        },
-        {
-          "column": 0,
-          "label": "internal GuiCompositeMainMenuLeft guiMainmenuLeft;",
-          "line": 79
-        },
-        {
-          "column": 0,
-          "label": "public MainMenuAPI api;",
-          "line": 81
-        },
-        {
-          "column": 0,
-          "label": "CurrentScreen.OnMouseDown(e);",
-          "line": 820
-        },
-        {
-          "column": 0,
-          "label": "Platform.MouseGrabbed = false;",
-          "line": 893
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryLib/Vintagestory/Client/MaxObf/SessionManager.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public class SessionManager",
-          "line": 15
-        },
-        {
-          "column": 0,
-          "label": "public void GetPlayerSkin(string playerUid, Action<byte[]> OnGetComplete)",
-          "line": 131
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryLib/Vintagestory/Common/SettingsBase.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public abstract class SettingsBase : SettingsBaseNoObf, ISettings",
-          "line": 10
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryLib/Vintagestory/Client/NoObf/SystemMouseInWorldInteractions.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public class SystemMouseInWorldInteractions : ClientSystem",
-          "line": 10
-        },
-        {
-          "column": 0,
-          "label": "public void OnFinalizeFrame(float dt)",
-          "line": 69
-        },
-        {
-          "column": 0,
-          "label": "if (game.MouseGrabbed || game.mouseWorldInteractAnyway || game.player.worlddata.AreaSelectionMode)",
-          "line": 74
-        },
-        {
-          "column": 0,
-          "label": "private void OnGameTick(float dt)",
-          "line": 96
-        },
-        {
-          "column": 0,
-          "label": "if (!game.MouseGrabbed && !game.mouseWorldInteractAnyway)",
-          "line": 111
-        },
-        {
-          "column": 0,
-          "label": "if (!game.MouseGrabbed)",
-          "line": 281
-        },
-        {
-          "column": 0,
-          "label": "game.RayTraceForSelection(ray, ref game.EntityPlayer.BlockSelection, ref game.EntityPlayer.EntitySelection, bfilter, efilter);",
-          "line": 289
-        },
-        {
-          "column": 0,
-          "label": "game.RayTraceForSelection(game.player, ref game.EntityPlayer.BlockSelection, ref game.EntityPlayer.EntitySelection, bfilter, efilter);",
-          "line": 293
-        },
-        {
-          "column": 0,
-          "label": "private void HandleMouseInteractionsNoBlockSelected(float dt)",
-          "line": 309
-        },
-        {
-          "column": 0,
-          "label": "game.EntitySelection.Entity.OnInteract(game.EntityPlayer, game.player.inventoryMgr.ActiveHotbarSlot, esel.HitPosition, EnumInteractMode.Interact);",
-          "line": 350
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryLib/Vintagestory/Client/NoObf/SystemPlayerControl.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "controls.Sneak = game.KeyboardState[sneakKey] && allMovementCaptured;",
-          "line": 85
-        },
-        {
-          "column": 0,
-          "label": "controls.ShiftKey = game.KeyboardState[shiftKey];",
-          "line": 89
-        }
-      ]
-    },
-    {
-      "path": "VintagestoryLib/Vintagestory/Client/NoObf/SystemRenderAim.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public class SystemRenderAim : ClientSystem",
-          "line": 8
-        },
-        {
-          "column": 0,
-          "label": "if (game.MouseGrabbed)",
-          "line": 30
-        },
-        {
-          "column": 0,
-          "label": "DrawAim(game);",
-          "line": 32
-        },
-        {
-          "column": 0,
-          "label": "if (game.MainCamera.CameraMode != 0 || game.Player.WorldData.CurrentGameMode == EnumGameMode.Spectator)",
-          "line": 38
-        }
-      ]
-    },
-    {
-      "path": "VSCreativeMod/Vintagestory/ServerMods/WorldEdit/WorldEditClientHandler.cs",
-      "bookmarks": [
-        {
-          "column": 0,
-          "label": "public class WorldEditClientHandler",
-          "line": 13
-        }
-      ]
-    }
-  ]
+	"files": [
+		{
+			"path": "VintagestoryLib/Vintagestory/Common/AssetManager.cs",
+			"bookmarks": [
+				{
+					"line": 10,
+					"column": 0,
+					"label": "public class AssetManager : IAssetManager"
+				},
+				{
+					"line": 12,
+					"column": 0,
+					"label": "private EnumAppSide side;"
+				}
+			]
+		},
+		{
+			"path": "VintagestoryAPI/Vintagestory/API/Common/BlockBehavior.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public abstract class BlockBehavior : CollectibleBehavior",
+					"line": 12
+				}
+			]
+		},
+		{
+			"path": "VSSurvivalMod/Vintagestory/GameContent/BlockBehaviorContainer.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public override bool OnBlockInteractStart(IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel, ref EnumHandling handling)",
+					"line": 15
+				}
+			]
+		},
+		{
+			"path": "VintagestoryAPI/Vintagestory/API/Common/BlockEntity.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public abstract class BlockEntity",
+					"line": 15
+				}
+			]
+		},
+		{
+			"path": "VintagestoryAPI/Vintagestory/API/Common/BlockEntityBehavior.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public abstract class BlockEntityBehavior",
+					"line": 13
+				}
+			]
+		},
+		{
+			"path": "VSSurvivalMod/Vintagestory/GameContent/BlockEntityFirepit.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public class BlockEntityFirepit : BlockEntityOpenableContainer, IHeatSource, IFirePit, ITemperatureSensitive",
+					"line": 12
+				}
+			]
+		},
+		{
+			"path": "VSSurvivalMod/Vintagestory/GameContent/BlockEntityOpenableContainer.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public abstract bool OnPlayerRightClick(IPlayer byPlayer, BlockSelection blockSel);",
+					"line": 22
+				}
+			]
+		},
+		{
+			"path": "VintagestoryLib/Vintagestory/Client/NoObf/Camera.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public class Camera",
+					"line": 8
+				},
+				{
+					"column": 0,
+					"label": "internal void Update(float deltaTime, AABBIntersectionTest intersectionTester)",
+					"line": 114
+				},
+				{
+					"column": 0,
+					"label": "IClientWorldAccessor cworld = intersectionTester.bsTester as IClientWorldAccessor;",
+					"line": 129
+				},
+				{
+					"column": 0,
+					"label": "return lookatFp(plr, camEyePosIn);",
+					"line": 172
+				}
+			]
+		},
+		{
+			"path": "VintagestoryLib/Vintagestory/Client/NoObf/ClientMain.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public sealed class ClientMain : GameMain, IWorldIntersectionSupplier, IClientWorldAccessor, IWorldAccessor",
+					"line": 22
+				},
+				{
+					"column": 0,
+					"label": "public void UpdateFreeMouse()",
+					"line": 2059
+				}
+			]
+		},
+		{
+			"path": "VintagestoryLib/Vintagestory/Client/NoObf/ClientPlatformAbstract.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public abstract class ClientPlatformAbstract",
+					"line": 13
+				},
+				{
+					"column": 0,
+					"label": "public abstract Size2i ScreenSize { get; }",
+					"line": 19
+				},
+				{
+					"column": 0,
+					"label": "public abstract Size2i WindowSize { get; }",
+					"line": 21
+				},
+				{
+					"column": 0,
+					"label": "public abstract bool IsFocused { get; }",
+					"line": 25
+				},
+				{
+					"column": 0,
+					"label": "public abstract AssetManager AssetManager { get; }",
+					"line": 33
+				},
+				{
+					"column": 0,
+					"label": "public abstract ILogger Logger { get; }",
+					"line": 35
+				},
+				{
+					"column": 0,
+					"label": "public abstract int CpuCoreCount { get; }",
+					"line": 39
+				},
+				{
+					"column": 0,
+					"label": "public abstract bool MouseGrabbed { get; set; }",
+					"line": 48
+				},
+				{
+					"column": 0,
+					"label": "public abstract string CurrentMouseCursor { get; protected set; }",
+					"line": 50
+				},
+				{
+					"column": 0,
+					"label": "public abstract IList<string> AvailableAudioDevices { get; }",
+					"line": 56
+				},
+				{
+					"column": 0,
+					"label": "public abstract string CurrentAudioDevice { get; set; }",
+					"line": 58
+				},
+				{
+					"column": 0,
+					"label": "public abstract bool IsServerRunning { get; set; }",
+					"line": 64
+				},
+				{
+					"column": 0,
+					"label": "public abstract bool IsGamePaused { get; }",
+					"line": 66
+				},
+				{
+					"column": 0,
+					"label": "public abstract string SaveScreenshot(string path = null, string filename = null, bool withAlpha = false, bool flip = false, string metaDataStr = null);",
+					"line": 110
+				},
+				{
+					"column": 0,
+					"label": "public abstract BitmapRef GrabScreenshot(bool withAlpha = false, bool scale = false);",
+					"line": 112
+				},
+				{
+					"column": 0,
+					"label": "public abstract BitmapRef GrabScreenshot(int width, int height, bool scaleScreenshot, bool flip, bool withAlpha = false);",
+					"line": 114
+				},
+				{
+					"column": 0,
+					"label": "public abstract string GetGameVersion();",
+					"line": 124
+				},
+				{
+					"column": 0,
+					"label": "public abstract MouseEvent CreateMouseEvent(EnumMouseButton button);",
+					"line": 155
+				},
+				{
+					"column": 0,
+					"label": "public abstract void SetGamePausedState(bool paused);",
+					"line": 293
+				}
+			]
+		},
+		{
+			"path": "VintagestoryLib/Vintagestory/Client/NoObf/ClientPlatformWindows.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public sealed class ClientPlatformWindows : ClientPlatformAbstract",
+					"line": 29
+				},
+				{
+					"column": 0,
+					"label": "mouseEventHandler.OnMouseDown(args);",
+					"line": 3198
+				},
+				{
+					"column": 0,
+					"label": "keyEventHandler.OnKeyPress(new KeyEvent",
+					"line": 3216
+				},
+				{
+					"column": 0,
+					"label": "keyEventHandler.OnKeyDown(args);",
+					"line": 3245
+				},
+				{
+					"column": 0,
+					"label": "keyEventHandler.OnKeyUp(args);",
+					"line": 3268
+				},
+				{
+					"column": 0,
+					"label": "return new MouseEvent((int)mouseX, (int)mouseY, button, 0);",
+					"line": 3274
+				}
+			]
+		},
+		{
+			"path": "VintagestoryLib/Vintagestory/Client/NoObf/ClientPlayer.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public class ClientPlayer : IClientPlayer, IPlayer",
+					"line": 13
+				}
+			]
+		},
+		{
+			"path": "VintagestoryLib/Vintagestory/Client/NoObf/ClientSettings.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public class ClientSettings : SettingsBase",
+					"line": 12
+				},
+				{
+					"column": 0,
+					"label": "public static Dictionary<string, Vec2i> DialogPositions",
+					"line": 24
+				},
+				{
+					"column": 0,
+					"label": "public static Dictionary<string, KeyCombination> KeyMapping",
+					"line": 37
+				},
+				{
+					"column": 0,
+					"label": "public static bool ToggleSprint",
+					"line": 230
+				},
+				{
+					"column": 0,
+					"label": "public static bool SeparateCtrl",
+					"line": 242
+				},
+				{
+					"column": 0,
+					"label": "public static string PlayerName",
+					"line": 470
+				},
+				{
+					"column": 0,
+					"label": "public static string Entitlements",
+					"line": 482
+				},
+				{
+					"column": 0,
+					"label": "public static string SettingsVersion",
+					"line": 494
+				},
+				{
+					"column": 0,
+					"label": "public static bool DeveloperMode",
+					"line": 602
+				},
+				{
+					"column": 0,
+					"label": "public static bool PauseGameOnLostFocus",
+					"line": 711
+				},
+				{
+					"column": 0,
+					"label": "public static int GameWindowMode",
+					"line": 747
+				},
+				{
+					"column": 0,
+					"label": "public static int MusicFrequency",
+					"line": 831
+				},
+				{
+					"column": 0,
+					"label": "public static int ScreenWidth",
+					"line": 891
+				},
+				{
+					"column": 0,
+					"label": "public static int ScreenHeight",
+					"line": 903
+				},
+				{
+					"column": 0,
+					"label": "public static List<string> ModPaths",
+					"line": 1371
+				},
+				{
+					"column": 0,
+					"label": "public static bool ImmersiveMouseMode",
+					"line": 1647
+				}
+			]
+		},
+		{
+			"path": "VintagestoryLib/Vintagestory/Client/NoObf/ClientSystem.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public abstract class ClientSystem",
+					"line": 6
+				}
+			]
+		},
+		{
+			"path": "VintagestoryLib/Vintagestory/Client/NoObf/ClientWorldMap.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public sealed class ClientWorldMap : WorldMap, IChunkProvider, ILandClaimAPI",
+					"line": 14
+				}
+			]
+		},
+		{
+			"path": "VintagestoryLib/Vintagestory/Client/NoObf/ClientWorldPlayerData.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public class ClientWorldPlayerData : IWorldPlayerData",
+					"line": 7
+				}
+			]
+		},
+		{
+			"path": "VintagestoryAPI/Vintagestory/API/Client/ConfigItem.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public class ConfigItem",
+					"line": 5
+				}
+			]
+		},
+		{
+			"path": "VintagestoryLib/Vintagestory/Common/CreativeTab.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public class CreativeTab",
+					"line": 7
+				}
+			]
+		},
+		{
+			"path": "VintagestoryLib/Vintagestory/Client/NoObf/DrawWorldInteractionUtil.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public class DrawWorldInteractionUtil",
+					"line": 9
+				}
+			]
+		},
+		{
+			"path": "VintagestoryAPI/Vintagestory/API/Common/EntityAgent.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public override void OnGameTick(float dt)",
+					"line": 480
+				},
+				{
+					"column": 0,
+					"label": "CurrentControls =",
+					"line": 496
+				}
+			]
+		},
+		{
+			"path": "VintagestoryAPI/Vintagestory/API/Common/EntityControls.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public class EntityControls",
+					"line": 11
+				},
+				{
+					"column": 0,
+					"label": "public bool IsStepping;",
+					"line": 65
+				},
+				{
+					"column": 0,
+					"label": "public float MovespeedMultiplier = 1f;",
+					"line": 92
+				},
+				{
+					"column": 0,
+					"label": "public virtual bool Jump",
+					"line": 181
+				},
+				{
+					"column": 0,
+					"label": "public virtual bool Sneak",
+					"line": 197
+				},
+				{
+					"column": 0,
+					"label": "public virtual bool Sprint",
+					"line": 243
+				},
+				{
+					"column": 0,
+					"label": "protected virtual void AttemptToggleAction(EnumEntityAction action, bool on)",
+					"line": 359
+				}
+			]
+		},
+		{
+			"path": "VintagestoryAPI/Vintagestory/API/Common/EntityHeadController.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public class EntityHeadController",
+					"line": 5
+				},
+				{
+					"column": 0,
+					"label": "protected EntityAgent entity;",
+					"line": 19
+				},
+				{
+					"column": 0,
+					"label": "public virtual void OnFrame(float dt)",
+					"line": 43
+				},
+				{
+					"column": 0,
+					"label": "if (entity.Pos.HeadYaw != 0f || entity.Pos.HeadPitch != 0f)",
+					"line": 53
+				},
+				{
+					"column": 0,
+					"label": "if (obj2 != null && obj2.ImmersiveFpMode)",
+					"line": 64
+				}
+			]
+		},
+		{
+			"path": "VintagestoryAPI/Vintagestory/API/Common/EntityPlayer.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public class EntityPlayer : EntityHumanoid, IPettable",
+					"line": 15
+				},
+				{
+					"column": 0,
+					"label": "private PlayerAnimationManager selfFpAnimManager;",
+					"line": 86
+				},
+				{
+					"column": 0,
+					"label": "public bool PrevFrameCanStandUp;",
+					"line": 96
+				},
+				{
+					"column": 0,
+					"label": "if (tesselating || player == null || (player != null && (player.WorldData?.CurrentGameMode).GetValueOrDefault() == EnumGameMode.Spectator))",
+					"line": 447
+				},
+				{
+					"column": 0,
+					"label": "else if ((controls.Sneak || !PrevFrameCanStandUp) && !controls.IsClimbing && !controls.IsFlying)",
+					"line": 479
+				},
+				{
+					"column": 0,
+					"label": "else if (!Alive)",
+					"line": 484
+				},
+				{
+					"column": 0,
+					"label": "if (!servercontrols.Sneak && !PrevFrameCanStandUp)",
+					"line": 675
+				},
+				{
+					"column": 0,
+					"label": "servercontrols.Sneak = true;",
+					"line": 677
+				},
+				{
+					"column": 0,
+					"label": "servercontrols.Sneak = false;",
+					"line": 679
+				},
+				{
+					"column": 0,
+					"label": "private void updateLocalEyePosImmersiveFpMode(float dt)",
+					"line": 697
+				},
+				{
+					"column": 0,
+					"label": "if (Api.Side == EnumAppSide.Server || AnimManager.Animator == null || ((Api as ICoreClientAPI).Render.CameraType != 0 && Alive))",
+					"line": 699
+				},
+				{
+					"column": 0,
+					"label": "public void HandleSeraphHandAnimations(float dt)",
+					"line": 750
+				}
+			]
+		},
+		{
+			"path": "VSSurvivalMod/Vintagestory/GameContent/EyesOverlayRenderer.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public class EyesOverlayRenderer : IRenderer, IDisposable",
+					"line": 6
+				},
+				{
+					"column": 0,
+					"label": "public void OnRenderFrame(float deltaTime, EnumRenderStage stage)",
+					"line": 46
+				},
+				{
+					"column": 0,
+					"label": "if (!(Level <= 0f) && capi.World.Player.CameraMode == EnumCameraMode.FirstPerson)",
+					"line": 48
+				}
+			]
+		},
+		{
+			"path": "VSSurvivalMod/Vintagestory/GameContent/FirepitContentsRenderer.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public FirepitContentsRenderer(ICoreClientAPI api, BlockPos pos)",
+					"line": 44
+				},
+				{
+					"column": 0,
+					"label": "public void SetContents(ItemStack newContentStack, ModelTransform transform)",
+					"line": 72
+				}
+			]
+		},
+		{
+			"path": "VintagestoryLib/Vintagestory/Common/GameMain.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public abstract class GameMain : IWorldIntersectionSupplier",
+					"line": 9
+				},
+				{
+					"column": 0,
+					"label": "public AABBIntersectionTest interesectionTester;",
+					"line": 11
+				},
+				{
+					"column": 0,
+					"label": "interesectionTester = new AABBIntersectionTest(this);",
+					"line": 52
+				},
+				{
+					"column": 0,
+					"label": "public void RayTraceForSelection(Vec3d fromPos, float pitch, float yaw, float range, ref BlockSelection blockSelection, ref EntitySelection entitySelection, BlockFilter bfilter = null, EntityFilter efilter = null)",
+					"line": 111
+				},
+				{
+					"column": 0,
+					"label": "Vec3d pos = player.Entity.Pos.XYZ.Add(player.Entity.LocalEyePos);",
+					"line": 174
+				}
+			]
+		},
+		{
+			"path": "VintagestoryAPI/Vintagestory/API/Client/GlKeyNames.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public static class GlKeyNames",
+					"line": 5
+				}
+			]
+		},
+		{
+			"path": "VintagestoryAPI/Vintagestory/API/Client/GlKeys.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public enum GlKeys",
+					"line": 8
+				}
+			]
+		},
+		{
+			"path": "VintagestoryAPI/Vintagestory/API/Client/GuiComposer.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public class GuiComposer : IDisposable",
+					"line": 15
+				},
+				{
+					"column": 0,
+					"label": "public GuiComposer Compose(bool focusFirstElement = true)",
+					"line": 356
+				}
+			]
+		},
+		{
+			"path": "VintagestoryAPI/Vintagestory/API/Client/GuiComposerHelpers.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public static class GuiComposerHelpers",
+					"line": 6
+				}
+			]
+		},
+		{
+			"path": "VintagestoryLib/Vintagestory/Client/NoObf/GuiComposerManager.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public class GuiComposerManager : IGuiComposerManager",
+					"line": 7
+				}
+			]
+		},
+		{
+			"path": "VintagestoryLib/Vintagestory/Client/NoObf/GuiCompositeSettings.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public class GuiCompositeSettings : GuiComposite",
+					"line": 15
+				},
+				{
+					"column": 0,
+					"label": ".AddConfigList(keycontrolItems, OnKeyControlItemClick, CairoFont.WhiteSmallText().WithFontSize(18f), configListBounds, \"configlist\")",
+					"line": 888
+				},
+				{
+					"column": 0,
+					"label": "private void OnKeyControlItemClick(int index, int indexNoTitle)",
+					"line": 1063
+				},
+				{
+					"column": 0,
+					"label": "private void CompletedCapture()",
+					"line": 1121
+				},
+				{
+					"column": 0,
+					"label": "GuiComposer guiComposer = composer.AddStaticText(Lang.Get(\"setting-name-immersivemousemode\"), CairoFont.WhiteSmallishText(), leftText = leftText.BelowCopy(0.0, 4.0)).AddHoverText(Lang.Get(\"setting-hover-immersivemousemode\"), CairoFont.WhiteSmallText(), 250, leftText.FlatCopy().WithFixedHeight(25.0)).AddSwitch(onImmersiveMouseModeChanged, rightSlider = rightSlider.BelowCopy(0.0, 17.0), \"immersiveMouseModeSwitch\")",
+					"line": 1414
+				},
+				{
+					"column": 0,
+					"label": "private void onImmersiveMouseModeChanged(bool on)",
+					"line": 1496
+				}
+			]
+		},
+		{
+			"path": "VintagestoryAPI/Vintagestory/API/Client/GuiDialog.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public abstract class GuiDialog : IDisposable",
+					"line": 9
+				}
+			]
+		},
+		{
+			"path": "VintagestoryAPI/Vintagestory/API/Client/GuiDialogBlockEntity.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "if (capi.Settings.Bool[\"immersiveMouseMode\"])",
+					"line": 92
+				}
+			]
+		},
+		{
+			"path": "VSSurvivalMod/Vintagestory/GameContent/GuiDialogBlockEntityRecipeSelector.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "if (capi.Settings.Bool[\"immersiveMouseMode\"])",
+					"line": 135
+				}
+			]
+		},
+		{
+			"path": "VintagestoryLib/Vintagestory/Client/NoObf/GuiDialogDead.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public class GuiDialogDead : GuiDialog",
+					"line": 6
+				}
+			]
+		},
+		{
+			"path": "VintagestoryLib/Vintagestory/Client/NoObf/GuiDialogEscapeMenu.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "internal class GuiDialogEscapeMenu : GuiDialog, IGameSettingsHandler, IGuiCompositeHandler",
+					"line": 9
+				}
+			]
+		},
+		{
+			"path": "VSSurvivalMod/Vintagestory/GameContent/GuiDialogHandbook.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public class GuiDialogHandbook : GuiDialog",
+					"line": 10
+				}
+			]
+		},
+		{
+			"path": "VintagestoryLib/Vintagestory/Client/NoObf/GuiDialogInventory.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public class GuiDialogInventory : GuiDialog",
+					"line": 10
+				},
+				{
+					"column": 0,
+					"label": "private void ComposeCreativeInvDialog()",
+					"line": 99
+				},
+				{
+					"column": 0,
+					"label": "foreach (CreativeTab tab2 in unorderedTabs)",
+					"line": 124
+				},
+				{
+					"column": 0,
+					"label": ".AddVerticalTabs(tabsL, tabBoundsL, OnTabClicked, \"verticalTabs\");",
+					"line": 177
+				}
+			]
+		},
+		{
+			"path": "VintagestoryLib/Vintagestory/Client/NoObf/GuiDialogMacroEditor.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "internal class GuiDialogMacroEditor : GuiDialog",
+					"line": 9
+				}
+			]
+		},
+		{
+			"path": "VintagestoryLib/Vintagestory/Client/NoObf/GuiDialogSelboxEditor.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "internal class GuiDialogSelboxEditor : GuiDialog",
+					"line": 12
+				}
+			]
+		},
+		{
+			"path": "VintagestoryLib/Vintagestory/Client/NoObf/GuiDialogTickProfiler.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public class GuiDialogTickProfiler : GuiDialog",
+					"line": 11
+				}
+			]
+		},
+		{
+			"path": "VintagestoryLib/Vintagestory/Client/NoObf/GuiDialogToolMode.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public class GuiDialogToolMode : GuiDialog",
+					"line": 11
+				},
+				{
+					"column": 0,
+					"label": "if (capi.Settings.Bool[\"immersiveMouseMode\"] && blockSele?.Position != null)",
+					"line": 165
+				}
+			]
+		},
+		{
+			"path": "VintagestoryAPI/Vintagestory/API/Client/GuiElement.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public abstract class GuiElement : IDisposable",
+					"line": 10
+				}
+			]
+		},
+		{
+			"path": "VintagestoryAPI/Vintagestory/API/Client/GuiElementConfigList.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public class GuiElementConfigList : GuiElementTextBase",
+					"line": 10
+				},
+				{
+					"column": 0,
+					"label": "public List<ConfigItem> items;",
+					"line": 18
+				},
+				{
+					"column": 0,
+					"label": "public void Refresh()",
+					"line": 93
+				},
+				{
+					"column": 0,
+					"label": "public override void OnMouseDownOnElement(ICoreClientAPI api, MouseEvent args)",
+					"line": 148
+				}
+			]
+		},
+		{
+			"path": "VintagestoryAPI/Vintagestory/API/Client/GuiElementItemSlotGrid.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public class GuiElementItemSlotGrid : GuiElementItemSlotGridBase",
+					"line": 8
+				}
+			]
+		},
+		{
+			"path": "VintagestoryAPI/Vintagestory/API/Client/GuiElementItemSlotGridBase.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public abstract class GuiElementItemSlotGridBase : GuiElement",
+					"line": 15
+				}
+			]
+		},
+		{
+			"path": "VintagestoryAPI/Vintagestory/API/Client/GuiElementItemSlotGridExcl.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public class GuiElementItemSlotGridExcl : GuiElementItemSlotGridBase",
+					"line": 10
+				}
+			]
+		},
+		{
+			"path": "VintagestoryAPI/Vintagestory/API/Client/GuiElementScrollbar.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public class GuiElementScrollbar : GuiElementControl",
+					"line": 6
+				}
+			]
+		},
+		{
+			"path": "VintagestoryLib/Vintagestory/Client/NoObf/GuiManager.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public class GuiManager : ClientSystem",
+					"line": 7
+				},
+				{
+					"column": 0,
+					"label": "public void RegisterDefaultDialogs()",
+					"line": 47
+				},
+				{
+					"column": 0,
+					"label": "if (DEBUG_PRINT_INTERACTIONS)",
+					"line": 331
+				},
+				{
+					"column": 0,
+					"label": "public override void OnMouseWheel(MouseWheelEventArgs args)",
+					"line": 408
+				}
+			]
+		},
+		{
+			"path": "VintagestoryLib/GuiScreen.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public class GuiScreen",
+					"line": 5
+				}
+			]
+		},
+		{
+			"path": "VintagestoryAPI/Vintagestory/API/Client/HotKey.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public class HotKey",
+					"line": 4
+				},
+				{
+					"column": 0,
+					"label": "public bool IsGlobalHotkey;",
+					"line": 9
+				}
+			]
+		},
+		{
+			"path": "VintagestoryLib/Vintagestory/Client/HotkeyCapturer.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public class HotkeyCapturer",
+					"line": 5
+				}
+			]
+		},
+		{
+			"path": "VintagestoryLib/Vintagestory/Client/HotkeyManager.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public class HotkeyManager",
+					"line": 9
+				},
+				{
+					"column": 0,
+					"label": "public OrderedDictionary<string, HotKey> HotKeys = new OrderedDictionary<string, HotKey>();",
+					"line": 11
+				},
+				{
+					"column": 0,
+					"label": "public bool ShouldTriggerHotkeys = true;",
+					"line": 13
+				},
+				{
+					"column": 0,
+					"label": "public virtual void RegisterDefaultHotKeys()",
+					"line": 17
+				},
+				{
+					"column": 0,
+					"label": "public bool TriggerHotKey(KeyEvent keyEventargs, IWorldAccessor world, IPlayer player, bool allowCharacterControls, bool keyUp)",
+					"line": 120
+				},
+				{
+					"column": 0,
+					"label": "private bool TriggerHotKey(KeyEvent keyEventargs, IWorldAccessor world, IPlayer player, bool allowCharacterControls, bool isGlobal, bool fallBack, bool keyup)",
+					"line": 133
+				},
+				{
+					"column": 0,
+					"label": "public bool IsHotKeyRegistered(KeyCombination keyCombMap)",
+					"line": 164
+				},
+				{
+					"column": 0,
+					"label": "public HotKey GetHotKeyByCode(string code)",
+					"line": 174
+				},
+				{
+					"column": 0,
+					"label": "public void RemoveHotKey(string code)",
+					"line": 183
+				},
+				{
+					"column": 0,
+					"label": "public void RegisterHotKey(HotKey keyComb)",
+					"line": 188
+				},
+				{
+					"column": 0,
+					"label": "if (TriggerHotKey(",
+					"line": 304
+				}
+			]
+		},
+		{
+			"path": "VintagestoryAPI/Vintagestory/API/Client/HotkeyType.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public enum HotkeyType",
+					"line": 2
+				}
+			]
+		},
+		{
+			"path": "VSSurvivalMod/Vintagestory/Client/NoObf/HudBosshealthBars.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public class HudBosshealthBars : HudElement",
+					"line": 7
+				}
+			]
+		},
+		{
+			"path": "VintagestoryLib/Vintagestory/Client/NoObf/HudDropItem.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "internal class HudDropItem : HudElement",
+					"line": 5
+				},
+				{
+					"column": 0,
+					"label": "public override void OnMouseDown(MouseEvent args)",
+					"line": 22
+				},
+				{
+					"column": 0,
+					"label": "if (!guiDialog.IsOpened() || guiDialog is HudMouseTools)",
+					"line": 30
+				},
+				{
+					"column": 0,
+					"label": "foreach (GuiComposer value in guiDialog.Composers.Values)",
+					"line": 34
+				},
+				{
+					"column": 0,
+					"label": "if (value.Bounds.PointInside(args.X, args.Y))",
+					"line": 36
+				}
+			]
+		},
+		{
+			"path": "VintagestoryAPI/Vintagestory/API/Client/HudElement.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public abstract class HudElement : GuiDialog",
+					"line": 5
+				}
+			]
+		},
+		{
+			"path": "VintagestoryLib/Vintagestory/Client/NoObf/HudHotbar.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public class HudHotbar : HudElement",
+					"line": 12
+				}
+			]
+		},
+		{
+			"path": "VintagestoryLib/Vintagestory/Client/NoObf/HudMouseTools.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "curStackInfoBounds.WithFixedAlignmentOffset(",
+					"line": 78
+				},
+				{
+					"column": 0,
+					"label": "curStackInfoBounds.CalcWorldBounds();",
+					"line": 85
+				},
+				{
+					"column": 0,
+					"label": "public override bool IsOpened()",
+					"line": 131
+				},
+				{
+					"column": 0,
+					"label": "if (!capi.Input.MouseGrabbed)",
+					"line": 133
+				}
+			]
+		},
+		{
+			"path": "VSSurvivalMod/Vintagestory/GameContent/HudTutorial.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public class HudTutorial : HudElement",
+					"line": 4
+				}
+			]
+		},
+		{
+			"path": "VSCreativeMod/VSCreativeMod/HudWorldEditInputCapture.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public class HudWorldEditInputCapture : HudElement",
+					"line": 7
+				}
+			]
+		},
+		{
+			"path": "VintagestoryAPI/Vintagestory/API/Client/IClientEventAPI.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public interface IClientEventAPI : IEventAPI",
+					"line": 8
+				}
+			]
+		},
+		{
+			"path": "VintagestoryAPI/Vintagestory/API/Client/IClientPlayer.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public interface IClientPlayer : IPlayer",
+					"line": 7
+				}
+			]
+		},
+		{
+			"path": "VintagestoryAPI/Vintagestory/API/Client/IClientWorldAccessor.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public interface IClientWorldAccessor : IWorldAccessor",
+					"line": 10
+				},
+				{
+					"column": 0,
+					"label": "new IClientGameCalendar Calendar { get; }",
+					"line": 15
+				},
+				{
+					"column": 0,
+					"label": "IClientPlayer Player { get; }",
+					"line": 30
+				},
+				{
+					"column": 0,
+					"label": "Dictionary<long, Entity> LoadedEntities { get; }",
+					"line": 35
+				}
+			]
+		},
+		{
+			"path": "VintagestoryAPI/Vintagestory/API/Client/ICoreClientAPI.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public interface ICoreClientAPI : ICoreAPI, ICoreAPICommon",
+					"line": 9
+				}
+			]
+		},
+		{
+			"path": "VintagestoryAPI/Vintagestory/API/Common/IEventAPI.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public interface IEventAPI",
+					"line": 10
+				},
+				{
+					"column": 0,
+					"label": "event EntityDeathDelegate OnEntityDeath;",
+					"line": 32
+				},
+				{
+					"column": 0,
+					"label": "void PushEvent(string eventName, IAttribute data = null);",
+					"line": 74
+				},
+				{
+					"column": 0,
+					"label": "void RegisterEventBusListener(EventBusListenerDelegate OnEvent, double priority = 0.5, string filterByEventName = null);",
+					"line": 82
+				},
+				{
+					"column": 0,
+					"label": "long RegisterGameTickListener(Action<float> onGameTick, int millisecondInterval, int initialDelayOffsetMs = 0);",
+					"line": 91
+				},
+				{
+					"column": 0,
+					"label": "long RegisterCallback(Action<float> OnTimePassed, int millisecondDelay);",
+					"line": 120
+				},
+				{
+					"column": 0,
+					"label": "long RegisterCallback(Action<float> OnTimePassed, int millisecondDelay, bool permittedWhilePaused);",
+					"line": 130
+				},
+				{
+					"column": 0,
+					"label": "long RegisterCallback(Action<IWorldAccessor, BlockPos, float> OnTimePassed, BlockPos pos, int millisecondDelay);",
+					"line": 139
+				},
+				{
+					"column": 0,
+					"label": "void UnregisterCallback(long listenerId);",
+					"line": 145
+				},
+				{
+					"column": 0,
+					"label": "void UnregisterGameTickListener(long listenerId);",
+					"line": 151
+				}
+			]
+		},
+		{
+			"path": "VintagestoryAPI/Vintagestory/API/Client/IGuiAPI.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public interface IGuiAPI",
+					"line": 7
+				}
+			]
+		},
+		{
+			"path": "VintagestoryAPI/Vintagestory/API/Client/IInputAPI.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public interface IInputAPI",
+					"line": 8
+				},
+				{
+					"column": 0,
+					"label": "string ClipboardText { get; set; }",
+					"line": 13
+				},
+				{
+					"column": 0,
+					"label": "bool[] KeyboardKeyState { get; }",
+					"line": 23
+				},
+				{
+					"column": 0,
+					"label": "int MouseX { get; }",
+					"line": 38
+				},
+				{
+					"column": 0,
+					"label": "int MouseY { get; }",
+					"line": 43
+				},
+				{
+					"column": 0,
+					"label": "bool MouseWorldInteractAnyway { get; set; }",
+					"line": 58
+				},
+				{
+					"column": 0,
+					"label": "bool MouseGrabbed { get; }",
+					"line": 64
+				},
+				{
+					"column": 0,
+					"label": "OrderedDictionary<string, HotKey> HotKeys { get; }",
+					"line": 69
+				},
+				{
+					"column": 0,
+					"label": "event OnEntityAction InWorldAction;",
+					"line": 74
+				},
+				{
+					"column": 0,
+					"label": "void RegisterHotKey(string hotkeyCode, string name, GlKeys key, HotkeyType type = HotkeyType.CharacterControls, bool altPressed = false, bool ctrlPressed = false, bool shiftPressed = false);",
+					"line": 107
+				},
+				{
+					"column": 0,
+					"label": "void SetHotKeyHandler(string hotkeyCode, ActionConsumable<KeyCombination> handler);",
+					"line": 126
+				},
+				{
+					"column": 0,
+					"label": "HotKey GetHotKeyByCode(string toggleKeyCombinationCode);",
+					"line": 135
+				},
+				{
+					"column": 0,
+					"label": "bool IsHotKeyPressed(string hotKeyCode);",
+					"line": 137
+				},
+				{
+					"column": 0,
+					"label": "bool IsHotKeyPressed(HotKey hotKey);",
+					"line": 139
+				}
+			]
+		},
+		{
+			"path": "VSEssentials/Vintagestory/GameContent/IInteractable.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public interface IInteractable",
+					"line": 4
+				},
+				{
+					"column": 0,
+					"label": "bool OnBlockInteractStart(IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel, ref EnumHandling handling);",
+					"line": 6
+				}
+			]
+		},
+		{
+			"path": "VintagestoryAPI/Vintagestory/API/Common/ILogger.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "void Debug(string message);",
+					"line": 93
+				},
+				{
+					"column": 0,
+					"label": "void Notification(string message);",
+					"line": 103
+				},
+				{
+					"column": 0,
+					"label": "void Warning(string message);",
+					"line": 113
+				},
+				{
+					"column": 0,
+					"label": "void Warning(Exception e);",
+					"line": 118
+				},
+				{
+					"column": 0,
+					"label": "void Error(string message);",
+					"line": 128
+				},
+				{
+					"column": 0,
+					"label": "void Error(Exception e);",
+					"line": 133
+				},
+				{
+					"column": 0,
+					"label": "void Fatal(string message);",
+					"line": 143
+				},
+				{
+					"column": 0,
+					"label": "void Fatal(Exception e);",
+					"line": 148
+				},
+				{
+					"column": 0,
+					"label": "void Audit(string message);",
+					"line": 158
+				}
+			]
+		},
+		{
+			"path": "VintagestoryAPI/Vintagestory/API/Common/IPlayer.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public interface IPlayer",
+					"line": 7
+				},
+				{
+					"column": 0,
+					"label": "string PlayerName { get; }",
+					"line": 38
+				},
+				{
+					"column": 0,
+					"label": "EntityPlayer Entity { get; }",
+					"line": 53
+				},
+				{
+					"column": 0,
+					"label": "bool HasPrivilege(string privilegeCode);",
+					"line": 92
+				}
+			]
+		},
+		{
+			"path": "VintagestoryAPI/Vintagestory/API/Common/IPlayerInventoryManager.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public interface IPlayerInventoryManager",
+					"line": 9
+				},
+				{
+					"column": 0,
+					"label": "int ActiveHotbarSlotNumber { get; set; }",
+					"line": 19
+				},
+				{
+					"column": 0,
+					"label": "ItemSlot ActiveHotbarSlot { get; }",
+					"line": 25
+				},
+				{
+					"column": 0,
+					"label": "Dictionary<string, IInventory> Inventories { get; }",
+					"line": 31
+				},
+				{
+					"column": 0,
+					"label": "IEnumerable<InventoryBase> InventoriesOrdered { get; }",
+					"line": 36
+				},
+				{
+					"column": 0,
+					"label": "List<IInventory> OpenedInventories { get; }",
+					"line": 41
+				},
+				{
+					"column": 0,
+					"label": "ItemSlot CurrentHoveredSlot { get; set; }",
+					"line": 52
+				},
+				{
+					"column": 0,
+					"label": "IInventory GetInventory(string inventoryId);",
+					"line": 96
+				},
+				{
+					"column": 0,
+					"label": "IInventory GetHotbarInventory();",
+					"line": 109
+				},
+				{
+					"column": 0,
+					"label": "bool Find(System.Func<ItemSlot, bool> matcher);",
+					"line": 179
+				},
+				{
+					"column": 0,
+					"label": "void OnDeath();",
+					"line": 196
+				},
+				{
+					"column": 0,
+					"label": "void BroadcastHotbarSlot();",
+					"line": 208
+				}
+			]
+		},
+		{
+			"path": "VintagestoryLib/Vintagestory/Client/NoObf/InputAPI.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public void TriggerInWorldAction(EnumEntityAction action, bool on, ref EnumHandling handling)",
+					"line": 83
+				},
+				{
+					"column": 0,
+					"label": "Delegate[] invocationList = this.InWorldAction.GetInvocationList();",
+					"line": 89
+				}
+			]
+		},
+		{
+			"path": "VintagestoryLib/Vintagestory/Client/Gui/MainMenuAPI.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public class MainMenuAPI : ICoreClientAPI, ICoreAPI, ICoreAPICommon",
+					"line": 12
+				}
+			]
+		},
+		{
+			"path": "VintagestoryAPI/Vintagestory/API/Common/ModSystem.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public abstract class ModSystem",
+					"line": 11
+				},
+				{
+					"column": 0,
+					"label": "public Mod Mod { get; internal set; }",
+					"line": 16
+				},
+				{
+					"column": 0,
+					"label": "public virtual bool ShouldLoad(EnumAppSide forSide)",
+					"line": 31
+				},
+				{
+					"column": 0,
+					"label": "public virtual double ExecuteOrder()",
+					"line": 53
+				},
+				{
+					"column": 0,
+					"label": "public virtual void Start(ICoreAPI api)",
+					"line": 73
+				},
+				{
+					"column": 0,
+					"label": "public virtual void StartClientSide(ICoreClientAPI api)",
+					"line": 101
+				},
+				{
+					"column": 0,
+					"label": "public virtual void StartServerSide(ICoreServerAPI api)",
+					"line": 111
+				}
+			]
+		},
+		{
+			"path": "VintagestoryAPI/Vintagestory/API/Client/MouseWheelEventArgs.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public class MouseWheelEventArgs",
+					"line": 5
+				}
+			]
+		},
+		{
+			"path": "VintagestoryAPI/Vintagestory/API/Common/PlayerAnimationManager.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public class PlayerAnimationManager : AnimationManager",
+					"line": 8
+				}
+			]
+		},
+		{
+			"path": "VintagestoryLib/Vintagestory/Client/NoObf/PlayerCamera.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public class PlayerCamera : Camera",
+					"line": 6
+				},
+				{
+					"column": 0,
+					"label": "Update(dt, game.interesectionTester);",
+					"line": 66
+				}
+			]
+		},
+		{
+			"path": "VintagestoryAPI/Vintagestory/API/Common/PlayerHeadController.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public class PlayerHeadController : EntityHeadController",
+					"line": 6
+				},
+				{
+					"column": 0,
+					"label": "protected IPlayer player;",
+					"line": 8
+				},
+				{
+					"column": 0,
+					"label": "private EntityPlayer entityPlayer;",
+					"line": 10
+				},
+				{
+					"column": 0,
+					"label": "if (player.PlayerUID == capi.World.Player.PlayerUID && !capi.Settings.Bool[\"immersiveFpMode\"] && cameraMode != 0)",
+					"line": 104
+				}
+			]
+		},
+		{
+			"path": "VintagestoryLib/Vintagestory/Client/ScreenManager.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public class ScreenManager : KeyEventHandler, MouseEventHandler, NewFrameHandler",
+					"line": 21
+				},
+				{
+					"column": 0,
+					"label": "public static GuiComposerManager GuiComposers;",
+					"line": 25
+				},
+				{
+					"column": 0,
+					"label": "public static ClientPlatformAbstract Platform;",
+					"line": 27
+				},
+				{
+					"column": 0,
+					"label": "public static bool[] KeyboardKeyState = new bool[keysMax];",
+					"line": 35
+				},
+				{
+					"column": 0,
+					"label": "public static bool[] MouseButtonState = new bool[(int)Enum.GetValues(typeof(EnumMouseButton)).Cast<EnumMouseButton>().Max()];",
+					"line": 37
+				},
+				{
+					"column": 0,
+					"label": "public SessionManager sessionManager;",
+					"line": 47
+				},
+				{
+					"column": 0,
+					"label": "public static HotkeyManager hotkeyManager;",
+					"line": 49
+				},
+				{
+					"column": 0,
+					"label": "internal GuiComposer mainMenuComposer;",
+					"line": 77
+				},
+				{
+					"column": 0,
+					"label": "internal GuiCompositeMainMenuLeft guiMainmenuLeft;",
+					"line": 79
+				},
+				{
+					"column": 0,
+					"label": "public MainMenuAPI api;",
+					"line": 81
+				},
+				{
+					"column": 0,
+					"label": "CurrentScreen.OnMouseDown(e);",
+					"line": 820
+				},
+				{
+					"column": 0,
+					"label": "Platform.MouseGrabbed = false;",
+					"line": 893
+				}
+			]
+		},
+		{
+			"path": "VintagestoryLib/Vintagestory/Client/MaxObf/SessionManager.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public class SessionManager",
+					"line": 15
+				},
+				{
+					"column": 0,
+					"label": "public void GetPlayerSkin(string playerUid, Action<byte[]> OnGetComplete)",
+					"line": 131
+				}
+			]
+		},
+		{
+			"path": "VintagestoryLib/Vintagestory/Common/SettingsBase.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public abstract class SettingsBase : SettingsBaseNoObf, ISettings",
+					"line": 10
+				}
+			]
+		},
+		{
+			"path": "VintagestoryLib/Vintagestory/Client/NoObf/SystemMouseInWorldInteractions.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public class SystemMouseInWorldInteractions : ClientSystem",
+					"line": 10
+				},
+				{
+					"column": 0,
+					"label": "public void OnFinalizeFrame(float dt)",
+					"line": 69
+				},
+				{
+					"column": 0,
+					"label": "if (game.MouseGrabbed || game.mouseWorldInteractAnyway || game.player.worlddata.AreaSelectionMode)",
+					"line": 74
+				},
+				{
+					"column": 0,
+					"label": "private void OnGameTick(float dt)",
+					"line": 96
+				},
+				{
+					"column": 0,
+					"label": "if (!game.MouseGrabbed && !game.mouseWorldInteractAnyway)",
+					"line": 111
+				},
+				{
+					"column": 0,
+					"label": "if (!game.MouseGrabbed)",
+					"line": 281
+				},
+				{
+					"column": 0,
+					"label": "game.RayTraceForSelection(ray, ref game.EntityPlayer.BlockSelection, ref game.EntityPlayer.EntitySelection, bfilter, efilter);",
+					"line": 289
+				},
+				{
+					"column": 0,
+					"label": "game.RayTraceForSelection(game.player, ref game.EntityPlayer.BlockSelection, ref game.EntityPlayer.EntitySelection, bfilter, efilter);",
+					"line": 293
+				},
+				{
+					"column": 0,
+					"label": "private void HandleMouseInteractionsNoBlockSelected(float dt)",
+					"line": 309
+				},
+				{
+					"column": 0,
+					"label": "game.EntitySelection.Entity.OnInteract(game.EntityPlayer, game.player.inventoryMgr.ActiveHotbarSlot, esel.HitPosition, EnumInteractMode.Interact);",
+					"line": 350
+				}
+			]
+		},
+		{
+			"path": "VintagestoryLib/Vintagestory/Client/NoObf/SystemPlayerControl.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "controls.Sneak = game.KeyboardState[sneakKey] && allMovementCaptured;",
+					"line": 85
+				},
+				{
+					"column": 0,
+					"label": "controls.ShiftKey = game.KeyboardState[shiftKey];",
+					"line": 89
+				}
+			]
+		},
+		{
+			"path": "VintagestoryLib/Vintagestory/Client/NoObf/SystemRenderAim.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public class SystemRenderAim : ClientSystem",
+					"line": 8
+				},
+				{
+					"column": 0,
+					"label": "if (game.MouseGrabbed)",
+					"line": 30
+				},
+				{
+					"column": 0,
+					"label": "DrawAim(game);",
+					"line": 32
+				},
+				{
+					"column": 0,
+					"label": "if (game.MainCamera.CameraMode != 0 || game.Player.WorldData.CurrentGameMode == EnumGameMode.Spectator)",
+					"line": 38
+				}
+			]
+		},
+		{
+			"path": "VSCreativeMod/Vintagestory/ServerMods/WorldEdit/WorldEditClientHandler.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public class WorldEditClientHandler",
+					"line": 13
+				}
+			]
+		},
+		{
+			"path": "VintagestoryAPI/Vintagestory/API/Client/ElementBounds.cs",
+			"bookmarks": [
+				{
+					"line": 12,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 198,
+					"column": 0,
+					"label": ""
+				}
+			]
+		}
+	]
 }

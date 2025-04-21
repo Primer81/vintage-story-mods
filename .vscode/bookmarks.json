@@ -1,3 +1,49 @@
 {
-  "files": []
+	"files": [
+		{
+			"path": "../../../../../Users/gwlar/AppData/Local/Temp/MetadataAsSource/6af5ecf7b0cf4004a9f58453dd6001e8/DecompilationMetadataAsSourceFileProvider/3955cbd83962490a8ad23f777684292b/AABBIntersectionTest.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "",
+					"line": 34
+				}
+			]
+		},
+		{
+			"path": "../../../../../Users/gwlar/AppData/Local/Temp/MetadataAsSource/6af5ecf7b0cf4004a9f58453dd6001e8/DecompilationMetadataAsSourceFileProvider/3a5d71fbc23847af82d54b184268211d/ElementBounds.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "",
+					"line": 210
+				}
+			]
+		},
+		{
+			"path": "../../../../../Users/gwlar/AppData/Local/Temp/MetadataAsSource/6af5ecf7b0cf4004a9f58453dd6001e8/DecompilationMetadataAsSourceFileProvider/547c51210553420d9feb2b732515213c/IWorldIntersectionSupplier.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "",
+					"line": 10
+				}
+			]
+		},
+		{
+			"path": "../../../vscode/1.96.2/_install/data/extensions/alefragnani.bookmarks-13.5.0/dist/extension-node.js",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "",
+					"line": 1849
+				},
+				{
+					"column": 0,
+					"label": "",
+					"line": 3645
+				}
+			]
+		}
+	]
 }
