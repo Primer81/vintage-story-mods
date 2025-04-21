@@ -42,5 +42,11 @@ sort:
 		$(call sort_json_file,--sort-object-keys -r -k path -x "[^/\\\\\\\\]*$$" "$(project_bookmarks)") $(newline)\
 	)
 
+.PHONY: label
+label:
+	$(foreach project_bookmarks,$(call rwildcard,.,.vscode/bookmarks.json),\
+		$(call update_bookmark_labels,"$(project_bookmarks)") $(newline)\
+	)
+
 .PHONY: backup
 backup: vintage-story-save-backup-all

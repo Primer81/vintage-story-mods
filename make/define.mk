@@ -9,6 +9,7 @@ export PYTHON?=python
 SCRIPT_DIR=scripts
 SCRIPT_UPDATE_INI_PY=$(SCRIPT_DIR)/update-ini.py
 SCRIPT_SORT_JSON_PY=$(SCRIPT_DIR)/sort-json.py
+SCRIPT_UPDATE_BOOKMARK_LABELS_PY=$(SCRIPT_DIR)/update-bookmark-labels.py
 
 ###############################################################################
 # Common Definitions
@@ -28,6 +29,7 @@ define zip
 endef
 write_ini=$(PYTHON) $(SCRIPT_UPDATE_INI_PY) "$(1)" $(2) $(3) $(4)
 sort_json_file=$(PYTHON) $(SCRIPT_SORT_JSON_PY) $(1)
+update_bookmark_labels=$(PYTHON) $(SCRIPT_UPDATE_BOOKMARK_LABELS_PY) $(1)
 lowercase=$(shell echo $(1) | tr A-Z a-z)
 now=$(shell date +%Y%m%dT%H%M%S)
 rwildcard=$(strip \
