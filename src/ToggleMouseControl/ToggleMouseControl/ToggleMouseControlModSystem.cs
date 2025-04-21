@@ -422,21 +422,34 @@ public static class GuiDialogPatcher
     }
 
     public static bool Before_GuiDialog_OnMouseMove(
-        GuiDialog __instance, ref MouseEvent args)
+        GuiDialog __instance,
+        ref MouseEvent args,
+        GuiDialog.DlgComposers ___Composers)
     {
         bool runOriginal = ShouldRunOriginalGuiDialogInputHandlers(__instance);
         if (runOriginal == false)
         {
             runOriginal = true;
-            // TODO: Make this relative to bounds of dialog
-            args = new MouseEvent(
-                (int)(-1000000),
-                (int)(-1000000),
-                0,
-                0,
-                EnumMouseButton.None,
-                0
-            );
+            {
+                int guiDialogOriginX = 0;
+                int guiDialogOriginY = 0;
+                GuiComposer[] composers = ___Composers.ToArray();
+                for (int i = 0; i < composers.Length; i++)
+                {
+                    guiDialogOriginX = Math.Min(
+                        guiDialogOriginX, (int)composers[i].Bounds.absFixedX);
+                    guiDialogOriginY = Math.Min(
+                        guiDialogOriginY, (int)composers[i].Bounds.absFixedY);
+                }
+                args = new MouseEvent(
+                    (int)(guiDialogOriginX),
+                    (int)(guiDialogOriginY),
+                    0,
+                    0,
+                    EnumMouseButton.None,
+                    0
+                );
+            }
         }
         return runOriginal;
     }
