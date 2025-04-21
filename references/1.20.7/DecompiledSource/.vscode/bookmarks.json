@@ -4,14 +4,14 @@
 			"path": "VintagestoryLib/Vintagestory/Common/AssetManager.cs",
 			"bookmarks": [
 				{
+					"line": 10,
 					"column": 0,
-					"label": "",
-					"line": 10
+					"label": "public class AssetManager : IAssetManager"
 				},
 				{
+					"line": 12,
 					"column": 0,
-					"label": "",
-					"line": 12
+					"label": "private EnumAppSide side;"
 				}
 			]
 		},
@@ -72,6 +72,31 @@
 					"column": 0,
 					"label": "",
 					"line": 22
+				}
+			]
+		},
+		{
+			"path": "VintagestoryLib/Vintagestory/Client/NoObf/Camera.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "",
+					"line": 8
+				},
+				{
+					"column": 0,
+					"label": "",
+					"line": 114
+				},
+				{
+					"column": 0,
+					"label": "",
+					"line": 129
+				},
+				{
+					"column": 0,
+					"label": "",
+					"line": 172
 				}
 			]
 		},
@@ -187,6 +212,51 @@
 					"column": 0,
 					"label": "",
 					"line": 293
+				}
+			]
+		},
+		{
+			"path": "VintagestoryLib/Vintagestory/Client/NoObf/ClientPlatformWindows.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "",
+					"line": 29
+				},
+				{
+					"column": 0,
+					"label": "",
+					"line": 3198
+				},
+				{
+					"column": 0,
+					"label": "",
+					"line": 3216
+				},
+				{
+					"column": 0,
+					"label": "",
+					"line": 3245
+				},
+				{
+					"column": 0,
+					"label": "",
+					"line": 3268
+				},
+				{
+					"column": 0,
+					"label": "",
+					"line": 3274
+				}
+			]
+		},
+		{
+			"path": "VintagestoryLib/Vintagestory/Client/NoObf/ClientPlayer.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "",
+					"line": 13
 				}
 			]
 		},
@@ -316,6 +386,26 @@
 			]
 		},
 		{
+			"path": "VintagestoryLib/Vintagestory/Common/CreativeTab.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "",
+					"line": 7
+				}
+			]
+		},
+		{
+			"path": "VintagestoryLib/Vintagestory/Client/NoObf/DrawWorldInteractionUtil.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "",
+					"line": 9
+				}
+			]
+		},
+		{
 			"path": "VintagestoryAPI/Vintagestory/API/Common/EntityAgent.cs",
 			"bookmarks": [
 				{
@@ -371,17 +461,47 @@
 			]
 		},
 		{
+			"path": "VintagestoryAPI/Vintagestory/API/Common/EntityHeadController.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "",
+					"line": 5
+				},
+				{
+					"column": 0,
+					"label": "",
+					"line": 19
+				},
+				{
+					"column": 0,
+					"label": "",
+					"line": 43
+				},
+				{
+					"column": 0,
+					"label": "",
+					"line": 53
+				},
+				{
+					"column": 0,
+					"label": "",
+					"line": 64
+				}
+			]
+		},
+		{
 			"path": "VintagestoryAPI/Vintagestory/API/Common/EntityPlayer.cs",
 			"bookmarks": [
 				{
-					"line": 15,
 					"column": 0,
-					"label": ""
+					"label": "",
+					"line": 15
 				},
 				{
-					"line": 86,
 					"column": 0,
-					"label": ""
+					"label": "",
+					"line": 86
 				},
 				{
 					"column": 0,
@@ -419,19 +539,39 @@
 					"line": 679
 				},
 				{
-					"line": 697,
 					"column": 0,
-					"label": ""
+					"label": "",
+					"line": 697
 				},
 				{
-					"line": 699,
 					"column": 0,
-					"label": ""
+					"label": "",
+					"line": 699
 				},
 				{
 					"column": 0,
 					"label": "",
 					"line": 750
+				}
+			]
+		},
+		{
+			"path": "VSSurvivalMod/Vintagestory/GameContent/EyesOverlayRenderer.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "",
+					"line": 6
+				},
+				{
+					"column": 0,
+					"label": "",
+					"line": 46
+				},
+				{
+					"column": 0,
+					"label": "",
+					"line": 48
 				}
 			]
 		},
@@ -447,6 +587,36 @@
 					"column": 0,
 					"label": "",
 					"line": 72
+				}
+			]
+		},
+		{
+			"path": "VintagestoryLib/Vintagestory/Common/GameMain.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "",
+					"line": 9
+				},
+				{
+					"column": 0,
+					"label": "",
+					"line": 11
+				},
+				{
+					"column": 0,
+					"label": "",
+					"line": 52
+				},
+				{
+					"column": 0,
+					"label": "",
+					"line": 111
+				},
+				{
+					"column": 0,
+					"label": "",
+					"line": 174
 				}
 			]
 		},
@@ -467,6 +637,41 @@
 					"column": 0,
 					"label": "",
 					"line": 8
+				}
+			]
+		},
+		{
+			"path": "VintagestoryAPI/Vintagestory/API/Client/GuiComposer.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "",
+					"line": 15
+				},
+				{
+					"column": 0,
+					"label": "public GuiComposer Compose(bool focusFirstElement = true)",
+					"line": 356
+				}
+			]
+		},
+		{
+			"path": "VintagestoryAPI/Vintagestory/API/Client/GuiComposerHelpers.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "",
+					"line": 6
+				}
+			]
+		},
+		{
+			"path": "VintagestoryLib/Vintagestory/Client/NoObf/GuiComposerManager.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "",
+					"line": 7
 				}
 			]
 		},
@@ -572,6 +777,21 @@
 					"column": 0,
 					"label": "",
 					"line": 10
+				},
+				{
+					"column": 0,
+					"label": "",
+					"line": 99
+				},
+				{
+					"column": 0,
+					"label": "",
+					"line": 124
+				},
+				{
+					"column": 0,
+					"label": "",
+					"line": 177
 				}
 			]
 		},
@@ -602,6 +822,21 @@
 					"column": 0,
 					"label": "",
 					"line": 11
+				}
+			]
+		},
+		{
+			"path": "VintagestoryLib/Vintagestory/Client/NoObf/GuiDialogToolMode.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "",
+					"line": 11
+				},
+				{
+					"column": 0,
+					"label": "",
+					"line": 165
 				}
 			]
 		},
@@ -641,6 +876,36 @@
 			]
 		},
 		{
+			"path": "VintagestoryAPI/Vintagestory/API/Client/GuiElementItemSlotGrid.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "",
+					"line": 8
+				}
+			]
+		},
+		{
+			"path": "VintagestoryAPI/Vintagestory/API/Client/GuiElementItemSlotGridBase.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "",
+					"line": 15
+				}
+			]
+		},
+		{
+			"path": "VintagestoryAPI/Vintagestory/API/Client/GuiElementItemSlotGridExcl.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "",
+					"line": 10
+				}
+			]
+		},
+		{
 			"path": "VintagestoryAPI/Vintagestory/API/Client/GuiElementScrollbar.cs",
 			"bookmarks": [
 				{
@@ -659,9 +924,9 @@
 					"line": 7
 				},
 				{
-					"line": 47,
 					"column": 0,
-					"label": ""
+					"label": "",
+					"line": 47
 				},
 				{
 					"column": 0,
@@ -669,9 +934,19 @@
 					"line": 331
 				},
 				{
-					"line": 408,
 					"column": 0,
-					"label": ""
+					"label": "",
+					"line": 408
+				}
+			]
+		},
+		{
+			"path": "VintagestoryLib/GuiScreen.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "",
+					"line": 5
 				}
 			]
 		},
@@ -781,6 +1056,36 @@
 			]
 		},
 		{
+			"path": "VintagestoryLib/Vintagestory/Client/NoObf/HudDropItem.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "",
+					"line": 5
+				},
+				{
+					"column": 0,
+					"label": "",
+					"line": 22
+				},
+				{
+					"column": 0,
+					"label": "",
+					"line": 30
+				},
+				{
+					"column": 0,
+					"label": "",
+					"line": 34
+				},
+				{
+					"column": 0,
+					"label": "",
+					"line": 36
+				}
+			]
+		},
+		{
 			"path": "VintagestoryAPI/Vintagestory/API/Client/HudElement.cs",
 			"bookmarks": [
 				{
@@ -804,14 +1109,14 @@
 			"path": "VintagestoryLib/Vintagestory/Client/NoObf/HudMouseTools.cs",
 			"bookmarks": [
 				{
-					"line": 78,
 					"column": 0,
-					"label": ""
+					"label": "",
+					"line": 78
 				},
 				{
-					"line": 85,
 					"column": 0,
-					"label": ""
+					"label": "",
+					"line": 85
 				},
 				{
 					"column": 0,
@@ -832,6 +1137,16 @@
 					"column": 0,
 					"label": "",
 					"line": 4
+				}
+			]
+		},
+		{
+			"path": "VSCreativeMod/VSCreativeMod/HudWorldEditInputCapture.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "",
+					"line": 7
 				}
 			]
 		},
@@ -1261,6 +1576,56 @@
 			]
 		},
 		{
+			"path": "VintagestoryAPI/Vintagestory/API/Common/PlayerAnimationManager.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "",
+					"line": 8
+				}
+			]
+		},
+		{
+			"path": "VintagestoryLib/Vintagestory/Client/NoObf/PlayerCamera.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "",
+					"line": 6
+				},
+				{
+					"column": 0,
+					"label": "",
+					"line": 66
+				}
+			]
+		},
+		{
+			"path": "VintagestoryAPI/Vintagestory/API/Common/PlayerHeadController.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "",
+					"line": 6
+				},
+				{
+					"column": 0,
+					"label": "",
+					"line": 8
+				},
+				{
+					"column": 0,
+					"label": "",
+					"line": 10
+				},
+				{
+					"column": 0,
+					"label": "",
+					"line": 104
+				}
+			]
+		},
+		{
 			"path": "VintagestoryLib/Vintagestory/Client/ScreenManager.cs",
 			"bookmarks": [
 				{
@@ -1314,14 +1679,14 @@
 					"line": 81
 				},
 				{
-					"line": 820,
 					"column": 0,
-					"label": ""
+					"label": "",
+					"line": 820
 				},
 				{
-					"line": 893,
 					"column": 0,
-					"label": ""
+					"label": "",
+					"line": 893
 				}
 			]
 		},
@@ -1379,19 +1744,19 @@
 					"line": 111
 				},
 				{
-					"line": 281,
 					"column": 0,
-					"label": ""
+					"label": "",
+					"line": 281
 				},
 				{
-					"line": 289,
 					"column": 0,
-					"label": ""
+					"label": "",
+					"line": 289
 				},
 				{
-					"line": 293,
 					"column": 0,
-					"label": ""
+					"label": "",
+					"line": 293
 				},
 				{
 					"column": 0,
@@ -1421,112 +1786,27 @@
 			]
 		},
 		{
-			"path": "VintagestoryAPI/Vintagestory/API/Common/PlayerHeadController.cs",
+			"path": "VintagestoryLib/Vintagestory/Client/NoObf/SystemRenderAim.cs",
 			"bookmarks": [
 				{
-					"line": 6,
 					"column": 0,
-					"label": ""
+					"label": "",
+					"line": 8
 				},
 				{
-					"line": 8,
 					"column": 0,
-					"label": ""
+					"label": "",
+					"line": 30
 				},
 				{
-					"line": 10,
 					"column": 0,
-					"label": ""
+					"label": "",
+					"line": 32
 				},
 				{
-					"line": 104,
 					"column": 0,
-					"label": ""
-				}
-			]
-		},
-		{
-			"path": "VintagestoryAPI/Vintagestory/API/Common/EntityHeadController.cs",
-			"bookmarks": [
-				{
-					"line": 5,
-					"column": 0,
-					"label": ""
-				},
-				{
-					"line": 19,
-					"column": 0,
-					"label": ""
-				},
-				{
-					"line": 43,
-					"column": 0,
-					"label": ""
-				},
-				{
-					"line": 53,
-					"column": 0,
-					"label": ""
-				},
-				{
-					"line": 64,
-					"column": 0,
-					"label": ""
-				}
-			]
-		},
-		{
-			"path": "VintagestoryLib/Vintagestory/Client/NoObf/HudDropItem.cs",
-			"bookmarks": [
-				{
-					"line": 5,
-					"column": 0,
-					"label": ""
-				},
-				{
-					"line": 22,
-					"column": 0,
-					"label": ""
-				},
-				{
-					"line": 30,
-					"column": 0,
-					"label": ""
-				},
-				{
-					"line": 34,
-					"column": 0,
-					"label": ""
-				},
-				{
-					"line": 36,
-					"column": 0,
-					"label": ""
-				}
-			]
-		},
-		{
-			"path": "VintagestoryLib/Vintagestory/Client/NoObf/GuiDialogToolMode.cs",
-			"bookmarks": [
-				{
-					"line": 11,
-					"column": 0,
-					"label": ""
-				},
-				{
-					"line": 165,
-					"column": 0,
-					"label": ""
-				}
-			]
-		},
-		{
-			"path": "VSCreativeMod/VSCreativeMod/HudWorldEditInputCapture.cs",
-			"bookmarks": [
-				{
-					"line": 7,
-					"column": 0,
-					"label": ""
+					"label": "",
+					"line": 38
 				}
 			]
 		},
@@ -1534,199 +1814,9 @@
 			"path": "VSCreativeMod/Vintagestory/ServerMods/WorldEdit/WorldEditClientHandler.cs",
 			"bookmarks": [
 				{
-					"line": 13,
 					"column": 0,
-					"label": ""
-				}
-			]
-		},
-		{
-			"path": "VintagestoryLib/Vintagestory/Client/NoObf/DrawWorldInteractionUtil.cs",
-			"bookmarks": [
-				{
-					"line": 9,
-					"column": 0,
-					"label": ""
-				}
-			]
-		},
-		{
-			"path": "VintagestoryLib/Vintagestory/Client/NoObf/ClientPlayer.cs",
-			"bookmarks": [
-				{
-					"line": 13,
-					"column": 0,
-					"label": ""
-				}
-			]
-		},
-		{
-			"path": "VintagestoryLib/Vintagestory/Common/GameMain.cs",
-			"bookmarks": [
-				{
-					"line": 9,
-					"column": 0,
-					"label": ""
-				},
-				{
-					"line": 11,
-					"column": 0,
-					"label": ""
-				},
-				{
-					"line": 52,
-					"column": 0,
-					"label": ""
-				},
-				{
-					"line": 111,
-					"column": 0,
-					"label": ""
-				},
-				{
-					"line": 174,
-					"column": 0,
-					"label": ""
-				}
-			]
-		},
-		{
-			"path": "VintagestoryLib/Vintagestory/Client/NoObf/Camera.cs",
-			"bookmarks": [
-				{
-					"line": 8,
-					"column": 0,
-					"label": ""
-				},
-				{
-					"line": 114,
-					"column": 0,
-					"label": ""
-				},
-				{
-					"line": 129,
-					"column": 0,
-					"label": ""
-				},
-				{
-					"line": 172,
-					"column": 0,
-					"label": ""
-				}
-			]
-		},
-		{
-			"path": "VintagestoryLib/Vintagestory/Client/NoObf/PlayerCamera.cs",
-			"bookmarks": [
-				{
-					"line": 6,
-					"column": 0,
-					"label": ""
-				},
-				{
-					"line": 66,
-					"column": 0,
-					"label": ""
-				}
-			]
-		},
-		{
-			"path": "VSSurvivalMod/Vintagestory/GameContent/EyesOverlayRenderer.cs",
-			"bookmarks": [
-				{
-					"line": 6,
-					"column": 0,
-					"label": ""
-				},
-				{
-					"line": 46,
-					"column": 0,
-					"label": ""
-				},
-				{
-					"line": 48,
-					"column": 0,
-					"label": ""
-				}
-			]
-		},
-		{
-			"path": "VintagestoryAPI/Vintagestory/API/Common/PlayerAnimationManager.cs",
-			"bookmarks": [
-				{
-					"line": 8,
-					"column": 0,
-					"label": ""
-				}
-			]
-		},
-		{
-			"path": "VintagestoryLib/Vintagestory/Client/NoObf/SystemRenderAim.cs",
-			"bookmarks": [
-				{
-					"line": 8,
-					"column": 0,
-					"label": ""
-				},
-				{
-					"line": 30,
-					"column": 0,
-					"label": ""
-				},
-				{
-					"line": 32,
-					"column": 0,
-					"label": ""
-				},
-				{
-					"line": 38,
-					"column": 0,
-					"label": ""
-				}
-			]
-		},
-		{
-			"path": "VintagestoryLib/Vintagestory/Client/NoObf/ClientPlatformWindows.cs",
-			"bookmarks": [
-				{
-					"line": 29,
-					"column": 0,
-					"label": ""
-				},
-				{
-					"line": 3198,
-					"column": 0,
-					"label": ""
-				},
-				{
-					"line": 3216,
-					"column": 0,
-					"label": ""
-				},
-				{
-					"line": 3245,
-					"column": 0,
-					"label": ""
-				},
-				{
-					"line": 3268,
-					"column": 0,
-					"label": ""
-				},
-				{
-					"line": 3274,
-					"column": 0,
-					"label": ""
-				}
-			]
-		},
-		{
-			"path": "VintagestoryLib/GuiScreen.cs",
-			"bookmarks": [
-				{
-					"line": 5,
-					"column": 0,
-					"label": ""
+					"label": "",
+					"line": 13
 				}
 			]
 		}
