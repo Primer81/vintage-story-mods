@@ -53,6 +53,7 @@ public class ToggleMouseControlModSystem : ModSystem
             harmony = new Harmony(Mod.Info.ModID);
             harmony.PatchCategory(Mod.Info.ModID);
             GuiDialogPatcher.PatchAllImplementations(harmony);
+            GuiElementPatcher.PatchAllImplementations(harmony);
         }
     }
 
@@ -172,6 +173,152 @@ internal static class Patches
         ToggleMouseControlModSystem.DialogsOpenCountPrev = dialogsOpenCount;
         return false;
     }
+
+    public static void PatchAllImplementationsOfMethodWithPrefixAndPostfix(
+        Harmony harmony,
+        Type methodParentClass,
+        string method,
+        Type thisClassType,
+        string prefix,
+        string postfix)
+    {
+        // Get the parent method
+        MethodInfo parentMethod = AccessTools.Method(methodParentClass, method);
+        if (parentMethod == null)
+        {
+            ToggleMouseControlModSystem.ClientApi.Logger.Error(
+                $"Failed to find parent method {methodParentClass.Name}.{method}");
+            return;
+        }
+
+        // Patch the parent method
+        harmony.Patch(
+            parentMethod,
+            prefix: new HarmonyMethod(AccessTools.Method(thisClassType, prefix)),
+            postfix: new HarmonyMethod(AccessTools.Method(thisClassType, postfix))
+        );
+
+        // Find all types in all loaded assemblies
+        List<Type> derivedTypes = new List<Type>();
+        foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
+        {
+            try
+            {
+                foreach (Type type in assembly.GetTypes())
+                {
+                    // Skip generic type definitions (we'll handle constructed generic types)
+                    if (type.IsGenericTypeDefinition)
+                    {
+                        continue;
+                    }
+
+                    // Check if this type derives from GuiElement
+                    if (type != methodParentClass && methodParentClass.IsAssignableFrom(type))
+                    {
+                        derivedTypes.Add(type);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ToggleMouseControlModSystem.ClientApi.Logger.Error(
+                    $"Error scanning assembly {assembly.FullName}: {ex.Message}");
+            }
+        }
+
+        // Patch all derived implementations that override the method
+        foreach (Type derivedType in derivedTypes)
+        {
+            try
+            {
+                if (derivedType.IsGenericType)
+                {
+                    PatchDerivedGenericTypeWithPrefixAndPostfix(
+                        harmony, derivedType, parentMethod, method,
+                        thisClassType, prefix, postfix);
+                }
+                else
+                {
+                    PatchDerivedTypeWithPrefixAndPostfix(
+                        harmony, derivedType, parentMethod, method,
+                        thisClassType, prefix, postfix);
+                }
+            }
+            catch (Exception ex)
+            {
+                ToggleMouseControlModSystem.ClientApi.Logger.Error(
+                    $"Error patching type {derivedType.FullName}: {ex.Message}");
+            }
+        }
+    }
+
+    private static void PatchDerivedTypeWithPrefixAndPostfix(
+        Harmony harmony,
+        Type derivedType, MethodInfo parentMethod,
+        string method,
+        Type thisClassType,
+        string prefix,
+        string postfix)
+    {
+        // Look for the method in this specific type (not inherited)
+        MethodInfo overriddenMethod = derivedType.GetMethod(method,
+            BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly);
+
+        if (overriddenMethod != null)
+        {
+            Console.WriteLine($"Patching overridden method in {derivedType.Name}");
+            harmony.Patch(
+                overriddenMethod,
+                prefix: new HarmonyMethod(AccessTools.Method(thisClassType, prefix)),
+                postfix: new HarmonyMethod(AccessTools.Method(thisClassType, postfix))
+            );
+        }
+    }
+
+    private static void PatchDerivedGenericTypeWithPrefixAndPostfix(
+        Harmony harmony,
+        Type derivedType, MethodInfo parentMethod,
+        string method,
+        Type thisClassType,
+        string prefix,
+        string postfix)
+    {
+        // Look for the method in this specific type (not inherited)
+        MethodInfo overriddenMethod = null;
+
+        // Try to get the method directly first
+        overriddenMethod = derivedType.GetMethod(method,
+            BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly);
+
+        // If not found, try to get it through reflection with parameter matching
+        if (overriddenMethod == null && parentMethod.GetParameters().Length > 0)
+        {
+            // Get parameter types from the parent method
+            Type[] paramTypes = parentMethod.GetParameters()
+                .Select(p => p.ParameterType)
+                .ToArray();
+
+            // Try to find the method with matching parameters
+            overriddenMethod = derivedType.GetMethod(
+                method,
+                BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly,
+                null,
+                paramTypes,
+                null
+            );
+        }
+
+        if (overriddenMethod != null)
+        {
+            ToggleMouseControlModSystem.ClientApi.Logger.Debug(
+                $"Patching generic overridden method in {derivedType.Name}");
+            harmony.Patch(
+                overriddenMethod,
+                prefix: new HarmonyMethod(AccessTools.Method(thisClassType, prefix)),
+                postfix: new HarmonyMethod(AccessTools.Method(thisClassType, postfix))
+            );
+        }
+    }
 }
 
 public static class GuiDialogPatcher
@@ -181,9 +328,25 @@ public static class GuiDialogPatcher
         bool runOriginal = true;
         if (ToggleMouseControlModSystem.ClientApi.Input.MouseGrabbed == true)
         {
-            runOriginal =
-                (__instance is HudHotbar && false) ||
-                (__instance.PrefersUngrabbedMouse == false);
+            if (__instance != null)
+            {
+                // Use reflection to safely check the property
+                try
+                {
+                    var prefersUngrabbedMouse = AccessTools.Property(
+                        typeof(GuiDialog), "PrefersUngrabbedMouse")?
+                        .GetValue(__instance);
+                    runOriginal =
+                        (prefersUngrabbedMouse == null) ||
+                        ((bool)prefersUngrabbedMouse == false);
+                }
+                catch
+                {
+                    // Property access failed, default to true
+                    ToggleMouseControlModSystem.ClientApi?.Logger?.Debug(
+                        "Failed to access PrefersUngrabbedMouse property");
+                }
+            }
         }
         return runOriginal;
     }
@@ -223,19 +386,6 @@ public static class GuiDialogPatcher
             nameof(GuiDialog.OnKeyUp),
             nameof(Before_GuiDialog_OnKeyUp),
             nameof(After_GuiDialog_OnKeyUp));
-
-        // PatchAllImplementationsOfMethodWithPrefixAndPostfix(
-        //     harmony,
-        //     typeof(GuiDialog),
-        //     nameof(GuiDialog.CaptureAllInputs),
-        //     nameof(Before_GuiDialog_CaptureAllInputs),
-        //     nameof(After_GuiDialog_CaptureAllInputs));
-        // PatchAllImplementationsOfMethodWithPrefixAndPostfix(
-        //     harmony,
-        //     typeof(GuiDialog),
-        //     nameof(GuiDialog.CaptureRawMouse),
-        //     nameof(Before_GuiDialog_CaptureRawMouse),
-        //     nameof(After_GuiDialog_CaptureRawMouse));
     }
 
     public static void PatchAllImplementationsOfMethodWithPrefixAndPostfix(
@@ -247,63 +397,13 @@ public static class GuiDialogPatcher
     {
         // This class's type!
         Type thisClassType = MethodBase.GetCurrentMethod().DeclaringType;
-
-        // Get the parent method
-        MethodInfo parentMethod = AccessTools.Method(methodParentClass, method);
-        if (parentMethod == null)
-        {
-            ToggleMouseControlModSystem.ClientApi.Logger.Error(
-                $"Failed to find parent method {methodParentClass.Name}.{method}");
-            return;
-        }
-
-        // Patch the parent method
-        harmony.Patch(
-            parentMethod,
-            prefix: new HarmonyMethod(AccessTools.Method(thisClassType, prefix)),
-            postfix: new HarmonyMethod(AccessTools.Method(thisClassType, postfix))
-        );
-
-        // Find all types in all loaded assemblies
-        List<Type> derivedTypes = new List<Type>();
-        foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
-        {
-            try
-            {
-                foreach (Type type in assembly.GetTypes())
-                {
-                    // Check if this type derives from GuiDialog
-                    if (type != typeof(GuiDialog) && typeof(GuiDialog).IsAssignableFrom(type))
-                    {
-                        derivedTypes.Add(type);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                ToggleMouseControlModSystem.ClientApi.Logger.Error(
-                    $"Error scanning assembly {assembly.FullName}: {ex.Message}");
-            }
-        }
-
-        // Patch all derived implementations that override the method
-        foreach (Type derivedType in derivedTypes)
-        {
-            // Look for the method in this specific type (not inherited)
-            MethodInfo overriddenMethod = derivedType.GetMethod(method,
-                BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly);
-
-            if (overriddenMethod != null)
-            {
-                ToggleMouseControlModSystem.ClientApi.Logger.Debug(
-                    $"Patching overridden method in {derivedType.Name}");
-                harmony.Patch(
-                    overriddenMethod,
-                    prefix: new HarmonyMethod(AccessTools.Method(thisClassType, prefix)),
-                    postfix: new HarmonyMethod(AccessTools.Method(thisClassType, postfix))
-                );
-            }
-        }
+        Patches.PatchAllImplementationsOfMethodWithPrefixAndPostfix(
+            harmony,
+            methodParentClass,
+            method,
+            thisClassType,
+            prefix,
+            postfix);
     }
 
     public static bool Before_GuiDialog_OnMouseWheel(
@@ -350,34 +450,67 @@ public static class GuiDialogPatcher
     public static void After_GuiDialog_OnKeyUp(GuiDialog __instance)
     {
     }
+}
 
-    // public static bool Before_GuiDialog_CaptureAllInputs(
-    //     GuiDialog __instance)
-    // {
-    //     bool runOriginal = true;
-    //     return runOriginal;
-    // }
+public static class GuiElementPatcher
+{
+    public static bool ShouldDisableGuiElementInputHandlers(GuiElement __instance)
+    {
+        bool disable = false;
+        if (ToggleMouseControlModSystem.ClientApi.Input.MouseGrabbed == true)
+        {
+            disable = true;
+        }
+        return disable;
+    }
 
-    // public static void After_GuiDialog_CaptureAllInputs(GuiDialog __instance, ref bool __result)
-    // {
-    //     if (ToggleMouseControlModSystem.ClientApi.Input.MouseGrabbed == true)
-    //     {
-    //         __result = __instance is HudHotbar && false;
-    //     }
-    // }
+    public static void PatchAllImplementations(Harmony harmony)
+    {
+        // Patch OnMouseMove
+        PatchAllImplementationsOfMethodWithPrefixAndPostfix(
+            harmony,
+            typeof(GuiElement),
+            nameof(GuiElement.OnMouseMove),
+            nameof(Before_GuiElement_OnMouseMove),
+            nameof(After_GuiElement_OnMouseMove));
+    }
 
-    // public static bool Before_GuiDialog_CaptureRawMouse(
-    //     GuiDialog __instance)
-    // {
-    //     bool runOriginal = true;
-    //     return runOriginal;
-    // }
+    public static void PatchAllImplementationsOfMethodWithPrefixAndPostfix(
+        Harmony harmony,
+        Type methodParentClass,
+        string method,
+        string prefix,
+        string postfix)
+    {
+        // This class's type!
+        Type thisClassType = MethodBase.GetCurrentMethod().DeclaringType;
+        Patches.PatchAllImplementationsOfMethodWithPrefixAndPostfix(
+            harmony,
+            methodParentClass,
+            method,
+            thisClassType,
+            prefix,
+            postfix);
+    }
 
-    // public static void After_GuiDialog_CaptureRawMouse(GuiDialog __instance, ref bool __result)
-    // {
-    //     if (ToggleMouseControlModSystem.ClientApi.Input.MouseGrabbed == true)
-    //     {
-    //         __result = __instance is HudHotbar && false;
-    //     }
-    // }
+    public static bool Before_GuiElement_OnMouseMove(
+        GuiElement __instance, ref MouseEvent args)
+    {
+        bool runOriginal = true;
+        if (ShouldDisableGuiElementInputHandlers(__instance))
+        {
+            args = new MouseEvent(
+                (int)(__instance.Bounds.absFixedX - 1000000),
+                (int)(__instance.Bounds.absFixedY - 1000000),
+                0,
+                0,
+                EnumMouseButton.None,
+                0
+            );
+        }
+        return runOriginal;
+    }
+    public static void After_GuiElement_OnMouseMove(GuiElement __instance)
+    {
+    }
 }
