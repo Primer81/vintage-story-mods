@@ -53,7 +53,6 @@ public class ToggleMouseControlModSystem : ModSystem
             harmony = new Harmony(Mod.Info.ModID);
             harmony.PatchCategory(Mod.Info.ModID);
             GuiDialogPatcher.PatchAllImplementations(harmony);
-            GuiElementPatcher.PatchAllImplementations(harmony);
         }
     }
 
@@ -323,7 +322,7 @@ internal static class Patches
 
 public static class GuiDialogPatcher
 {
-    public static bool ShouldDisableGuiDialogInputHandlers(GuiDialog __instance)
+    public static bool ShouldRunOriginalGuiDialogInputHandlers(GuiDialog __instance)
     {
         bool runOriginal = true;
         if (ToggleMouseControlModSystem.ClientApi.Input.MouseGrabbed == true)
@@ -360,6 +359,13 @@ public static class GuiDialogPatcher
             nameof(GuiDialog.OnMouseWheel),
             nameof(Before_GuiDialog_OnMouseWheel),
             nameof(After_GuiDialog_OnMouseWheel));
+        // Patch OnMouseMove
+        PatchAllImplementationsOfMethodWithPrefixAndPostfix(
+            harmony,
+            typeof(GuiDialog),
+            nameof(GuiDialog.OnMouseMove),
+            nameof(Before_GuiDialog_OnMouseMove),
+            nameof(After_GuiDialog_OnMouseMove));
         // Patch OnMouseDown/OnMouseUp
         PatchAllImplementationsOfMethodWithPrefixAndPostfix(
             harmony,
@@ -409,99 +415,23 @@ public static class GuiDialogPatcher
     public static bool Before_GuiDialog_OnMouseWheel(
         GuiDialog __instance)
     {
-        return ShouldDisableGuiDialogInputHandlers(__instance);
+        return ShouldRunOriginalGuiDialogInputHandlers(__instance);
     }
     public static void After_GuiDialog_OnMouseWheel(GuiDialog __instance)
     {
     }
 
-    public static bool Before_GuiDialog_OnMouseDown(
-        GuiDialog __instance)
+    public static bool Before_GuiDialog_OnMouseMove(
+        GuiDialog __instance, ref MouseEvent args)
     {
-        return ShouldDisableGuiDialogInputHandlers(__instance);
-    }
-    public static void After_GuiDialog_OnMouseDown(GuiDialog __instance)
-    {
-    }
-
-    public static bool Before_GuiDialog_OnMouseUp(
-        GuiDialog __instance)
-    {
-        return ShouldDisableGuiDialogInputHandlers(__instance);
-    }
-    public static void After_GuiDialog_OnMouseUp(GuiDialog __instance)
-    {
-    }
-
-    public static bool Before_GuiDialog_OnKeyDown(
-        GuiDialog __instance)
-    {
-        return ShouldDisableGuiDialogInputHandlers(__instance);
-    }
-    public static void After_GuiDialog_OnKeyDown(GuiDialog __instance)
-    {
-    }
-
-    public static bool Before_GuiDialog_OnKeyUp(
-        GuiDialog __instance)
-    {
-        return ShouldDisableGuiDialogInputHandlers(__instance);
-    }
-    public static void After_GuiDialog_OnKeyUp(GuiDialog __instance)
-    {
-    }
-}
-
-public static class GuiElementPatcher
-{
-    public static bool ShouldDisableGuiElementInputHandlers(GuiElement __instance)
-    {
-        bool disable = false;
-        if (ToggleMouseControlModSystem.ClientApi.Input.MouseGrabbed == true)
+        bool runOriginal = ShouldRunOriginalGuiDialogInputHandlers(__instance);
+        if (runOriginal == false)
         {
-            disable = true;
-        }
-        return disable;
-    }
-
-    public static void PatchAllImplementations(Harmony harmony)
-    {
-        // Patch OnMouseMove
-        PatchAllImplementationsOfMethodWithPrefixAndPostfix(
-            harmony,
-            typeof(GuiElement),
-            nameof(GuiElement.OnMouseMove),
-            nameof(Before_GuiElement_OnMouseMove),
-            nameof(After_GuiElement_OnMouseMove));
-    }
-
-    public static void PatchAllImplementationsOfMethodWithPrefixAndPostfix(
-        Harmony harmony,
-        Type methodParentClass,
-        string method,
-        string prefix,
-        string postfix)
-    {
-        // This class's type!
-        Type thisClassType = MethodBase.GetCurrentMethod().DeclaringType;
-        Patches.PatchAllImplementationsOfMethodWithPrefixAndPostfix(
-            harmony,
-            methodParentClass,
-            method,
-            thisClassType,
-            prefix,
-            postfix);
-    }
-
-    public static bool Before_GuiElement_OnMouseMove(
-        GuiElement __instance, ref MouseEvent args)
-    {
-        bool runOriginal = true;
-        if (ShouldDisableGuiElementInputHandlers(__instance))
-        {
+            runOriginal = true;
+            // TODO: Make this relative to bounds of dialog
             args = new MouseEvent(
-                (int)(__instance.Bounds.absFixedX - 1000000),
-                (int)(__instance.Bounds.absFixedY - 1000000),
+                (int)(-1000000),
+                (int)(-1000000),
                 0,
                 0,
                 EnumMouseButton.None,
@@ -510,7 +440,43 @@ public static class GuiElementPatcher
         }
         return runOriginal;
     }
-    public static void After_GuiElement_OnMouseMove(GuiElement __instance)
+    public static void After_GuiDialog_OnMouseMove(GuiDialog __instance)
+    {
+    }
+
+    public static bool Before_GuiDialog_OnMouseDown(
+        GuiDialog __instance)
+    {
+        return ShouldRunOriginalGuiDialogInputHandlers(__instance);
+    }
+    public static void After_GuiDialog_OnMouseDown(GuiDialog __instance)
+    {
+    }
+
+    public static bool Before_GuiDialog_OnMouseUp(
+        GuiDialog __instance)
+    {
+        return ShouldRunOriginalGuiDialogInputHandlers(__instance);
+    }
+    public static void After_GuiDialog_OnMouseUp(GuiDialog __instance)
+    {
+    }
+
+    public static bool Before_GuiDialog_OnKeyDown(
+        GuiDialog __instance)
+    {
+        return ShouldRunOriginalGuiDialogInputHandlers(__instance);
+    }
+    public static void After_GuiDialog_OnKeyDown(GuiDialog __instance)
+    {
+    }
+
+    public static bool Before_GuiDialog_OnKeyUp(
+        GuiDialog __instance)
+    {
+        return ShouldRunOriginalGuiDialogInputHandlers(__instance);
+    }
+    public static void After_GuiDialog_OnKeyUp(GuiDialog __instance)
     {
     }
 }
