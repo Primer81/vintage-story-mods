@@ -11,12 +11,7 @@
 <p>&nbsp;</p>
 <p>Active Bugs:</p>
 <ul>
-<li>B07: Given mouse control is toggled OFF and any GUI with a scrollbar is open under the player's crosshairs, then the player cannot scroll across the hotbar.<br />
-<ul>
-<li><span style="font-size: 10pt;">Note: This occurs regardless of whether immersive mouse mode is ON or OFF.</span></li>
-<li><span style="font-size: 10pt;">Dev Note: Should try approaching this by moving the crosshair GUI's z-depth to be underneath other GUIs.</span></li>
-</ul>
-</li>
+<li>None! (that I know of 😉)</li>
 </ul>
 <p>&nbsp;</p>
 <p>Patched<sup>1</sup> Bugs:</p>
@@ -38,9 +33,31 @@
 <p>&nbsp;</p>
 <p>Fixed<sup>2</sup> Bugs:</p>
 <div class="spoiler">
-<div class="spoiler-toggle">Fixed (9)</div>
+<div class="spoiler-toggle">Fixed (12)</div>
 <div class="spoiler-text">
 <ul>
+<li>B13: Given toggle sprint is ON and the player is sprinting, when the player releases the sprint key, then they do not continue sprinting.
+<ul>
+<li><span style="font-size: 10pt;">Introduced in v1.1.5</span></li>
+<li><span style="font-size: 10pt;">Fixed in v1.1.6 🛠️</span></li>
+</ul>
+</li>
+<li>B12: Given immersive mouse mode is OFF and a GUI dialog is open, when a new GUI dialog is open, mouse control does NOT auto-enable.
+<ul>
+<li><span style="font-size: 10pt;">Fixed in v1.1.4 🛠️</span></li>
+</ul>
+</li>
+<li>B07: Given mouse control is toggled OFF and any GUI with a scrollbar is open under the player's crosshairs, then the player cannot scroll across the hotbar.<br />
+<ul>
+<li><span style="font-size: 10pt;">Note: This occurs regardless of whether immersive mouse mode is ON or OFF.</span></li>
+<li><span style="text-decoration: line-through;"><span style="font-size: 10pt;">Dev Note: Should try approaching this by moving the crosshair GUI's z-depth to be underneath other GUIs.</span></span>
+<ul>
+<li><span style="font-size: 10pt;">The crosshairs are not GuiDialogs 🫤</span></li>
+</ul>
+</li>
+<li><span style="font-size: 10pt;">Fixed in v1.1.4 🛠️</span></li>
+</ul>
+</li>
 <li>B11: Given immersive mouse mode is OFF and a certain type of GUI (such as the firepit) is open, then mouse control does not auto-enable as expected.
 <ul>
 <li><span style="font-size: 10pt;">Note: By "certain type of GUI" I mean GUIs which are expected to disable the mouse grab given immersive mouse mode is OFF and do not set the PrefersUngrabbedMouse property to true.</span></li>
@@ -107,6 +124,21 @@
 <p>&nbsp;</p>
 <p>Improvements Made:</p>
 <ul>
+<li>F11: Add the ability to sneak while mouse control is granted.
+<ul>
+<li><span style="font-size: 10pt;">Added in v1.1.5 🎉</span></li>
+</ul>
+</li>
+<li>F01: Add the ability to sprint while mouse control is granted.
+<ul>
+<li><span style="font-size: 10pt;">Added in v1.1.5 🎉</span></li>
+</ul>
+</li>
+<li>F02: Add the ability to jump while mouse control is granted.
+<ul>
+<li><span style="font-size: 10pt;">Added in v1.1.5 🎉</span></li>
+</ul>
+</li>
 <li>F09: Decouple disabling mouse control from the ESC key while retaining the the ability to close GUIs with the ESC key. This will more closely match the Vanilla behavior.
 <ul>
 <li><span style="font-size: 10pt;">Added in v1.1.0 🎉</span></li>
@@ -127,18 +159,20 @@
 <p>Deprecated Improvements:</p>
 <div class="spoiler">
 <div class="spoiler-toggle">Deprecated (1)</div>
-<div class="spoiler-text">F03: Disable mouse control when ESC is pressed rather than open the ESC menu.
+<div class="spoiler-text">
+<ul>
+<li>F03: Disable mouse control when ESC is pressed rather than open the ESC menu.
 <ul>
 <li><span style="font-size: 10pt;">Added in v1.0.3 🎉</span></li>
 <li><span style="font-size: 10pt;">Replaced with F09 in v1.1.0 🏗️</span></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
 <p>&nbsp;</p>
 <p>Future Improvements:</p>
 <ul>
-<li>F01: Add the ability to sprint while mouse control is granted.</li>
-<li>F02: Add the ability to jump while mouse control is granted.</li>
 <li>F04: Tie the handbook pause button to a hot key (will likely spin this into its own mod).</li>
 <li>F05: Make it possible to configure which GUI's will auto-enable mouse control when immersive mouse mode is ON.
 <ul>
