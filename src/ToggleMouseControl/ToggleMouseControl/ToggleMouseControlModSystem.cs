@@ -102,6 +102,164 @@ public class ToggleMouseControlModSystem : ModSystem
 [HarmonyPatchCategory("togglemousecontrol")]
 internal static class Patches
 {
+    [HarmonyPrefix()]
+    [HarmonyPatch(typeof(SystemPlayerControl), "OnGameTick")]
+    public static bool Before_SystemPlayerControl_OnGameTick(
+        SystemPlayerControl __instance,
+        ClientMain ___game,
+        int ___forwardKey,
+        int ___backwardKey,
+        int ___leftKey,
+        int ___rightKey,
+        int ___jumpKey,
+        int ___sneakKey,
+        int ___sprintKey,
+        int ___ctrlKey,
+        int ___shiftKey,
+        bool ___nowFloorSitting,
+        EntityControls ___prevControls,
+        float dt)
+    {
+        bool runOriginal = false;
+		EntityControls controls = ((___game.EntityPlayer.MountedOn == null) ? ___game.EntityPlayer.Controls : ___game.EntityPlayer.MountedOn.Controls);
+		if (controls != null)
+		{
+            FieldInfo OpenedGuisFieldInfo = typeof(ClientMain).GetField("OpenedGuis",
+                BindingFlags.NonPublic | BindingFlags.Instance);
+            List<GuiDialog> OpenedGuis = (List<GuiDialog>)OpenedGuisFieldInfo.GetValue(___game);
+
+            FieldInfo worlddataFieldInfo = typeof(ClientPlayer).GetField("worlddata",
+                BindingFlags.NonPublic | BindingFlags.Instance);
+            ClientWorldPlayerData worlddata = (ClientWorldPlayerData)worlddataFieldInfo.GetValue(___game.player);
+
+            FieldInfo inputapiFieldInfo = typeof(ClientCoreAPI).GetField("inputapi",
+                BindingFlags.NonPublic | BindingFlags.Instance);
+            InputAPI inputapi = (InputAPI)inputapiFieldInfo.GetValue(___game.api);
+
+			___game.EntityPlayer.Controls.OnAction = inputapi.TriggerInWorldAction;
+			// bool allMovementCaptured =
+            //     ___game.MouseGrabbed ||
+            //     (___game.api.Settings.Bool["immersiveMouseMode"] &&
+            //     OpenedGuis.All((GuiDialog gui) => !gui.PrefersUngrabbedMouse));
+			controls.Forward = ___game.KeyboardState[___forwardKey];
+			controls.Backward = ___game.KeyboardState[___backwardKey];
+			controls.Left = ___game.KeyboardState[___leftKey];
+			controls.Right = ___game.KeyboardState[___rightKey];
+			controls.Jump =
+                ___game.KeyboardState[___jumpKey] &&
+                // allMovementCaptured &&
+                (___game.EntityPlayer.PrevFrameCanStandUp ||
+                worlddata.NoClip);
+			controls.Sneak =
+                ___game.KeyboardState[___sneakKey];//&&
+                // allMovementCaptured;
+			bool wasSprint = controls.Sprint;
+			controls.Sprint = (___game.KeyboardState[___sprintKey] ||
+                (wasSprint && controls.TriesToMove &&
+                    ClientSettings.ToggleSprint));// &&
+                // allMovementCaptured;
+			controls.CtrlKey = ___game.KeyboardState[___ctrlKey];
+			controls.ShiftKey = ___game.KeyboardState[___shiftKey];
+			controls.DetachedMode = worlddata.FreeMove || ___game.EntityPlayer.IsEyesSubmerged();
+			controls.FlyPlaneLock = worlddata.FreeMovePlaneLock;
+			controls.Up = controls.DetachedMode && controls.Jump;
+			controls.Down = controls.DetachedMode && controls.Sneak;
+			controls.MovespeedMultiplier = worlddata.MoveSpeedMultiplier;
+			controls.IsFlying = worlddata.FreeMove;
+			controls.NoClip = worlddata.NoClip;
+			controls.LeftMouseDown = ___game.InWorldMouseState.Left;
+			controls.RightMouseDown = ___game.InWorldMouseState.Right;
+			controls.FloorSitting = ___nowFloorSitting;
+
+            MethodInfo methodInfo = typeof(SystemPlayerControl).GetMethod("SendServerPackets",
+                BindingFlags.NonPublic | BindingFlags.Instance,
+                null,
+                new Type[] {
+                    typeof(EntityControls), typeof(EntityControls)
+                },
+                null);
+            methodInfo.Invoke(__instance, new object[] {___prevControls, controls});
+		}
+        return runOriginal;
+    }
+
+    // [HarmonyPrefix()]
+    // [HarmonyPatch(typeof(HotKey), "DidPress")]
+    // public static bool Before_HotKey_DidPress(
+    //     HotKey __instance,
+    //     ref bool __result,
+    //     KeyEvent keyEventargs,
+    //     IWorldAccessor world,
+    //     IPlayer player,
+    //     bool allowCharacterControls,)
+    // {
+    //     bool runOriginal = false;
+    //     {
+    //         MethodInfo methodInfo = typeof(HotKey).GetMethod("MouseControlsIgnoreModifiers",
+    //             BindingFlags.NonPublic | BindingFlags.Instance,
+    //             null,
+    //             new Type[] {},
+    //             null);
+    //         bool handled = (bool)methodInfo.Invoke(__instance, new object[] {});
+    //         if (keyEventargs.KeyCode == __instance.CurrentMapping.KeyCode &&
+    //             ((bool)methodInfo.Invoke(__instance, new object[] {}) ||
+    //                 (keyEventargs.AltPressed == __instance.CurrentMapping.Alt &&
+    //                     keyEventargs.CtrlPressed == __instance.CurrentMapping.Ctrl &&
+    //                     keyEventargs.ShiftPressed == __instance.CurrentMapping.Shift)) &&
+    //             ((__instance.KeyCombinationType != HotkeyType.CharacterControls &&
+    //                 __instance.KeyCombinationType != HotkeyType.MovementControls) ||
+    //                 allowCharacterControls))
+    //         {
+    //             if (keyEventargs.KeyCode2 != __instance.CurrentMapping.SecondKeyCode &&
+    //                 __instance.CurrentMapping.SecondKeyCode.HasValue)
+    //             {
+    //                 __result = __instance.CurrentMapping.SecondKeyCode == 0;
+    //                 return runOriginal;
+    //             }
+    //             __result = true;
+    //             return runOriginal;
+    //         }
+    //         __result = false;
+    //         return runOriginal;
+    //     }
+    // }
+
+    // [HarmonyPrefix()]
+    // [HarmonyPatch(typeof(ScreenManager), "OnKeyDown")]
+    // public static bool Before_ScreenManager_OnKeyDown(
+    //     ScreenManager __instance,
+    //     GuiScreen ___CurrentScreen,
+    //     KeyEvent e)
+    // {
+    //     bool runOriginal = false;
+    // 	ScreenManager.KeyboardKeyState[e.KeyCode] = true;
+    // 	ScreenManager.KeyboardModifiers.AltPressed = e.AltPressed;
+    // 	ScreenManager.KeyboardModifiers.CtrlPressed = e.CtrlPressed;
+    // 	ScreenManager.KeyboardModifiers.ShiftPressed = e.ShiftPressed;
+    // 	if (___CurrentScreen.GetType() != typeof(GuiScreenRunningGame))
+    // 	{
+    //         Type hotkeyManagerType = typeof(HotkeyManager);
+    //         MethodInfo methodInfo = hotkeyManagerType.GetMethod("TriggerGlobalHotKey",
+    //             BindingFlags.NonPublic | BindingFlags.Instance,
+    //             null,
+    //             new Type[] {
+    //                 typeof(KeyEvent),
+    //                 typeof(IWorldAccessor),
+    //                 typeof(IPlayer),
+    //                 typeof(bool)
+    //             },
+    //             null);
+    //         bool handled = (bool)methodInfo.Invoke(__instance, new object[] {
+    //             e,
+    //             null,
+    //             null,
+    //             false});
+    // 		e.Handled = handled;
+    // 	}
+    // 	___CurrentScreen.OnKeyDown(e);
+    //     return runOriginal;
+    // }
+
     // Stop filter text input from taking focus on handbook open
     [HarmonyPostfix()]
     [HarmonyPatch(typeof(GuiDialogHandbook), "OnGuiOpened")]
