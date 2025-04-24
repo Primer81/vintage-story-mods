@@ -189,8 +189,12 @@ internal static class Patches
             // logic for setting Sprint in SystemPlayerControl.OnGameTick(...).
             // They should match EXCEPT this code should not depend on the
             // locally calculated `allMovementCaptured` variable.
+            bool wasSprint = __instance.Sprint;
             value = SystemPlayerControlMembers.game.KeyboardState[
-                SystemPlayerControlMembers.sprintKey];
+                        SystemPlayerControlMembers.sprintKey] ||
+                    (wasSprint &&
+                    __instance.TriesToMove &&
+                    ClientSettings.ToggleSprint);
         }
         return runOriginal;
     }
