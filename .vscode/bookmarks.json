@@ -35,12 +35,12 @@
 			"bookmarks": [
 				{
 					"column": 0,
-					"label": "",
+					"label": "this._onDidChangeTreeData = new r.EventEmitter;",
 					"line": 1849
 				},
 				{
 					"column": 0,
-					"label": "",
+					"label": "}, e.prototype.refresh = function() {",
 					"line": 3645
 				}
 			]

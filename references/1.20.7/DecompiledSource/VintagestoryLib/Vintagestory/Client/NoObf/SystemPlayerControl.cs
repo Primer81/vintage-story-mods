@@ -82,13 +82,24 @@ public class SystemPlayerControl : ClientSystem
 			controls.Backward = game.KeyboardState[backwardKey];
 			controls.Left = game.KeyboardState[leftKey];
 			controls.Right = game.KeyboardState[rightKey];
-			controls.Jump = game.KeyboardState[jumpKey] && allMovementCaptured && (game.EntityPlayer.PrevFrameCanStandUp || game.player.worlddata.NoClip);
+			controls.Jump =
+				game.KeyboardState[jumpKey] &&
+				allMovementCaptured &&
+				(game.EntityPlayer.PrevFrameCanStandUp ||
+					game.player.worlddata.NoClip);
 			controls.Sneak = game.KeyboardState[sneakKey] && allMovementCaptured;
 			bool wasSprint = controls.Sprint;
-			controls.Sprint = (game.KeyboardState[sprintKey] || (wasSprint && controls.TriesToMove && ClientSettings.ToggleSprint)) && allMovementCaptured;
+			controls.Sprint =
+				(game.KeyboardState[sprintKey] ||
+					(wasSprint &&
+					controls.TriesToMove &&
+					ClientSettings.ToggleSprint)) &&
+				allMovementCaptured;
 			controls.CtrlKey = game.KeyboardState[ctrlKey];
 			controls.ShiftKey = game.KeyboardState[shiftKey];
-			controls.DetachedMode = game.player.worlddata.FreeMove || game.EntityPlayer.IsEyesSubmerged();
+			controls.DetachedMode =
+				game.player.worlddata.FreeMove ||
+				game.EntityPlayer.IsEyesSubmerged();
 			controls.FlyPlaneLock = game.player.worlddata.FreeMovePlaneLock;
 			controls.Up = controls.DetachedMode && controls.Jump;
 			controls.Down = controls.DetachedMode && controls.Sneak;

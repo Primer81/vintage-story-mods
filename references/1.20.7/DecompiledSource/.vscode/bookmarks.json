@@ -4,14 +4,14 @@
 			"path": "VintagestoryLib/Vintagestory/Common/AssetManager.cs",
 			"bookmarks": [
 				{
-					"line": 10,
 					"column": 0,
-					"label": "public class AssetManager : IAssetManager"
+					"label": "public class AssetManager : IAssetManager",
+					"line": 10
 				},
 				{
-					"line": 12,
 					"column": 0,
-					"label": "private EnumAppSide side;"
+					"label": "private EnumAppSide side;",
+					"line": 12
 				}
 			]
 		},
@@ -107,6 +107,16 @@
 					"column": 0,
 					"label": "public sealed class ClientMain : GameMain, IWorldIntersectionSupplier, IClientWorldAccessor, IWorldAccessor",
 					"line": 22
+				},
+				{
+					"column": 0,
+					"label": "public bool[] KeyboardState;",
+					"line": 34
+				},
+				{
+					"column": 0,
+					"label": "foreach (ClientSystem system in array)",
+					"line": 1804
 				},
 				{
 					"column": 0,
@@ -402,6 +412,21 @@
 					"column": 0,
 					"label": "public class DrawWorldInteractionUtil",
 					"line": 9
+				}
+			]
+		},
+		{
+			"path": "VintagestoryAPI/Vintagestory/API/Client/ElementBounds.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public class ElementBounds",
+					"line": 12
+				},
+				{
+					"column": 0,
+					"label": "public virtual void CalcWorldBounds()",
+					"line": 198
 				}
 			]
 		},
@@ -937,6 +962,11 @@
 					"column": 0,
 					"label": "public override void OnMouseWheel(MouseWheelEventArgs args)",
 					"line": 408
+				},
+				{
+					"column": 0,
+					"label": "public override bool CaptureAllInputs()",
+					"line": 454
 				}
 			]
 		},
@@ -947,6 +977,16 @@
 					"column": 0,
 					"label": "public class GuiScreen",
 					"line": 5
+				}
+			]
+		},
+		{
+			"path": "VintagestoryLib/Vintagestory/Client/GuiScreenRunningGame.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "runningGame.OnKeyDown(args);",
+					"line": 291
 				}
 			]
 		},
@@ -962,6 +1002,11 @@
 					"column": 0,
 					"label": "public bool IsGlobalHotkey;",
 					"line": 9
+				},
+				{
+					"column": 0,
+					"label": "public virtual bool DidPress(KeyEvent keyEventargs, IWorldAccessor world, IPlayer player, bool allowCharacterControls)",
+					"line": 59
 				}
 			]
 		},
@@ -997,6 +1042,11 @@
 					"column": 0,
 					"label": "public virtual void RegisterDefaultHotKeys()",
 					"line": 17
+				},
+				{
+					"column": 0,
+					"label": "internal bool TriggerGlobalHotKey(KeyEvent keyEventargs, IWorldAccessor world, IPlayer player, bool keyUp)",
+					"line": 107
 				},
 				{
 					"column": 0,
@@ -1774,14 +1824,24 @@
 			"path": "VintagestoryLib/Vintagestory/Client/NoObf/SystemPlayerControl.cs",
 			"bookmarks": [
 				{
+					"line": 84,
+					"column": 0,
+					"label": ""
+				},
+				{
 					"column": 0,
 					"label": "controls.Sneak = game.KeyboardState[sneakKey] && allMovementCaptured;",
-					"line": 85
+					"line": 89
+				},
+				{
+					"line": 91,
+					"column": 0,
+					"label": ""
 				},
 				{
 					"column": 0,
 					"label": "controls.ShiftKey = game.KeyboardState[shiftKey];",
-					"line": 89
+					"line": 98
 				}
 			]
 		},
@@ -1817,21 +1877,6 @@
 					"column": 0,
 					"label": "public class WorldEditClientHandler",
 					"line": 13
-				}
-			]
-		},
-		{
-			"path": "VintagestoryAPI/Vintagestory/API/Client/ElementBounds.cs",
-			"bookmarks": [
-				{
-					"line": 12,
-					"column": 0,
-					"label": ""
-				},
-				{
-					"line": 198,
-					"column": 0,
-					"label": ""
 				}
 			]
 		}

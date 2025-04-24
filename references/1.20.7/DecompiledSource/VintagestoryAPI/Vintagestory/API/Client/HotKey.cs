@@ -59,7 +59,14 @@ public class HotKey
 	/// <returns>If the hotkey was pressed or not.</returns>
 	public virtual bool DidPress(KeyEvent keyEventargs, IWorldAccessor world, IPlayer player, bool allowCharacterControls)
 	{
-		if (keyEventargs.KeyCode == CurrentMapping.KeyCode && (MouseControlsIgnoreModifiers() || (keyEventargs.AltPressed == CurrentMapping.Alt && keyEventargs.CtrlPressed == CurrentMapping.Ctrl && keyEventargs.ShiftPressed == CurrentMapping.Shift)) && ((KeyCombinationType != HotkeyType.CharacterControls && KeyCombinationType != HotkeyType.MovementControls) || allowCharacterControls))
+		if (keyEventargs.KeyCode == CurrentMapping.KeyCode &&
+			(MouseControlsIgnoreModifiers() ||
+				(keyEventargs.AltPressed == CurrentMapping.Alt &&
+					keyEventargs.CtrlPressed == CurrentMapping.Ctrl &&
+					keyEventargs.ShiftPressed == CurrentMapping.Shift)) &&
+			((KeyCombinationType != HotkeyType.CharacterControls &&
+					KeyCombinationType != HotkeyType.MovementControls) ||
+				allowCharacterControls))
 		{
 			if (keyEventargs.KeyCode2 != CurrentMapping.SecondKeyCode && CurrentMapping.SecondKeyCode.HasValue)
 			{
