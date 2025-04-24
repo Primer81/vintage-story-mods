@@ -162,6 +162,9 @@ internal static class Patches
         if (SystemPlayerControlMembers.IsValid == true)
         {
             ClientMain game = SystemPlayerControlMembers.game;
+            // This logic for retrieving the player controls is based on
+            // the same code used in SystemPlayerControls.OnGameTick(...)
+            // for retriving the player controls. It should match.
             EntityControls controls =
                 (game.EntityPlayer.MountedOn == null)
                 ? game.EntityPlayer.Controls
@@ -182,6 +185,10 @@ internal static class Patches
         bool runOriginal = true;
         if (IsInstanceOfPlayerControls(__instance))
         {
+            // This logic for setting the value of Sprint is based on the same
+            // logic for setting Sprint in SystemPlayerControl.OnGameTick(...).
+            // They should match EXCEPT this code should not depend on the
+            // locally calculated `allMovementCaptured` variable.
             value = SystemPlayerControlMembers.game.KeyboardState[
                 SystemPlayerControlMembers.sprintKey];
         }
@@ -196,6 +203,10 @@ internal static class Patches
         bool runOriginal = true;
         if (IsInstanceOfPlayerControls(__instance))
         {
+            // This logic for setting the value of Sneak is based on the same
+            // logic for setting Sneak in SystemPlayerControl.OnGameTick(...).
+            // They should match EXCEPT this code should not depend on the
+            // locally calculated `allMovementCaptured` variable.
             value = SystemPlayerControlMembers.game.KeyboardState[
                 SystemPlayerControlMembers.sneakKey];
         }
@@ -210,6 +221,10 @@ internal static class Patches
         bool runOriginal = true;
         if (IsInstanceOfPlayerControls(__instance))
         {
+            // This logic for setting the value of Jump is based on the same
+            // logic for setting Jump in SystemPlayerControl.OnGameTick(...).
+            // They should match EXCEPT this code should not depend on the
+            // locally calculated `allMovementCaptured` variable.
             FieldInfo worlddataFieldInfo = typeof(ClientPlayer).GetField("worlddata",
                 BindingFlags.NonPublic | BindingFlags.Instance);
             ClientWorldPlayerData worlddata = (ClientWorldPlayerData)worlddataFieldInfo.GetValue(
