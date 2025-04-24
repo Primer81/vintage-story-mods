@@ -40,6 +40,7 @@ public class ToggleMouseControlModSystem : ModSystem
         DialogsWantMouseControlPrev = false;
         DialogsOpenCountPrev = 0;
         mouseControlToggledOn = false;
+        SystemPlayerControlMembers.IsValid = false;
         // Enable mouse toggle
         {
             triggerOnUpAlsoOriginal =
@@ -99,6 +100,24 @@ public class ToggleMouseControlModSystem : ModSystem
     }
 }
 
+static class SystemPlayerControlMembers
+{
+    public static bool IsValid;
+
+    public static ClientMain game;
+    public static int forwardKey;
+    public static int backwardKey;
+    public static int leftKey;
+    public static int rightKey;
+    public static int jumpKey;
+    public static int sneakKey;
+    public static int sprintKey;
+    public static int ctrlKey;
+    public static int shiftKey;
+    public static bool nowFloorSitting;
+    public static EntityControls prevControls;
+}
+
 [HarmonyPatchCategory("togglemousecontrol")]
 internal static class Patches
 {
@@ -120,68 +139,170 @@ internal static class Patches
         EntityControls ___prevControls,
         float dt)
     {
-        bool runOriginal = false;
-		EntityControls controls = ((___game.EntityPlayer.MountedOn == null) ? ___game.EntityPlayer.Controls : ___game.EntityPlayer.MountedOn.Controls);
-		if (controls != null)
-		{
-            FieldInfo OpenedGuisFieldInfo = typeof(ClientMain).GetField("OpenedGuis",
-                BindingFlags.NonPublic | BindingFlags.Instance);
-            List<GuiDialog> OpenedGuis = (List<GuiDialog>)OpenedGuisFieldInfo.GetValue(___game);
-
-            FieldInfo worlddataFieldInfo = typeof(ClientPlayer).GetField("worlddata",
-                BindingFlags.NonPublic | BindingFlags.Instance);
-            ClientWorldPlayerData worlddata = (ClientWorldPlayerData)worlddataFieldInfo.GetValue(___game.player);
-
-            FieldInfo inputapiFieldInfo = typeof(ClientCoreAPI).GetField("inputapi",
-                BindingFlags.NonPublic | BindingFlags.Instance);
-            InputAPI inputapi = (InputAPI)inputapiFieldInfo.GetValue(___game.api);
-
-			___game.EntityPlayer.Controls.OnAction = inputapi.TriggerInWorldAction;
-			// bool allMovementCaptured =
-            //     ___game.MouseGrabbed ||
-            //     (___game.api.Settings.Bool["immersiveMouseMode"] &&
-            //     OpenedGuis.All((GuiDialog gui) => !gui.PrefersUngrabbedMouse));
-			controls.Forward = ___game.KeyboardState[___forwardKey];
-			controls.Backward = ___game.KeyboardState[___backwardKey];
-			controls.Left = ___game.KeyboardState[___leftKey];
-			controls.Right = ___game.KeyboardState[___rightKey];
-			controls.Jump =
-                ___game.KeyboardState[___jumpKey] &&
-                // allMovementCaptured &&
-                (___game.EntityPlayer.PrevFrameCanStandUp ||
-                worlddata.NoClip);
-			controls.Sneak =
-                ___game.KeyboardState[___sneakKey];//&&
-                // allMovementCaptured;
-			bool wasSprint = controls.Sprint;
-			controls.Sprint = (___game.KeyboardState[___sprintKey] ||
-                (wasSprint && controls.TriesToMove &&
-                    ClientSettings.ToggleSprint));// &&
-                // allMovementCaptured;
-			controls.CtrlKey = ___game.KeyboardState[___ctrlKey];
-			controls.ShiftKey = ___game.KeyboardState[___shiftKey];
-			controls.DetachedMode = worlddata.FreeMove || ___game.EntityPlayer.IsEyesSubmerged();
-			controls.FlyPlaneLock = worlddata.FreeMovePlaneLock;
-			controls.Up = controls.DetachedMode && controls.Jump;
-			controls.Down = controls.DetachedMode && controls.Sneak;
-			controls.MovespeedMultiplier = worlddata.MoveSpeedMultiplier;
-			controls.IsFlying = worlddata.FreeMove;
-			controls.NoClip = worlddata.NoClip;
-			controls.LeftMouseDown = ___game.InWorldMouseState.Left;
-			controls.RightMouseDown = ___game.InWorldMouseState.Right;
-			controls.FloorSitting = ___nowFloorSitting;
-
-            MethodInfo methodInfo = typeof(SystemPlayerControl).GetMethod("SendServerPackets",
-                BindingFlags.NonPublic | BindingFlags.Instance,
-                null,
-                new Type[] {
-                    typeof(EntityControls), typeof(EntityControls)
-                },
-                null);
-            methodInfo.Invoke(__instance, new object[] {___prevControls, controls});
-		}
+        bool runOriginal = true;
+        SystemPlayerControlMembers.game = ___game;
+        SystemPlayerControlMembers.forwardKey = ___forwardKey;
+        SystemPlayerControlMembers.backwardKey = ___backwardKey;
+        SystemPlayerControlMembers.leftKey = ___leftKey;
+        SystemPlayerControlMembers.rightKey = ___rightKey;
+        SystemPlayerControlMembers.jumpKey = ___jumpKey;
+        SystemPlayerControlMembers.sneakKey = ___sneakKey;
+        SystemPlayerControlMembers.sprintKey = ___sprintKey;
+        SystemPlayerControlMembers.ctrlKey = ___ctrlKey;
+        SystemPlayerControlMembers.shiftKey = ___shiftKey;
+        SystemPlayerControlMembers.nowFloorSitting = ___nowFloorSitting;
+        SystemPlayerControlMembers.prevControls = ___prevControls;
+        SystemPlayerControlMembers.IsValid = true;
         return runOriginal;
     }
+
+    private static bool IsInstanceOfPlayerControls(EntityControls instance)
+    {
+        bool isInstanceOfPlayerControls = false;
+        if (SystemPlayerControlMembers.IsValid == true)
+        {
+            ClientMain game = SystemPlayerControlMembers.game;
+            EntityControls controls =
+                (game.EntityPlayer.MountedOn == null)
+                ? game.EntityPlayer.Controls
+                : game.EntityPlayer.MountedOn.Controls;
+            if (ReferenceEquals(instance, controls))
+            {
+                isInstanceOfPlayerControls = true;
+            }
+        }
+        return isInstanceOfPlayerControls;
+    }
+
+    [HarmonyPrefix()]
+    [HarmonyPatch(typeof(EntityControls), "set_Sprint")]
+    public static bool Before_EntityControls_set_Sprint(
+        EntityControls __instance, ref bool value)
+    {
+        bool runOriginal = true;
+        if (IsInstanceOfPlayerControls(__instance))
+        {
+            value = SystemPlayerControlMembers.game.KeyboardState[
+                SystemPlayerControlMembers.sprintKey];
+        }
+        return runOriginal;
+    }
+
+    [HarmonyPrefix()]
+    [HarmonyPatch(typeof(EntityControls), "set_Sneak")]
+    public static bool Before_EntityControls_set_Sneak(
+        EntityControls __instance, ref bool value)
+    {
+        bool runOriginal = true;
+        if (IsInstanceOfPlayerControls(__instance))
+        {
+            value = SystemPlayerControlMembers.game.KeyboardState[
+                SystemPlayerControlMembers.sneakKey];
+        }
+        return runOriginal;
+    }
+
+    [HarmonyPrefix()]
+    [HarmonyPatch(typeof(EntityControls), "set_Jump")]
+    public static bool Before_EntityControls_set_Jump(
+        EntityControls __instance, ref bool value)
+    {
+        bool runOriginal = true;
+        if (IsInstanceOfPlayerControls(__instance))
+        {
+            FieldInfo worlddataFieldInfo = typeof(ClientPlayer).GetField("worlddata",
+                BindingFlags.NonPublic | BindingFlags.Instance);
+            ClientWorldPlayerData worlddata = (ClientWorldPlayerData)worlddataFieldInfo.GetValue(
+                SystemPlayerControlMembers.game.player);
+
+            value = SystemPlayerControlMembers.game.KeyboardState[
+                SystemPlayerControlMembers.jumpKey] &&
+                (SystemPlayerControlMembers.game.EntityPlayer.PrevFrameCanStandUp ||
+                    worlddata.NoClip);
+        }
+        return runOriginal;
+    }
+
+    // [HarmonyPrefix()]
+    // [HarmonyPatch(typeof(SystemPlayerControl), "OnGameTick")]
+    // public static bool Before_SystemPlayerControl_OnGameTick(
+    //     SystemPlayerControl __instance,
+    //     ClientMain ___game,
+    //     int ___forwardKey,
+    //     int ___backwardKey,
+    //     int ___leftKey,
+    //     int ___rightKey,
+    //     int ___jumpKey,
+    //     int ___sneakKey,
+    //     int ___sprintKey,
+    //     int ___ctrlKey,
+    //     int ___shiftKey,
+    //     bool ___nowFloorSitting,
+    //     EntityControls ___prevControls,
+    //     float dt)
+    // {
+    //     bool runOriginal = false;
+	// 	EntityControls controls = ((___game.EntityPlayer.MountedOn == null) ? ___game.EntityPlayer.Controls : ___game.EntityPlayer.MountedOn.Controls);
+	// 	if (controls != null)
+	// 	{
+    //         FieldInfo OpenedGuisFieldInfo = typeof(ClientMain).GetField("OpenedGuis",
+    //             BindingFlags.NonPublic | BindingFlags.Instance);
+    //         List<GuiDialog> OpenedGuis = (List<GuiDialog>)OpenedGuisFieldInfo.GetValue(___game);
+
+    //         FieldInfo worlddataFieldInfo = typeof(ClientPlayer).GetField("worlddata",
+    //             BindingFlags.NonPublic | BindingFlags.Instance);
+    //         ClientWorldPlayerData worlddata = (ClientWorldPlayerData)worlddataFieldInfo.GetValue(___game.player);
+
+    //         FieldInfo inputapiFieldInfo = typeof(ClientCoreAPI).GetField("inputapi",
+    //             BindingFlags.NonPublic | BindingFlags.Instance);
+    //         InputAPI inputapi = (InputAPI)inputapiFieldInfo.GetValue(___game.api);
+
+	// 		___game.EntityPlayer.Controls.OnAction = inputapi.TriggerInWorldAction;
+	// 		// bool allMovementCaptured =
+    //         //     ___game.MouseGrabbed ||
+    //         //     (___game.api.Settings.Bool["immersiveMouseMode"] &&
+    //         //     OpenedGuis.All((GuiDialog gui) => !gui.PrefersUngrabbedMouse));
+	// 		controls.Forward = ___game.KeyboardState[___forwardKey];
+	// 		controls.Backward = ___game.KeyboardState[___backwardKey];
+	// 		controls.Left = ___game.KeyboardState[___leftKey];
+	// 		controls.Right = ___game.KeyboardState[___rightKey];
+	// 		controls.Jump =
+    //             ___game.KeyboardState[___jumpKey] &&
+    //             // allMovementCaptured &&
+    //             (___game.EntityPlayer.PrevFrameCanStandUp ||
+    //             worlddata.NoClip);
+	// 		controls.Sneak =
+    //             ___game.KeyboardState[___sneakKey];//&&
+    //             // allMovementCaptured;
+	// 		bool wasSprint = controls.Sprint;
+	// 		controls.Sprint = (___game.KeyboardState[___sprintKey] ||
+    //             (wasSprint && controls.TriesToMove &&
+    //                 ClientSettings.ToggleSprint));// &&
+    //             // allMovementCaptured;
+	// 		controls.CtrlKey = ___game.KeyboardState[___ctrlKey];
+	// 		controls.ShiftKey = ___game.KeyboardState[___shiftKey];
+	// 		controls.DetachedMode = worlddata.FreeMove || ___game.EntityPlayer.IsEyesSubmerged();
+	// 		controls.FlyPlaneLock = worlddata.FreeMovePlaneLock;
+	// 		controls.Up = controls.DetachedMode && controls.Jump;
+	// 		controls.Down = controls.DetachedMode && controls.Sneak;
+	// 		controls.MovespeedMultiplier = worlddata.MoveSpeedMultiplier;
+	// 		controls.IsFlying = worlddata.FreeMove;
+	// 		controls.NoClip = worlddata.NoClip;
+	// 		controls.LeftMouseDown = ___game.InWorldMouseState.Left;
+	// 		controls.RightMouseDown = ___game.InWorldMouseState.Right;
+	// 		controls.FloorSitting = ___nowFloorSitting;
+
+    //         MethodInfo methodInfo = typeof(SystemPlayerControl).GetMethod("SendServerPackets",
+    //             BindingFlags.NonPublic | BindingFlags.Instance,
+    //             null,
+    //             new Type[] {
+    //                 typeof(EntityControls), typeof(EntityControls)
+    //             },
+    //             null);
+    //         methodInfo.Invoke(__instance, new object[] {___prevControls, controls});
+	// 	}
+    //     return runOriginal;
+    // }
 
     // [HarmonyPrefix()]
     // [HarmonyPatch(typeof(HotKey), "DidPress")]
