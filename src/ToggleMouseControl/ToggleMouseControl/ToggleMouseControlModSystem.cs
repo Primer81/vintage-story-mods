@@ -11,8 +11,8 @@ using System.Linq;
 using HarmonyLib;
 using System.Collections.Generic;
 using System.Reflection;
-using System.Linq.Expressions;
-using System.Reflection.Metadata.Ecma335;
+using System.Reflection.Emit;
+using Vintagestory.Common;
 
 namespace ToggleMouseControl;
 
@@ -21,6 +21,7 @@ public class ToggleMouseControlModSystem : ModSystem
     static public ICoreClientAPI ClientApi;
     static public bool DialogsWantMouseControlPrev;
     static public int DialogsOpenCountPrev;
+    static public Config Config;
 
     static private Harmony harmony;
     static private bool mouseControlToggledOn;
@@ -41,6 +42,11 @@ public class ToggleMouseControlModSystem : ModSystem
         DialogsOpenCountPrev = 0;
         mouseControlToggledOn = false;
         SystemPlayerControlMembers.IsValid = false;
+        // Configuration
+        {
+            Config = Fetch<Config>();
+            Dump(Config);
+        }
         // Enable mouse toggle
         {
             triggerOnUpAlsoOriginal =
@@ -59,6 +65,10 @@ public class ToggleMouseControlModSystem : ModSystem
 
     public override void Dispose()
     {
+        // Store settings
+        {
+            Dump(Config);
+        }
         // Unpatch if possible
         {
             harmony?.UnpatchAll(Mod.Info.ModID);
@@ -98,6 +108,44 @@ public class ToggleMouseControlModSystem : ModSystem
     {
         return mouseControlToggledOn;
     }
+
+    public static void Dump(object data)
+    {
+        ClientApi.StoreModConfig(
+            data,
+            System.IO.Path.Combine(
+                $"{nameof(ToggleMouseControl)}",
+                $"{data.GetType().Name}.json"));
+    }
+
+    public static dynamic Fetch<T>() where T : new()
+    {
+        string path = System.IO.Path.Combine(
+            $"{nameof(ToggleMouseControl)}",
+            $"{typeof(T).Name}.json");
+        try
+        {
+            // Use reflection to call the generic method with the runtime type
+            var method = ClientApi.GetType().GetMethod(
+                "LoadModConfig", new[] { typeof(string) });
+            var genericMethod = method.MakeGenericMethod(typeof(T));
+            return genericMethod.Invoke(ClientApi, new object[] { path });
+        }
+        catch
+        {
+            return new T();
+        }
+    }
+}
+
+public class Config
+{
+    public bool GuiAutoToggleMouseControl;
+
+    public Config()
+    {
+        GuiAutoToggleMouseControl = false;
+    }
 }
 
 static class SystemPlayerControlMembers
@@ -118,9 +166,124 @@ static class SystemPlayerControlMembers
     public static EntityControls prevControls;
 }
 
+
+[HarmonyPatchCategory("togglemousecontrol")]
+[HarmonyPatch(typeof(GuiCompositeSettings))]
+[HarmonyPatch("OnAccessibilityOptions")]
+public static class GuiCompositeSettings_OnAccessibilityOptions
+{
+    public static IEnumerable<CodeInstruction> Transpiler(
+        IEnumerable<CodeInstruction> instructions)
+    {
+        const string operandToggleSprint = "setting-name-togglesprint";
+        const string operandToggleMouseControl = "setting-name-togglemousecontrol";
+
+        var codes = new List<CodeInstruction>(instructions);
+
+        // Find the index of the sprint toggle instruction
+        int sprintToggleIndex = -1;
+        for (int i = 0; i < codes.Count; i++)
+        {
+            if (codes[i].operand is string operand && operand.Equals(operandToggleSprint))
+            {
+                sprintToggleIndex = i;
+                break;
+            }
+        }
+
+        // If we found the sprint toggle, insert our new toggle before it
+        if (sprintToggleIndex > 0)
+        {
+            int insertIndex = sprintToggleIndex;
+
+            // Get the method references we need
+            var arrayEmptyMethod = AccessTools.Method(
+                typeof(Array), "Empty").MakeGenericMethod(typeof(object));
+            var langGetMethod = AccessTools.Method(
+                typeof(Lang), "Get", new[] { typeof(string), typeof(object[]) });
+            var fontMethod = AccessTools.Method(
+                typeof(CairoFont), "WhiteSmallishText");
+            var belowCopyMethod = AccessTools.Method(
+                typeof(ElementBounds), "BelowCopy", new[] { typeof(double), typeof(double), typeof(double), typeof(double) });
+            var withFixedWidthMethod = AccessTools.Method(
+                typeof(ElementBounds), "WithFixedWidth", new[] { typeof(double) });
+            var addStaticTextMethod = AccessTools.Method(
+                typeof(Vintagestory.API.Client.GuiComposerHelpers),
+                "AddStaticText",
+                new[] { typeof(GuiComposer), typeof(string), typeof(CairoFont), typeof(ElementBounds), typeof(string) });
+
+            // Verify all method references are valid
+            if (arrayEmptyMethod == null || langGetMethod == null || fontMethod == null ||
+                belowCopyMethod == null || withFixedWidthMethod == null || addStaticTextMethod == null)
+            {
+                // Log error or handle missing methods
+                yield break;
+            }
+
+            // We want to insert our new toggle before the sprint toggle
+            var autoToggleMouseInstructions = new List<CodeInstruction>
+            {
+                // Load the string for our toggle label
+                new CodeInstruction(OpCodes.Ldstr, operandToggleMouseControl),
+
+                // Call Lang.Get(string, object[])
+                new CodeInstruction(OpCodes.Call, arrayEmptyMethod),
+                new CodeInstruction(OpCodes.Call, langGetMethod),
+
+                // Get the font
+                new CodeInstruction(OpCodes.Call, fontMethod),
+
+                // Load leftText variable
+                new CodeInstruction(OpCodes.Ldloc_0),
+
+                // Create a copy of the bounds below the previous element
+                new CodeInstruction(OpCodes.Ldc_R8, 0.0),
+                new CodeInstruction(OpCodes.Ldc_R8, 12.0),
+                new CodeInstruction(OpCodes.Ldc_R8, 0.0),
+                new CodeInstruction(OpCodes.Ldc_R8, 0.0),
+                new CodeInstruction(OpCodes.Callvirt, belowCopyMethod),
+
+                // Set fixed width
+                new CodeInstruction(OpCodes.Ldc_R8, 360.0),
+                new CodeInstruction(OpCodes.Callvirt, withFixedWidthMethod),
+
+                // Duplicate the bounds for assignment to leftText
+                new CodeInstruction(OpCodes.Dup),
+                new CodeInstruction(OpCodes.Stloc_0),
+
+                // Last parameter (null)
+                new CodeInstruction(OpCodes.Ldnull),
+
+                // Call AddStaticText - this is an extension method so it's a regular call, not callvirt
+                new CodeInstruction(OpCodes.Call, addStaticTextMethod)
+            };
+
+            // Insert our new instructions
+            codes.InsertRange(insertIndex, autoToggleMouseInstructions);
+        }
+
+        // Return the modified instructions
+        foreach (var code in codes)
+        {
+            yield return code;
+        }
+    }
+}
+
 [HarmonyPatchCategory("togglemousecontrol")]
 internal static class Patches
 {
+    // [HarmonyPrefix()]
+    // [HarmonyPatch(typeof(GuiScreenSettings), "LoadComposer")]
+    // public static bool Before_GuiScreenSettings_LoadComposer(
+    //     GuiScreenSettings __instance,
+    //     ref GuiComposer composer)
+    // {
+    //     bool runOriginal = true;
+
+    //     return runOriginal;
+    // }
+
     [HarmonyPrefix()]
     [HarmonyPatch(typeof(SystemPlayerControl), "OnGameTick")]
     public static bool Before_SystemPlayerControl_OnGameTick(
@@ -288,7 +451,7 @@ internal static class Patches
             !___exitToMainMenu &&
             __instance.BlocksReceivedAndLoaded &&
             !forceDisableMouseGrab;
-        if (ClientSettings.ImmersiveMouseMode == false)
+        if (ToggleMouseControlModSystem.Config.GuiAutoToggleMouseControl == true)
         {
             if ((dialogsWantMouseControl != ToggleMouseControlModSystem.DialogsWantMouseControlPrev) ||
                 (dialogsOpenCount > ToggleMouseControlModSystem.DialogsOpenCountPrev))
