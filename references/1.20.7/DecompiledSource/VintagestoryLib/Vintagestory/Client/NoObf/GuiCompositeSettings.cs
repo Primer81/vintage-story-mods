@@ -1211,15 +1211,35 @@ public class GuiCompositeSettings : GuiComposite
 				Lang.Get("setting-accessibility-notes"),
 				CairoFont.WhiteSmallText(),
 				leftText.FlatCopy().WithFixedWidth(800.0))
+			// Toggle sprint switch
 			.AddStaticText(
 				Lang.Get("setting-name-togglesprint"),
 				CairoFont.WhiteSmallishText(),
 				leftText = leftText.BelowCopy(0.0, 12.0).WithFixedWidth(360.0))
-			.AddHoverText(Lang.Get("setting-hover-togglesprint"), CairoFont.WhiteSmallText(), 250, leftText.FlatCopy().WithFixedHeight(25.0))
-			.AddSwitch(onToggleSprint, rightSlider.FlatCopy(), "toggleSprint")
-			.AddStaticText(Lang.Get("setting-name-bobblehead"), CairoFont.WhiteSmallishText(), leftText = leftText.BelowCopy(0.0, 2.0))
-			.AddHoverText(Lang.Get("setting-hover-bobblehead"), CairoFont.WhiteSmallText(), 250, leftText.FlatCopy().WithFixedHeight(25.0))
-			.AddSwitch(onViewBobbingChanged, rightSlider = rightSlider.BelowCopy(0.0, 20.0), "viewBobbingSwitch")
+			.AddHoverText(
+				Lang.Get("setting-hover-togglesprint"),
+				CairoFont.WhiteSmallText(),
+				250,
+				leftText.FlatCopy().WithFixedHeight(25.0))
+			.AddSwitch(
+				onToggleSprint,
+				rightSlider.FlatCopy(),
+				"toggleSprint")
+			// View bobbing switch
+			.AddStaticText(
+				Lang.Get("setting-name-bobblehead"),
+				CairoFont.WhiteSmallishText(),
+				leftText = leftText.BelowCopy(0.0, 2.0))
+			.AddHoverText(
+				Lang.Get("setting-hover-bobblehead"),
+				CairoFont.WhiteSmallText(),
+				250,
+				leftText.FlatCopy().WithFixedHeight(25.0))
+			.AddSwitch(
+				onViewBobbingChanged,
+				rightSlider = rightSlider.BelowCopy(0.0, 20.0),
+				"viewBobbingSwitch")
+			// Other ...
 			.AddStaticText(Lang.Get("setting-name-camerashake"), CairoFont.WhiteSmallishText(), leftText = leftText.BelowCopy(0.0, 2.0))
 			.AddSlider(onCameraShakeChanged, rightSlider = rightSlider.BelowCopy(0.0, 18.0).WithFixedSize(200.0, 25.0), "cameraShakeSlider")
 			.AddHoverText(Lang.Get("setting-hover-camerashake"), CairoFont.WhiteSmallText(), 250, leftText.FlatCopy().WithFixedHeight(25.0))
