@@ -2,11 +2,7 @@
 <p>&nbsp;</p>
 <p>For those who wish immersive mouse mode was actually immersive. 😜</p>
 <p>&nbsp;</p>
-<p>Works with and without immersive mouse mode with slight behavior changes as follows:</p>
-<ul>
-<li><span style="font-size: 12pt;">With immersive mouse mode OFF, most GUIs will auto-<em>enable</em> mouse control when opened and auto-<em>disable</em> mouse control when closed. This mode is useful if you don't want to toggle mouse control each time you open or close a GUI that has an auto-toggle trigger in Vanilla.</span></li>
-<li><span style="font-size: 12pt;">With immersive mouse mode ON, most GUIs will NOT auto-toggle the mouse control when opened or closed. This mode provides the player with the most control over the mouse.</span></li>
-</ul>
+<p>Works with and without immersive mouse mode!</p>
 <h3>Bugs</h3>
 <p>&nbsp;</p>
 <p>Active Bugs:</p>
@@ -38,7 +34,7 @@
 <ul>
 <li>B13: Given toggle sprint is ON and the player is sprinting, when the player releases the sprint key, then they do not continue sprinting.
 <ul>
-<li><span style="font-size: 10pt;">Introduced in v1.1.5</span></li>
+<li><span style="font-size: 10pt;">Introduced in v1.1.5 🪲</span></li>
 <li><span style="font-size: 10pt;">Fixed in v1.1.6 🛠️</span></li>
 </ul>
 </li>
@@ -124,6 +120,12 @@
 <p>&nbsp;</p>
 <p>Improvements Made:</p>
 <ul>
+<li>F10: Decouple the auto-toggling behavior of a certain type of GUI (such as the player inventory) from the immersive mouse mode setting into its own setting.
+<ul>
+<li><span style="font-size: 10pt;">Note:</span><span style="font-size: 10pt;"> By "certain type of GUI" I mean GUIs which are expected to disable the mouse grab and do set the PrefersUngrabbedMouse property to true.</span></li>
+<li><span style="font-size: 10pt;">Added in v1.2.0 🎉</span></li>
+</ul>
+</li>
 <li>F11: Add the ability to sneak while mouse control is granted.
 <ul>
 <li><span style="font-size: 10pt;">Added in v1.1.5 🎉</span></li>
@@ -182,9 +184,18 @@
 <li>
 <p>F06: Minimize the size of the mod.</p>
 </li>
-<li>F10: Decouple the auto-toggling behavior of a certain type of GUI (such as the player inventory) from the immersive mouse mode setting into its own setting.
-<ul>
-<li><span style="font-size: 10pt;">Note:</span><span style="font-size: 10pt;"> By "certain type of GUI" I mean GUIs which are expected to disable the mouse grab and do set the PrefersUngrabbedMouse property to true.</span></li>
+<li><span style="font-size: 12pt;">F12: Make it possible to configure whether sneak, sprint, or jump player controls are accessible when mouse control is ON.</span></li>
 </ul>
-</li>
+<p>&nbsp;</p>
+<h3>Compatibility Test Backlog</h3>
+<p>&nbsp;</p>
+<p>Tests Completed:</p>
+<ul>
+<li>None... 😅</li>
+</ul>
+<p>&nbsp;</p>
+<p>Tests to do:</p>
+<ul>
+<li>T01: Test compatibility with Vintage Story v1.20.8</li>
+<li>T02: Test compatibility with Vintage Story v1.20.9</li>
 </ul>
