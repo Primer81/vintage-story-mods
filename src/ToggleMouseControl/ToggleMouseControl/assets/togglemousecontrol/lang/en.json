@@ -1,3 +1,4 @@
 {
-    "hello": "hello world!"
+    "setting-name-autotogglemouse": "Auto Toggle Mouse",
+    "setting-hover-autotogglemouse": "Turn this on if you want mouse control to auto-enable when opening a GUI and auto-disable when closing a GUI"
 }
