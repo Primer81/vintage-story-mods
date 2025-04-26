@@ -172,6 +172,19 @@ static class SystemPlayerControlMembers
 [HarmonyPatch("OnAccessibilityOptions")]
 public static class GuiCompositeSettings_OnAccessibilityOptions
 {
+    private static MethodInfo arrayEmptyMethod;
+    private static MethodInfo langGetMethod;
+    private static MethodInfo whiteSmallishTextMethod;
+    private static MethodInfo whiteSmallTextMethod;
+    private static MethodInfo flatCopyMethod;
+    private static MethodInfo belowCopyMethod;
+    private static MethodInfo withFixedWidthMethod;
+    private static MethodInfo withFixedHeightMethod;
+    private static MethodInfo addStaticTextMethod;
+    private static MethodInfo addHoverTextMethod;
+    private static MethodInfo addSwitchMethod;
+    private static MethodInfo onAutoMouseToggleChangedMethod;
+
     public static void onAutoMouseToggleChanged(bool on)
     {
         ToggleMouseControlModSystem.Config.GuiAutoToggleMouseControl = on;
@@ -180,210 +193,228 @@ public static class GuiCompositeSettings_OnAccessibilityOptions
     public static IEnumerable<CodeInstruction> Transpiler(
         IEnumerable<CodeInstruction> instructions)
     {
-        bool success;
-        const string operandHookName = "setting-name-bobblehead";
-        const string operandSettingNameAutoToggleMouse = "togglemousecontrol:setting-name-autotogglemouse";
-        const string operandSettingHoverAutoToggleMouse = "togglemousecontrol:setting-hover-autotogglemouse";
-
+        bool success = true;
         var codes = new List<CodeInstruction>(instructions);
-
-        // Find the index of the sprint toggle instruction
-        int sprintToggleIndex = -1;
-        for (int i = 0; i < codes.Count; i++)
+        int instructionHookIndex = -1;
+        // Load methods needed for transpiling
+        if (success)
         {
-            if (codes[i].operand is string operand && operand.Equals(operandHookName))
-            {
-                sprintToggleIndex = i;
-                break;
-            }
+            success = LoadMethods();
         }
-        success = sprintToggleIndex > 0;
-
+        // Find the instruction index at which to insert
+        if (success)
+        {
+            instructionHookIndex = FindAutoToggleMouseSettingInstructionIndex(codes);
+            success = instructionHookIndex > 0;
+        }
         // If we found the sprint toggle, insert our new toggle before it
         if (success)
         {
-            int insertIndex = sprintToggleIndex;
-
-            // Get the method references we need
-            var arrayEmptyMethod = AccessTools.Method(
-                typeof(Array), "Empty").MakeGenericMethod(typeof(object));
-            success = success && arrayEmptyMethod != null;
-            var langGetMethod = AccessTools.Method(
-                typeof(Lang), "Get", new[] {
-                    typeof(string), typeof(object[])
-                });
-            success = success && langGetMethod != null;
-            var whiteSmallishTextMethod = AccessTools.Method(
-                typeof(CairoFont), "WhiteSmallishText");
-            success = success && whiteSmallishTextMethod != null;
-            var whiteSmallTextMethod = AccessTools.Method(
-                typeof(CairoFont), "WhiteSmallText");
-            success = success && whiteSmallTextMethod != null;
-            var flatCopyMethod = AccessTools.Method(
-                typeof(ElementBounds), "FlatCopy");
-            success = success && flatCopyMethod != null;
-            var belowCopyMethod = AccessTools.Method(
-                typeof(ElementBounds), "BelowCopy", new[] {
-                    typeof(double), typeof(double),
-                    typeof(double), typeof(double)
-                });
-            success = success && belowCopyMethod != null;
-            var withFixedWidthMethod = AccessTools.Method(
-                typeof(ElementBounds), "WithFixedWidth", new[] {
-                    typeof(double)
-                });
-            success = success && withFixedWidthMethod != null;
-            var withFixedHeightMethod = AccessTools.Method(
-                typeof(ElementBounds), "WithFixedHeight", new[] {
-                    typeof(double)
-                });
-            success = success && withFixedHeightMethod != null;
-            var addStaticTextMethod = AccessTools.Method(
-                typeof(Vintagestory.API.Client.GuiComposerHelpers), "AddStaticText",
-                new[] {
-                    typeof(GuiComposer), typeof(string), typeof(CairoFont),
-                    typeof(ElementBounds), typeof(string)
-                });
-            success = success && addStaticTextMethod != null;
-            var addHoverTextMethod = AccessTools.Method(
-                typeof(Vintagestory.API.Client.GuiComposerHelpers), "AddHoverText",
-                new[] {
-                    typeof(GuiComposer), typeof(string), typeof(CairoFont), typeof(int),
-                    typeof(ElementBounds), typeof(string)
-                });
-            success = success && addHoverTextMethod != null;
-            var addSwitchMethod = AccessTools.Method(
-                typeof(Vintagestory.API.Client.GuiComposerHelpers), "AddSwitch",
-                new[] {
-                    typeof(GuiComposer), typeof(Action<bool>),
-                    typeof(ElementBounds), typeof(string),
-                    typeof(double), typeof(double)
-                });
-            success = success && addSwitchMethod != null;
-            var onAutoMouseToggleChangedMethod = AccessTools.Method(
-                typeof(GuiCompositeSettings_OnAccessibilityOptions),
-                "onAutoMouseToggleChanged");
-            success = success && onAutoMouseToggleChangedMethod != null;
-
-            // Verify all method references are valid
-            if (success == false)
-            {
-                // Log error or handle missing methods
-                yield break;
-            }
-
-            // Insert our own static text for the new switch
-            var autoToggleMouseInstructions = new List<CodeInstruction>
-            {
-                // Load the string for our toggle label
-                new CodeInstruction(OpCodes.Ldstr, operandSettingNameAutoToggleMouse),
-
-                // Call Lang.Get(string, object[])
-                new CodeInstruction(OpCodes.Call, arrayEmptyMethod),
-                new CodeInstruction(OpCodes.Call, langGetMethod),
-
-                // Get the font
-                new CodeInstruction(OpCodes.Call, whiteSmallishTextMethod),
-
-                // Load leftText variable
-                new CodeInstruction(OpCodes.Ldloc_0),
-
-                // Create a copy of the bounds below the previous element
-                new CodeInstruction(OpCodes.Ldc_R8, 0.0),
-                new CodeInstruction(OpCodes.Ldc_R8, 2.0),
-                new CodeInstruction(OpCodes.Ldc_R8, 0.0),
-                new CodeInstruction(OpCodes.Ldc_R8, 0.0),
-                new CodeInstruction(OpCodes.Callvirt, belowCopyMethod),
-
-                // Duplicate the bounds for assignment to leftText
-                new CodeInstruction(OpCodes.Dup),
-                new CodeInstruction(OpCodes.Stloc_0),
-
-                // Last parameter (null)
-                new CodeInstruction(OpCodes.Ldnull),
-
-                // Call AddStaticText - this is an extension method so
-                // it's a regular call, not callvirt
-                new CodeInstruction(OpCodes.Call, addStaticTextMethod)
-            };
-
-            // Insert our own hover text for the new switch
-            autoToggleMouseInstructions.AddRange(new List<CodeInstruction>
-            {
-                // Load the string for our toggle label
-                new CodeInstruction(OpCodes.Ldstr, operandSettingHoverAutoToggleMouse),
-
-                // Call Lang.Get(string, object[])
-                new CodeInstruction(OpCodes.Call, arrayEmptyMethod),
-                new CodeInstruction(OpCodes.Call, langGetMethod),
-
-                // Get the font
-                new CodeInstruction(OpCodes.Call, whiteSmallTextMethod),
-
-                // Load constant integer
-                new CodeInstruction(OpCodes.Ldc_I4, 250),
-
-                // Load leftText variable
-                new CodeInstruction(OpCodes.Ldloc_0),
-
-                // Create a flat copy of the leftText variable
-                new CodeInstruction(OpCodes.Callvirt, flatCopyMethod),
-
-                // Set fixed height
-                new CodeInstruction(OpCodes.Ldc_R8, 25.0),
-                new CodeInstruction(OpCodes.Callvirt, withFixedHeightMethod),
-
-                // Last parameter (null)
-                new CodeInstruction(OpCodes.Ldnull),
-
-                // Call AddHoverText - this is an extension method so
-                // it's a regular call, not callvirt
-                new CodeInstruction(OpCodes.Call, addHoverTextMethod)
-            });
-
-            // Insert our own switch with our own callback
-            autoToggleMouseInstructions.AddRange(new List<CodeInstruction>
-            {
-                // Create delegate for our toggle change event
-                new CodeInstruction(OpCodes.Ldnull),
-                new CodeInstruction(OpCodes.Ldftn, onAutoMouseToggleChangedMethod),
-                new CodeInstruction(OpCodes.Newobj, AccessTools.Constructor(
-                    typeof(Action<bool>), new[] { typeof(object), typeof(IntPtr) })),
-
-                // Load rightSlider variable and create a flat copy
-                new CodeInstruction(OpCodes.Ldloc_1), // Assuming rightSlider is stored in local variable 1
-
-                // Create a copy of the bounds below the previous element
-                new CodeInstruction(OpCodes.Ldc_R8, 0.0),
-                new CodeInstruction(OpCodes.Ldc_R8, 20.0),
-                new CodeInstruction(OpCodes.Ldc_R8, 0.0),
-                new CodeInstruction(OpCodes.Ldc_R8, 0.0),
-                new CodeInstruction(OpCodes.Callvirt, belowCopyMethod),
-
-                // Duplicate the bounds for assignment to rightSlider
-                new CodeInstruction(OpCodes.Dup),
-                new CodeInstruction(OpCodes.Stloc_1),
-
-                // Load the key for the switch
-                new CodeInstruction(OpCodes.Ldstr, "autoMouseToggleSwitch"),
-
-                // Load the actual default values from the source code
-                new CodeInstruction(OpCodes.Ldc_R8, 30.0), // Size default is 30.0
-                new CodeInstruction(OpCodes.Ldc_R8, 4.0),  // Padding default is 4.0
-
-                // Call AddSwitch
-                new CodeInstruction(OpCodes.Call, addSwitchMethod)
-            });
-
-            // Insert our new instructions
-            codes.InsertRange(insertIndex, autoToggleMouseInstructions);
+            AddAutoToggleMouseSetting(codes, instructionHookIndex);
         }
-
         // Return the modified instructions
         foreach (var code in codes)
         {
             yield return code;
         }
+    }
+
+    public static bool LoadMethods()
+    {
+        bool success = true;
+        arrayEmptyMethod = AccessTools.Method(
+            typeof(Array), "Empty").MakeGenericMethod(typeof(object));
+        success = success && arrayEmptyMethod != null;
+        langGetMethod = AccessTools.Method(
+            typeof(Lang), "Get", new[] {
+                typeof(string), typeof(object[])
+            });
+        success = success && langGetMethod != null;
+        whiteSmallishTextMethod = AccessTools.Method(
+            typeof(CairoFont), "WhiteSmallishText");
+        success = success && whiteSmallishTextMethod != null;
+        whiteSmallTextMethod = AccessTools.Method(
+            typeof(CairoFont), "WhiteSmallText");
+        success = success && whiteSmallTextMethod != null;
+        flatCopyMethod = AccessTools.Method(
+            typeof(ElementBounds), "FlatCopy");
+        success = success && flatCopyMethod != null;
+        belowCopyMethod = AccessTools.Method(
+            typeof(ElementBounds), "BelowCopy", new[] {
+                typeof(double), typeof(double),
+                typeof(double), typeof(double)
+            });
+        success = success && belowCopyMethod != null;
+        withFixedWidthMethod = AccessTools.Method(
+            typeof(ElementBounds), "WithFixedWidth", new[] {
+                typeof(double)
+            });
+        success = success && withFixedWidthMethod != null;
+        withFixedHeightMethod = AccessTools.Method(
+            typeof(ElementBounds), "WithFixedHeight", new[] {
+                typeof(double)
+            });
+        success = success && withFixedHeightMethod != null;
+        addStaticTextMethod = AccessTools.Method(
+            typeof(Vintagestory.API.Client.GuiComposerHelpers), "AddStaticText",
+            new[] {
+                typeof(GuiComposer), typeof(string), typeof(CairoFont),
+                typeof(ElementBounds), typeof(string)
+            });
+        success = success && addStaticTextMethod != null;
+        addHoverTextMethod = AccessTools.Method(
+            typeof(Vintagestory.API.Client.GuiComposerHelpers), "AddHoverText",
+            new[] {
+                typeof(GuiComposer), typeof(string), typeof(CairoFont), typeof(int),
+                typeof(ElementBounds), typeof(string)
+            });
+        success = success && addHoverTextMethod != null;
+        addSwitchMethod = AccessTools.Method(
+            typeof(Vintagestory.API.Client.GuiComposerHelpers), "AddSwitch",
+            new[] {
+                typeof(GuiComposer), typeof(Action<bool>),
+                typeof(ElementBounds), typeof(string),
+                typeof(double), typeof(double)
+            });
+        success = success && addSwitchMethod != null;
+        onAutoMouseToggleChangedMethod = AccessTools.Method(
+            typeof(GuiCompositeSettings_OnAccessibilityOptions),
+            "onAutoMouseToggleChanged");
+        success = success && onAutoMouseToggleChangedMethod != null;
+        return success;
+    }
+
+    public static int FindAutoToggleMouseSettingInstructionIndex(List<CodeInstruction> codes)
+    {
+        int instructionHookIndex = -1;
+        const string operandHookName = "setting-name-bobblehead";
+
+        // Find code instruction index at which to insert the static
+        // text, hover text, and switch callback code instructions
+        for (int i = 0; i < codes.Count; i++)
+        {
+            if (codes[i].operand is string operand && operand.Equals(operandHookName))
+            {
+                instructionHookIndex = i;
+                break;
+            }
+        }
+        return instructionHookIndex;
+    }
+
+    public static void AddAutoToggleMouseSetting(
+        List<CodeInstruction> codes, int instructionHookIndex)
+    {
+        const string operandSettingNameAutoToggleMouse =
+            "togglemousecontrol:setting-name-autotogglemouse";
+        const string operandSettingHoverAutoToggleMouse =
+            "togglemousecontrol:setting-hover-autotogglemouse";
+
+        // Insert our own static text for the new switch
+        var autoToggleMouseInstructions = new List<CodeInstruction>
+        {
+            // Load the string for our toggle label
+            new CodeInstruction(OpCodes.Ldstr, operandSettingNameAutoToggleMouse),
+
+            // Call Lang.Get(string, object[])
+            new CodeInstruction(OpCodes.Call, arrayEmptyMethod),
+            new CodeInstruction(OpCodes.Call, langGetMethod),
+
+            // Get the font
+            new CodeInstruction(OpCodes.Call, whiteSmallishTextMethod),
+
+            // Load leftText variable
+            new CodeInstruction(OpCodes.Ldloc_0),
+
+            // Create a copy of the bounds below the previous element
+            new CodeInstruction(OpCodes.Ldc_R8, 0.0),
+            new CodeInstruction(OpCodes.Ldc_R8, 2.0),
+            new CodeInstruction(OpCodes.Ldc_R8, 0.0),
+            new CodeInstruction(OpCodes.Ldc_R8, 0.0),
+            new CodeInstruction(OpCodes.Callvirt, belowCopyMethod),
+
+            // Duplicate the bounds for assignment to leftText
+            new CodeInstruction(OpCodes.Dup),
+            new CodeInstruction(OpCodes.Stloc_0),
+
+            // Last parameter (null)
+            new CodeInstruction(OpCodes.Ldnull),
+
+            // Call AddStaticText - this is an extension method so
+            // it's a regular call, not callvirt
+            new CodeInstruction(OpCodes.Call, addStaticTextMethod)
+        };
+
+        // Insert our own hover text for the new switch
+        autoToggleMouseInstructions.AddRange(new List<CodeInstruction>
+        {
+            // Load the string for our toggle label
+            new CodeInstruction(OpCodes.Ldstr, operandSettingHoverAutoToggleMouse),
+
+            // Call Lang.Get(string, object[])
+            new CodeInstruction(OpCodes.Call, arrayEmptyMethod),
+            new CodeInstruction(OpCodes.Call, langGetMethod),
+
+            // Get the font
+            new CodeInstruction(OpCodes.Call, whiteSmallTextMethod),
+
+            // Load constant integer
+            new CodeInstruction(OpCodes.Ldc_I4, 250),
+
+            // Load leftText variable
+            new CodeInstruction(OpCodes.Ldloc_0),
+
+            // Create a flat copy of the leftText variable
+            new CodeInstruction(OpCodes.Callvirt, flatCopyMethod),
+
+            // Set fixed height
+            new CodeInstruction(OpCodes.Ldc_R8, 25.0),
+            new CodeInstruction(OpCodes.Callvirt, withFixedHeightMethod),
+
+            // Last parameter (null)
+            new CodeInstruction(OpCodes.Ldnull),
+
+            // Call AddHoverText - this is an extension method so
+            // it's a regular call, not callvirt
+            new CodeInstruction(OpCodes.Call, addHoverTextMethod)
+        });
+
+        // Insert our own switch with our own callback
+        autoToggleMouseInstructions.AddRange(new List<CodeInstruction>
+        {
+            // Create delegate for our toggle change event
+            new CodeInstruction(OpCodes.Ldnull),
+            new CodeInstruction(OpCodes.Ldftn, onAutoMouseToggleChangedMethod),
+            new CodeInstruction(OpCodes.Newobj, AccessTools.Constructor(
+                typeof(Action<bool>), new[] { typeof(object), typeof(IntPtr) })),
+
+            // Load rightSlider variable and create a flat copy
+            new CodeInstruction(OpCodes.Ldloc_1), // Assuming rightSlider is stored in local variable 1
+
+            // Create a copy of the bounds below the previous element
+            new CodeInstruction(OpCodes.Ldc_R8, 0.0),
+            new CodeInstruction(OpCodes.Ldc_R8, 20.0),
+            new CodeInstruction(OpCodes.Ldc_R8, 0.0),
+            new CodeInstruction(OpCodes.Ldc_R8, 0.0),
+            new CodeInstruction(OpCodes.Callvirt, belowCopyMethod),
+
+            // Duplicate the bounds for assignment to rightSlider
+            new CodeInstruction(OpCodes.Dup),
+            new CodeInstruction(OpCodes.Stloc_1),
+
+            // Load the key for the switch
+            new CodeInstruction(OpCodes.Ldstr, "autoMouseToggleSwitch"),
+
+            // Load the actual default values from the source code
+            new CodeInstruction(OpCodes.Ldc_R8, 30.0), // Size default is 30.0
+            new CodeInstruction(OpCodes.Ldc_R8, 4.0),  // Padding default is 4.0
+
+            // Call AddSwitch
+            new CodeInstruction(OpCodes.Call, addSwitchMethod)
+        });
+
+        // Insert our new instructions
+        codes.InsertRange(instructionHookIndex, autoToggleMouseInstructions);
     }
 }
 
