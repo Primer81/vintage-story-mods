@@ -1206,7 +1206,16 @@ public class GuiCompositeSettings : GuiComposite
 	{
 		ElementBounds leftText = ElementBounds.Fixed(0.0, 85.0, 450.0, 42.0);
 		ElementBounds rightSlider = ElementBounds.Fixed(470.0, 138.0, 200.0, 20.0);
-		GuiComposer guiComposer = ComposerHeader("gamesettings-accessibility", "accessibility").AddStaticText(Lang.Get("setting-accessibility-notes"), CairoFont.WhiteSmallText(), leftText.FlatCopy().WithFixedWidth(800.0)).AddStaticText(Lang.Get("setting-name-togglesprint"), CairoFont.WhiteSmallishText(), leftText = leftText.BelowCopy(0.0, 12.0).WithFixedWidth(360.0)).AddHoverText(Lang.Get("setting-hover-togglesprint"), CairoFont.WhiteSmallText(), 250, leftText.FlatCopy().WithFixedHeight(25.0))
+		GuiComposer guiComposer = ComposerHeader("gamesettings-accessibility", "accessibility")
+			.AddStaticText(
+				Lang.Get("setting-accessibility-notes"),
+				CairoFont.WhiteSmallText(),
+				leftText.FlatCopy().WithFixedWidth(800.0))
+			.AddStaticText(
+				Lang.Get("setting-name-togglesprint"),
+				CairoFont.WhiteSmallishText(),
+				leftText = leftText.BelowCopy(0.0, 12.0).WithFixedWidth(360.0))
+			.AddHoverText(Lang.Get("setting-hover-togglesprint"), CairoFont.WhiteSmallText(), 250, leftText.FlatCopy().WithFixedHeight(25.0))
 			.AddSwitch(onToggleSprint, rightSlider.FlatCopy(), "toggleSprint")
 			.AddStaticText(Lang.Get("setting-name-bobblehead"), CairoFont.WhiteSmallishText(), leftText = leftText.BelowCopy(0.0, 2.0))
 			.AddHoverText(Lang.Get("setting-hover-bobblehead"), CairoFont.WhiteSmallText(), 250, leftText.FlatCopy().WithFixedHeight(25.0))
@@ -1217,12 +1226,38 @@ public class GuiCompositeSettings : GuiComposite
 			.AddStaticText(Lang.Get("setting-name-wireframethickness"), CairoFont.WhiteSmallishText(), leftText = leftText.BelowCopy(0.0, 2.0));
 		ActionConsumable<int> onNewSliderValue = onWireframeThicknessChanged;
 		ElementBounds elementBounds = rightSlider.BelowCopy(0.0, 19.0).WithFixedSize(200.0, 25.0);
-		composer = GuiComposerHelpers.AddDropDown(bounds: rightSlider = elementBounds.BelowCopy(0.0, 19.0).WithFixedSize(100.0, 25.0), composer: guiComposer.AddSlider(onNewSliderValue, elementBounds, "wireframethicknessSlider").AddHoverText(Lang.Get("setting-hover-wireframethickness"), CairoFont.WhiteSmallText(), 250, leftText.FlatCopy().WithFixedHeight(25.0)).AddStaticText(Lang.Get("setting-name-wireframecolors"), CairoFont.WhiteSmallishText(), leftText = leftText.BelowCopy(0.0, 2.0)), values: new string[3] { "Preset1", "Preset2", "Preset3" }, names: new string[3]
-		{
-			Lang.Get("Preset 1"),
-			Lang.Get("Preset 2"),
-			Lang.Get("Preset 3")
-		}, selectedIndex: ClientSettings.guiColorsPreset - 1, onSelectionChanged: onWireframeColorsChanged, key: "wireframecolorsDropdown").AddHoverText(Lang.Get("setting-hover-wireframecolors"), CairoFont.WhiteSmallText(), 250, leftText.FlatCopy().WithFixedHeight(25.0)).AddStaticText(Lang.Get("setting-name-instabilityWavingStrength"), CairoFont.WhiteSmallishText(), leftText = leftText.BelowCopy(0.0, 2.0))
+		composer = GuiComposerHelpers
+			.AddDropDown(
+				bounds: rightSlider = elementBounds.BelowCopy(0.0, 19.0).WithFixedSize(100.0, 25.0),
+				composer: guiComposer
+					.AddSlider(onNewSliderValue, elementBounds, "wireframethicknessSlider")
+					.AddHoverText(
+						Lang.Get("setting-hover-wireframethickness"),
+						CairoFont.WhiteSmallText(),
+						250,
+						leftText.FlatCopy().WithFixedHeight(25.0))
+					.AddStaticText(Lang.Get("setting-name-wireframecolors"),
+				CairoFont.WhiteSmallishText(),
+				leftText = leftText.BelowCopy(0.0, 2.0)),
+				values: new string[3] { "Preset1", "Preset2", "Preset3" },
+				names: new string[3]
+				{
+					Lang.Get("Preset 1"),
+					Lang.Get("Preset 2"),
+					Lang.Get("Preset 3")
+				},
+				selectedIndex: ClientSettings.guiColorsPreset - 1,
+				onSelectionChanged: onWireframeColorsChanged,
+				key: "wireframecolorsDropdown")
+			.AddHoverText(
+				Lang.Get("setting-hover-wireframecolors"),
+				CairoFont.WhiteSmallText(),
+				250,
+				leftText.FlatCopy().WithFixedHeight(25.0))
+			.AddStaticText(
+				Lang.Get("setting-name-instabilityWavingStrength"),
+				CairoFont.WhiteSmallishText(),
+				leftText = leftText.BelowCopy(0.0, 2.0))
 			.AddSlider(onInstabilityStrengthChanged, rightSlider = rightSlider.BelowCopy(0.0, 19.0).WithFixedSize(200.0, 25.0), "instabilityWavingStrengthSlider")
 			.AddHoverText(Lang.Get("setting-hover-instabilityWavingStrength"), CairoFont.WhiteSmallText(), 250, leftText.FlatCopy().WithFixedHeight(25.0))
 			.AddRichtext(Lang.Get("help-accessibility"), CairoFont.WhiteDetailText(), leftText = leftText.BelowCopy(0.0, 23.0))

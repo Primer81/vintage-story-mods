@@ -709,6 +709,11 @@
 					"line": 15
 				},
 				{
+					"line": 148,
+					"column": 0,
+					"label": ""
+				},
+				{
 					"column": 0,
 					"label": ".AddConfigList(keycontrolItems, OnKeyControlItemClick, CairoFont.WhiteSmallText().WithFontSize(18f), configListBounds, \"configlist\")",
 					"line": 888
@@ -724,14 +729,19 @@
 					"line": 1121
 				},
 				{
+					"line": 1272,
+					"column": 0,
+					"label": ""
+				},
+				{
 					"column": 0,
 					"label": "GuiComposer guiComposer = composer.AddStaticText(Lang.Get(\"setting-name-immersivemousemode\"), CairoFont.WhiteSmallishText(), leftText = leftText.BelowCopy(0.0, 4.0)).AddHoverText(Lang.Get(\"setting-hover-immersivemousemode\"), CairoFont.WhiteSmallText(), 250, leftText.FlatCopy().WithFixedHeight(25.0)).AddSwitch(onImmersiveMouseModeChanged, rightSlider = rightSlider.BelowCopy(0.0, 17.0), \"immersiveMouseModeSwitch\")",
-					"line": 1414
+					"line": 1449
 				},
 				{
 					"column": 0,
 					"label": "private void onImmersiveMouseModeChanged(bool on)",
-					"line": 1496
+					"line": 1531
 				}
 			]
 		},
@@ -1877,6 +1887,21 @@
 					"column": 0,
 					"label": "public class WorldEditClientHandler",
 					"line": 13
+				}
+			]
+		},
+		{
+			"path": "VintagestoryLib/Vintagestory/Client/NoObf/GuiScreenSettings.cs",
+			"bookmarks": [
+				{
+					"line": 5,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 30,
+					"column": 0,
+					"label": ""
 				}
 			]
 		}
