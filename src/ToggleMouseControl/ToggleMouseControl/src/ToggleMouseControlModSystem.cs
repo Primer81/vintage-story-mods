@@ -105,6 +105,14 @@ public class ToggleMouseControlModSystem : ModSystem
         return mouseControlToggledOn;
     }
 
+    public static void SetMouseControlEnabled(bool enabled)
+    {
+        if (IsMouseControlToggledOn() != enabled)
+        {
+            ToggleMouseControl();
+        }
+    }
+
     public static void Dump(object data)
     {
         ClientApi.StoreModConfig(

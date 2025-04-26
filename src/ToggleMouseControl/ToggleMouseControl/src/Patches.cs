@@ -201,24 +201,15 @@ internal static class Patches
                 (dialogWasClosed == true);
             if (toggleBecauseDialogsPrefer)
             {
-                if (ToggleMouseControlModSystem.IsMouseControlToggledOn() != dialogsWantMouseControl)
-                {
-                    ToggleMouseControlModSystem.ToggleMouseControl();
-                }
+                ToggleMouseControlModSystem.SetMouseControlEnabled(dialogsWantMouseControl);
             }
             else if (toggleBecauseDialogWasOpened)
             {
-                if (ToggleMouseControlModSystem.IsMouseControlToggledOn() == false)
-                {
-                    ToggleMouseControlModSystem.ToggleMouseControl();
-                }
+                ToggleMouseControlModSystem.SetMouseControlEnabled(false);
             }
             else if (toggleBecauseDialogWasClosed)
             {
-                if (ToggleMouseControlModSystem.IsMouseControlToggledOn() == true)
-                {
-                    ToggleMouseControlModSystem.ToggleMouseControl();
-                }
+                ToggleMouseControlModSystem.SetMouseControlEnabled(true);
             }
         }
         if (canGrabMouse)

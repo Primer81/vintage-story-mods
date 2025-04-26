@@ -45,10 +45,7 @@ public static class GuiCompositeSettings_OnAccessibilityOptions
     {
         ToggleMouseControlModSystem.Config.GuiAutoToggleMouseControl = on;
         ToggleMouseControlModSystem.Dump(ToggleMouseControlModSystem.Config);
-        if (ToggleMouseControlModSystem.IsMouseControlToggledOn())
-        {
-            ToggleMouseControlModSystem.ToggleMouseControl();
-        }
+        ToggleMouseControlModSystem.SetMouseControlEnabled(false);
     }
 
     public static IEnumerable<CodeInstruction> Transpiler(
