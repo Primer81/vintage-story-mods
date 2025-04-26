@@ -687,6 +687,11 @@
 					"column": 0,
 					"label": "public static class GuiComposerHelpers",
 					"line": 6
+				},
+				{
+					"line": 1348,
+					"column": 0,
+					"label": ""
 				}
 			]
 		},
