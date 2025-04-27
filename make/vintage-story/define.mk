@@ -37,7 +37,13 @@ export DOTNET_ILSPYCMD_REFERENCES?=\
     $(VINTAGE_STORY)\
     $(VINTAGE_STORY)/Mods\
     $(VINTAGE_STORY)/Lib
-export DOTNET_ILSPYCMD_OUTPUT_VERSION?=new
+ifndef version
+    ### Defaults
+    export DOTNET_ILSPYCMD_OUTPUT_VERSION?=new
+else
+    ### Shorthand
+    export DOTNET_ILSPYCMD_OUTPUT_VERSION?=$(version)
+endif
 export DOTNET_ILSPYCMD_FLAGS?=\
     --project\
     --disable-updatecheck\
