@@ -19,6 +19,14 @@ namespace ToggleMouseControl;
 [HarmonyPatchCategory("togglemousecontrol")]
 internal static class Patches
 {
+    [HarmonyPostfix()]
+    [HarmonyPatch(typeof(GuiDialogInventory), "get_PrefersUngrabbedMouse")]
+    public static void Before_GuiDialogInventory_get_PrefersUngrabbedMouse(
+        ref bool __result)
+    {
+        __result = true;
+    }
+
     [HarmonyPrefix()]
     [HarmonyPatch(typeof(SystemPlayerControl), "OnGameTick")]
     public static bool Before_SystemPlayerControl_OnGameTick(
