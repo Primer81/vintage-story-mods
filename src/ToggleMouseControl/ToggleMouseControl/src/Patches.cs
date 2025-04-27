@@ -252,11 +252,20 @@ internal static class Patches
         }
 
         // Patch the parent method
-        harmony.Patch(
-            parentMethod,
-            prefix: new HarmonyMethod(AccessTools.Method(thisClassType, prefix)),
-            postfix: new HarmonyMethod(AccessTools.Method(thisClassType, postfix))
-        );
+        if (prefix != null)
+        {
+            harmony.Patch(
+                parentMethod,
+                prefix: new HarmonyMethod(AccessTools.Method(thisClassType, prefix))
+            );
+        }
+        if (postfix != null)
+        {
+            harmony.Patch(
+                parentMethod,
+                postfix: new HarmonyMethod(AccessTools.Method(thisClassType, postfix))
+            );
+        }
 
         // Find all types in all loaded assemblies
         List<Type> derivedTypes = new List<Type>();

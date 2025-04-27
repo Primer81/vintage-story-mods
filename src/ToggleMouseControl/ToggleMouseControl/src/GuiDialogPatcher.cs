@@ -88,6 +88,13 @@ public static class GuiDialogPatcher
             nameof(GuiDialog.OnKeyUp),
             nameof(Before_GuiDialog_OnKeyUp),
             nameof(After_GuiDialog_OnKeyUp));
+        // Patch OnGuiOpened
+        PatchAllImplementationsOfMethodWithPrefixAndPostfix(
+            harmony,
+            typeof(GuiDialog),
+            nameof(GuiDialog.OnGuiOpened),
+            null,
+            nameof(After_GuiDialog_OnGuiOpened));
     }
 
     public static void PatchAllImplementationsOfMethodWithPrefixAndPostfix(
@@ -187,5 +194,13 @@ public static class GuiDialogPatcher
     }
     public static void After_GuiDialog_OnKeyUp(GuiDialog __instance)
     {
+    }
+
+    public static void After_GuiDialog_OnGuiOpened(GuiDialog __instance)
+    {
+        foreach (GuiComposer composer in __instance.Composers.Values)
+        {
+            composer.UnfocusOwnElements();
+        }
     }
 }
