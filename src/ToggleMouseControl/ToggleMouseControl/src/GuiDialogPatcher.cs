@@ -54,40 +54,40 @@ public static class GuiDialogPatcher
             typeof(GuiDialog),
             nameof(GuiDialog.OnMouseWheel),
             nameof(Before_GuiDialog_OnMouseWheel),
-            nameof(After_GuiDialog_OnMouseWheel));
+            null);
         // Patch OnMouseMove
         PatchAllImplementationsOfMethodWithPrefixAndPostfix(
             harmony,
             typeof(GuiDialog),
             nameof(GuiDialog.OnMouseMove),
             nameof(Before_GuiDialog_OnMouseMove),
-            nameof(After_GuiDialog_OnMouseMove));
+            null);
         // Patch OnMouseDown/OnMouseUp
         PatchAllImplementationsOfMethodWithPrefixAndPostfix(
             harmony,
             typeof(GuiDialog),
             nameof(GuiDialog.OnMouseDown),
             nameof(Before_GuiDialog_OnMouseDown),
-            nameof(After_GuiDialog_OnMouseDown));
+            null);
         PatchAllImplementationsOfMethodWithPrefixAndPostfix(
             harmony,
             typeof(GuiDialog),
             nameof(GuiDialog.OnMouseUp),
             nameof(Before_GuiDialog_OnMouseUp),
-            nameof(After_GuiDialog_OnMouseUp));
+            null);
         // Patch OnKeyDown/OnKeyUp
         PatchAllImplementationsOfMethodWithPrefixAndPostfix(
             harmony,
             typeof(GuiDialog),
             nameof(GuiDialog.OnKeyDown),
             nameof(Before_GuiDialog_OnKeyDown),
-            nameof(After_GuiDialog_OnKeyDown));
+            null);
         PatchAllImplementationsOfMethodWithPrefixAndPostfix(
             harmony,
             typeof(GuiDialog),
             nameof(GuiDialog.OnKeyUp),
             nameof(Before_GuiDialog_OnKeyUp),
-            nameof(After_GuiDialog_OnKeyUp));
+            null);
         // Patch OnGuiOpened
         PatchAllImplementationsOfMethodWithPrefixAndPostfix(
             harmony,
@@ -119,9 +119,6 @@ public static class GuiDialogPatcher
         GuiDialog __instance)
     {
         return ShouldRunOriginalGuiDialogInputHandlers(__instance);
-    }
-    public static void After_GuiDialog_OnMouseWheel(GuiDialog __instance)
-    {
     }
 
     public static bool Before_GuiDialog_OnMouseMove(
@@ -156,17 +153,11 @@ public static class GuiDialogPatcher
         }
         return runOriginal;
     }
-    public static void After_GuiDialog_OnMouseMove(GuiDialog __instance)
-    {
-    }
 
     public static bool Before_GuiDialog_OnMouseDown(
         GuiDialog __instance)
     {
         return ShouldRunOriginalGuiDialogInputHandlers(__instance);
-    }
-    public static void After_GuiDialog_OnMouseDown(GuiDialog __instance)
-    {
     }
 
     public static bool Before_GuiDialog_OnMouseUp(
@@ -174,26 +165,17 @@ public static class GuiDialogPatcher
     {
         return ShouldRunOriginalGuiDialogInputHandlers(__instance);
     }
-    public static void After_GuiDialog_OnMouseUp(GuiDialog __instance)
-    {
-    }
 
     public static bool Before_GuiDialog_OnKeyDown(
         GuiDialog __instance)
     {
         return ShouldRunOriginalGuiDialogInputHandlers(__instance);
     }
-    public static void After_GuiDialog_OnKeyDown(GuiDialog __instance)
-    {
-    }
 
     public static bool Before_GuiDialog_OnKeyUp(
         GuiDialog __instance)
     {
         return ShouldRunOriginalGuiDialogInputHandlers(__instance);
-    }
-    public static void After_GuiDialog_OnKeyUp(GuiDialog __instance)
-    {
     }
 
     public static void After_GuiDialog_OnGuiOpened(GuiDialog __instance)
