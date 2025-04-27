@@ -3,6 +3,8 @@
 <p>For those who wish immersive mouse mode was actually immersive. 😜</p>
 <p>&nbsp;</p>
 <p>Works with and without immersive mouse mode!</p>
+<p>&nbsp;</p>
+<p>Adds a new setting named "Auto Toggle Mouse" to the accessibility menu. Allows you to control whether the mouse should auto-enable when opening a GUI and auto-disable when closing a GUI.</p>
 <h3>Bugs</h3>
 <p>&nbsp;</p>
 <p>Active Bugs:</p>
@@ -29,9 +31,21 @@
 <p>&nbsp;</p>
 <p>Fixed<sup>2</sup> Bugs:</p>
 <div class="spoiler">
-<div class="spoiler-toggle">Fixed (12)</div>
+<div class="spoiler-toggle">Fixed (14)</div>
 <div class="spoiler-text">
 <ul>
+<li>B15: Given immersive mouse mode is ON, when the survival inventory is opened/closed, then the Vanilla behavior is to NOT auto-toggle the mouse control.
+<ul>
+<li><span style="font-size: 10pt;">Introduced in v1.2.0 🪲 (also in Vanilla 😉)</span></li>
+<li><span style="font-size: 10pt;">Fixed in v1.2.2 🛠️</span></li>
+</ul>
+</li>
+<li>B14: Given the %APPDATA%VintagestoryData\ModConfig\ToggleMouseControl\Config.json file has not been generated yet, when loading a world, then the mod crashes by returning a null Config instead of the default Config.
+<ul>
+<li><span style="font-size: 10pt;">Introduced in v1.2.0 🪲</span></li>
+<li><span style="font-size: 10pt;">Fixed in v1.2.1 🛠️</span></li>
+</ul>
+</li>
 <li>B13: Given toggle sprint is ON and the player is sprinting, when the player releases the sprint key, then they do not continue sprinting.
 <ul>
 <li><span style="font-size: 10pt;">Introduced in v1.1.5 🪲</span></li>
@@ -120,6 +134,11 @@
 <p>&nbsp;</p>
 <p>Improvements Made:</p>
 <ul>
+<li>F14: Improve compatibility with other mods that focus their own elements upon opening their custom GuiDialog.
+<ul>
+<li><span style="font-size: 10pt;">Added in v1.2.3 🎉</span></li>
+</ul>
+</li>
 <li>F10: Decouple the auto-toggling behavior of a certain type of GUI (such as the player inventory) from the immersive mouse mode setting into its own setting.
 <ul>
 <li><span style="font-size: 10pt;">Note:</span><span style="font-size: 10pt;"> By "certain type of GUI" I mean GUIs which are expected to disable the mouse grab and do set the PrefersUngrabbedMouse property to true.</span></li>
@@ -185,17 +204,23 @@
 <p>F06: Minimize the size of the mod.</p>
 </li>
 <li><span style="font-size: 12pt;">F12: Make it possible to configure whether sneak, sprint, or jump player controls are accessible when mouse control is ON.</span></li>
+<li><span style="font-size: 12pt;">F13: Translate settings/tooltips for other languages supported by Vintage Story</span></li>
 </ul>
 <p>&nbsp;</p>
-<h3>Compatibility Test Backlog</h3>
+<h3>Compatibility Test and Review Backlog</h3>
 <p>&nbsp;</p>
-<p>Tests Completed:</p>
+<p>Test/Reviews Completed:</p>
 <ul>
-<li>None... 😅</li>
+<li>T00: Review and test compatibility with Vintage Story v1.20.7</li>
 </ul>
 <p>&nbsp;</p>
-<p>Tests to do:</p>
+<p>Test/Reviews to do:</p>
 <ul>
-<li>T01: Test compatibility with Vintage Story v1.20.8</li>
-<li>T02: Test compatibility with Vintage Story v1.20.9</li>
+<li>T01: Review and test compatibility with Vintage Story v1.20.8</li>
+<li>T02: Review and test compatibility with Vintage Story v1.20.9
+<ul>
+<li><span style="font-size: 10pt;">Review: TODO</span></li>
+<li><span style="font-size: 10pt;">Test: Seems to work as expected after playtesting for a bit.</span></li>
+</ul>
+</li>
 </ul>
