@@ -122,7 +122,7 @@ public class ToggleMouseControlModSystem : ModSystem
                 $"{data.GetType().Name}.json"));
     }
 
-    public static dynamic Fetch<T>() where T : new()
+    public static T Fetch<T>() where T : new()
     {
         string path = System.IO.Path.Combine(
             $"{nameof(ToggleMouseControl)}",
@@ -152,7 +152,15 @@ public class ToggleMouseControlModSystem : ModSystem
             var constructedMethod = genericMethod.MakeGenericMethod(typeof(T));
 
             // Invoke the method through the interface
-            return constructedMethod.Invoke(ClientApi, new object[] { path });
+            T result = (T)constructedMethod.Invoke(ClientApi, new object[] { path });
+            if (result == null)
+            {
+                return new T();
+            }
+            else
+            {
+                return result;
+            }
         }
         catch
         {
