@@ -205,11 +205,11 @@ internal static class Patches
             }
             else if (toggleBecauseDialogWasOpened)
             {
-                ToggleMouseControlModSystem.SetMouseControlEnabled(false);
+                ToggleMouseControlModSystem.SetMouseControlEnabled(true);
             }
             else if (toggleBecauseDialogWasClosed)
             {
-                ToggleMouseControlModSystem.SetMouseControlEnabled(true);
+                ToggleMouseControlModSystem.SetMouseControlEnabled(false);
             }
         }
         if (canGrabMouse)
