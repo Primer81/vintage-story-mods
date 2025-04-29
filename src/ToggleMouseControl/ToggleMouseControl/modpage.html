@@ -6,7 +6,12 @@
 <p>&nbsp;</p>
 <p>Adds a new setting named "Auto Toggle Mouse" to the accessibility menu. Allows you to control whether the mouse should auto-enable when opening a GUI and auto-disable when closing a GUI.</p>
 <p>&nbsp;</p>
-<p>In addition, in the case where the "Auto Toggle Mouse" setting is ON, but you have certain GUIs that you&nbsp;<em>don't</em> want</p>
+<p>In addition, in the case where the "Auto Toggle Mouse" setting is ON, but you have certain GUIs that you either</p>
+<ul>
+<li><em>don't</em> want to auto-toggle... in which case you would set "AutoToggleMouse" equal to false..&nbsp; <em>or</em></li>
+<li>you <em>do</em> want to toggle even when immersive mouse mode is ON... in which case you would set "TreatAsImmersive" equal to true...</li>
+</ul>
+<p>then you can open up the "ToggleMouseControl/Config.json" file and make changes for that specific GUI based on its debug name.</p>
 <h3>Bugs</h3>
 <p>&nbsp;</p>
 <p>Active Bugs:</p>
