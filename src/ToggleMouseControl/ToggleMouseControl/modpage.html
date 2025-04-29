@@ -5,6 +5,8 @@
 <p>Works with and without immersive mouse mode!</p>
 <p>&nbsp;</p>
 <p>Adds a new setting named "Auto Toggle Mouse" to the accessibility menu. Allows you to control whether the mouse should auto-enable when opening a GUI and auto-disable when closing a GUI.</p>
+<p>&nbsp;</p>
+<p>In addition, in the case where the "Auto Toggle Mouse" setting is ON, but you have certain GUIs that you&nbsp;<em>don't</em> want</p>
 <h3>Bugs</h3>
 <p>&nbsp;</p>
 <p>Active Bugs:</p>
@@ -134,6 +136,11 @@
 <p>&nbsp;</p>
 <p>Improvements Made:</p>
 <ul>
+<li>F05: Given the auto toggle mouse setting is ON, then it should be possible to configure which GUI's will auto-toggle mouse control. Given an "immersive" dialog is configured to auto-toggle, then this configuration shall override the immersive mouse mode's behavior which prevents the auto-toggle.
+<ul>
+<li><span style="font-size: 10pt;">Added in v1.3.0 🎉</span></li>
+</ul>
+</li>
 <li>F14: Improve compatibility with other mods that focus their own elements upon opening their custom GuiDialog.
 <ul>
 <li><span style="font-size: 10pt;">Added in v1.2.3 🎉</span></li>
@@ -195,11 +202,6 @@
 <p>Future Improvements:</p>
 <ul>
 <li>F04: Tie the handbook pause button to a hot key (will likely spin this into its own mod).</li>
-<li>F05: Make it possible to configure which GUI's will auto-enable mouse control when immersive mouse mode is ON.
-<ul>
-<li><span style="font-size: 10pt;">Specifically: Given immersive mouse mode is ON and mouse control is toggled OFF, while a <em>configured GUI</em> is open, mouse control is automatically granted.</span></li>
-</ul>
-</li>
 <li>
 <p>F06: Minimize the size of the mod.</p>
 </li>
