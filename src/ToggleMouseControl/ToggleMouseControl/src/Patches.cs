@@ -178,15 +178,14 @@ internal static class Patches
         ref bool ___exitToDisconnectScreen,
         ref bool ___exitToMainMenu)
     {
+        // Fetch persistant config storage
+        ToggleMouseControlModSystem.Config = ToggleMouseControlModSystem.Fetch<Config>();
+
+        List<GuiDialog> dialogGuis = ___api.Gui.OpenedGuis
+            .Where(gui => gui.DialogType == EnumDialogType.Dialog)
+            .ToList();
         bool dialogsWantMouseControl =
-            ___api.Gui.OpenedGuis
-                .Where((GuiDialog gui) => gui.DialogType == EnumDialogType.Dialog)
-                .Any((GuiDialog dlg) => dlg.PrefersUngrabbedMouse);
-        int dialogsOpenCount = __instance.DialogsOpened;
-        bool dialogWasOpened =
-            dialogsOpenCount > ToggleMouseControlModSystem.DialogsOpenCountPrev;
-        bool dialogWasClosed =
-            dialogsOpenCount < ToggleMouseControlModSystem.DialogsOpenCountPrev;
+            DoDialogsWantMouseControl(/*__instance, */dialogGuis);
         bool forceDisableMouseGrab =
             ___api.Gui.OpenedGuis.Any((GuiDialog gui) => gui.DisableMouseGrab) ||
             ___api.IsGamePaused ||
@@ -197,29 +196,23 @@ internal static class Patches
             !___exitToMainMenu &&
             __instance.BlocksReceivedAndLoaded &&
             !forceDisableMouseGrab;
+        // Update config when new dialogs that haven't been seen before are opened
+        if (ToggleMouseControlModSystem.UpdateConfigFlag == true)
+        {
+            ToggleMouseControlModSystem.UpdateConfigFlag =
+                !ToggleMouseControlModSystem.Dump(ToggleMouseControlModSystem.Config);
+        }
+        // Check for auto toggle triggers
         if (ToggleMouseControlModSystem.Config.GuiAutoToggleMouseControl == true)
         {
             bool toggleBecauseDialogsPrefer =
                 dialogsWantMouseControl != ToggleMouseControlModSystem.DialogsWantMouseControlPrev;
-            bool toggleBecauseDialogWasOpened =
-                (ClientSettings.ImmersiveMouseMode == false) &&
-                (dialogWasOpened == true);
-            bool toggleBecauseDialogWasClosed =
-                (ClientSettings.ImmersiveMouseMode == false) &&
-                (dialogWasClosed == true);
             if (toggleBecauseDialogsPrefer)
             {
                 ToggleMouseControlModSystem.SetMouseControlEnabled(dialogsWantMouseControl);
             }
-            else if (toggleBecauseDialogWasOpened)
-            {
-                ToggleMouseControlModSystem.SetMouseControlEnabled(true);
-            }
-            else if (toggleBecauseDialogWasClosed)
-            {
-                ToggleMouseControlModSystem.SetMouseControlEnabled(false);
-            }
         }
+        // Make the final decision as to whether the mouse is grabbed or not
         if (canGrabMouse)
         {
             __instance.MouseGrabbed = !ToggleMouseControlModSystem.IsMouseControlToggledOn();
@@ -230,8 +223,51 @@ internal static class Patches
         }
         ___mouseWorldInteractAnyway = !__instance.MouseGrabbed;
         ToggleMouseControlModSystem.DialogsWantMouseControlPrev = dialogsWantMouseControl;
-        ToggleMouseControlModSystem.DialogsOpenCountPrev = dialogsOpenCount;
+        ToggleMouseControlModSystem.DialogGuisPrev = dialogGuis;
         return false;
+    }
+
+    private static bool DoDialogsWantMouseControl(
+        /*ClientMain instance, */List<GuiDialog> dialogGuis)
+    {
+        bool result = false;
+
+        // Check if any dialog meets the conditions
+        foreach (var dlg in dialogGuis)
+        {
+            bool doesDialogWantMouseControl = DoesDialogWantMouseControl(dlg);
+            result = result || doesDialogWantMouseControl;
+        }
+
+        // No dialog met the conditions
+        return result;
+    }
+
+    private static bool DoesDialogWantMouseControl(GuiDialog dlg)
+    {
+        bool configExists = ToggleMouseControlModSystem.Config.GuiConfigs.ContainsKey(dlg.DebugName);
+        if (!configExists)
+        {
+            ToggleMouseControlModSystem.Config.GuiConfigs.Add(dlg.DebugName, new GuiConfig(dlg));
+            ToggleMouseControlModSystem.UpdateConfigFlag = true;
+        }
+        return
+            ToggleMouseControlModSystem.Config.GuiConfigs[dlg.DebugName].AutoToggleMouse &&
+            (
+                !ToggleMouseControlModSystem.Config.GuiConfigs[dlg.DebugName].TreatAsImmersive ||
+                !ClientSettings.ImmersiveMouseMode
+            );
+    }
+
+    private static bool IsDialogImmersive(GuiDialog dlg)
+    {
+        bool configExists = ToggleMouseControlModSystem.Config.GuiConfigs.ContainsKey(dlg.DebugName);
+        if (!configExists)
+        {
+            ToggleMouseControlModSystem.Config.GuiConfigs.Add(dlg.DebugName, new GuiConfig(dlg));
+            ToggleMouseControlModSystem.UpdateConfigFlag = true;
+        }
+        return ToggleMouseControlModSystem.Config.GuiConfigs[dlg.DebugName].TreatAsImmersive;
     }
 
     public static void PatchAllImplementationsOfMethodWithPrefixAndPostfix(

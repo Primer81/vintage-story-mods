@@ -20,7 +20,8 @@ public class ToggleMouseControlModSystem : ModSystem
 {
     static public ICoreClientAPI ClientApi;
     static public bool DialogsWantMouseControlPrev;
-    static public int DialogsOpenCountPrev;
+    static public List<GuiDialog> DialogGuisPrev;
+    static public bool UpdateConfigFlag;
     static public Config Config;
 
     static private Harmony harmony;
@@ -39,13 +40,13 @@ public class ToggleMouseControlModSystem : ModSystem
         ClientApi = api;
         // Initial static state defaults
         DialogsWantMouseControlPrev = false;
-        DialogsOpenCountPrev = 0;
+        DialogGuisPrev = new List<GuiDialog>();
         mouseControlToggledOn = false;
         SystemPlayerControlMembers.IsValid = false;
         // Configuration
         {
             Config = Fetch<Config>();
-            Dump(Config);
+            UpdateConfigFlag = !Dump(Config);
         }
         // Enable mouse toggle
         {
@@ -113,13 +114,23 @@ public class ToggleMouseControlModSystem : ModSystem
         }
     }
 
-    public static void Dump(object data)
+    public static bool Dump(object data)
     {
-        ClientApi.StoreModConfig(
-            data,
-            System.IO.Path.Combine(
-                $"{nameof(ToggleMouseControl)}",
-                $"{data.GetType().Name}.json"));
+        bool success;
+        try
+        {
+            ClientApi.StoreModConfig(
+                data,
+                System.IO.Path.Combine(
+                    $"{nameof(ToggleMouseControl)}",
+                    $"{data.GetType().Name}.json"));
+            success = true;
+        }
+        catch
+        {
+            success = false;
+        }
+        return success;
     }
 
     public static T Fetch<T>() where T : new()
