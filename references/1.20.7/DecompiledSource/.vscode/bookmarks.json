@@ -677,6 +677,11 @@
 					"column": 0,
 					"label": "public GuiComposer Compose(bool focusFirstElement = true)",
 					"line": 356
+				},
+				{
+					"column": 0,
+					"label": "public GuiComposer AddInteractiveElement(GuiElement element, string key = null)",
+					"line": 768
 				}
 			]
 		},
@@ -689,9 +694,9 @@
 					"line": 6
 				},
 				{
-					"line": 1348,
 					"column": 0,
-					"label": ""
+					"label": "public static GuiComposer AddStaticText(this GuiComposer composer, string text, CairoFont font, ElementBounds bounds, string key = null)",
+					"line": 1348
 				}
 			]
 		},
@@ -714,9 +719,9 @@
 					"line": 15
 				},
 				{
-					"line": 148,
 					"column": 0,
-					"label": ""
+					"label": "composerHeader = handler.dialogBase(dialogName + \"main\", containerBounds.fixedWidth, containerBounds.fixedHeight).BeginChildElements(containerBounds).AddToggleButton(Lang.Get(\"setting-graphics-header\"), fnt, OnGraphicsOptions, gButtonBounds, \"graphics\")",
+					"line": 148
 				},
 				{
 					"column": 0,
@@ -734,9 +739,9 @@
 					"line": 1121
 				},
 				{
-					"line": 1292,
 					"column": 0,
-					"label": ""
+					"label": "handler.LoadComposer(composer);",
+					"line": 1292
 				},
 				{
 					"column": 0,
@@ -817,6 +822,11 @@
 					"column": 0,
 					"label": "public class GuiDialogInventory : GuiDialog",
 					"line": 10
+				},
+				{
+					"column": 0,
+					"label": "public override bool PrefersUngrabbedMouse => Composers[\"maininventory\"] == creativeInvDialog;",
+					"line": 36
 				},
 				{
 					"column": 0,
@@ -1002,6 +1012,21 @@
 					"column": 0,
 					"label": "runningGame.OnKeyDown(args);",
 					"line": 291
+				}
+			]
+		},
+		{
+			"path": "VintagestoryLib/Vintagestory/Client/NoObf/GuiScreenSettings.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public class GuiScreenSettings : GuiScreen, IGameSettingsHandler, IGuiCompositeHandler",
+					"line": 5
+				},
+				{
+					"column": 0,
+					"label": "public void LoadComposer(GuiComposer composer)",
+					"line": 30
 				}
 			]
 		},
@@ -1581,6 +1606,26 @@
 			]
 		},
 		{
+			"path": "VintagestoryAPI/Vintagestory/API/Common/InventoryBase.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public abstract class InventoryBase : IInventory, IReadOnlyCollection<ItemSlot>, IEnumerable<ItemSlot>, IEnumerable",
+					"line": 17
+				}
+			]
+		},
+		{
+			"path": "VSSurvivalMod/Vintagestory/GameContent/InventorySmelting.cs",
+			"bookmarks": [
+				{
+					"column": 0,
+					"label": "public class InventorySmelting : InventoryBase, ISlotProvider",
+					"line": 9
+				}
+			]
+		},
+		{
 			"path": "VintagestoryLib/Vintagestory/Client/Gui/MainMenuAPI.cs",
 			"bookmarks": [
 				{
@@ -1839,9 +1884,9 @@
 			"path": "VintagestoryLib/Vintagestory/Client/NoObf/SystemPlayerControl.cs",
 			"bookmarks": [
 				{
-					"line": 84,
 					"column": 0,
-					"label": ""
+					"label": "controls.Jump =",
+					"line": 84
 				},
 				{
 					"column": 0,
@@ -1849,9 +1894,9 @@
 					"line": 89
 				},
 				{
-					"line": 91,
 					"column": 0,
-					"label": ""
+					"label": "controls.Sprint =",
+					"line": 91
 				},
 				{
 					"column": 0,
@@ -1892,21 +1937,6 @@
 					"column": 0,
 					"label": "public class WorldEditClientHandler",
 					"line": 13
-				}
-			]
-		},
-		{
-			"path": "VintagestoryLib/Vintagestory/Client/NoObf/GuiScreenSettings.cs",
-			"bookmarks": [
-				{
-					"line": 5,
-					"column": 0,
-					"label": ""
-				},
-				{
-					"line": 30,
-					"column": 0,
-					"label": ""
 				}
 			]
 		}
