@@ -1,2 +1,6 @@
-PYTHON_CHECK := $(shell which python3 2>/dev/null || which python 2>/dev/null)
-$(if $(PYTHON_CHECK),,$(error Python is not installed. Please install Python before continuing.))
+###############################################################################
+# Python
+###############################################################################
+export PYTHON?=python
+PYTHON_CHECK := $(shell which $(PYTHON) 2>/dev/null)
+$(if $(PYTHON_CHECK),,$(error '$(PYTHON)' is not installed. Please install '$(PYTHON)' before continuing.))

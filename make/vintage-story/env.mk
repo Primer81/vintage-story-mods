@@ -25,7 +25,7 @@ ifndef VINTAGE_STORY
         ifndef HOME
             $(error HOME is undefined. Needed to define VINTAGE_STORY)
         endif
-        export VINTAGE_STORY=$(HOME)/.config/Vintagestory
+        export VINTAGE_STORY=$(HOME)/.local/share/vintagestory
     endif
 endif
 export VINTAGE_STORY:=$(subst \,/,$(VINTAGE_STORY))
