@@ -21,5 +21,8 @@
 		{
 			"path": "references/1.20.7/DecompiledSource"
 		}
-	]
+	],
+	"settings": {
+		"makefile.configureOnOpen": false
+	}
 }
